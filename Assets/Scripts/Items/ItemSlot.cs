@@ -24,6 +24,8 @@ public class ItemSlot : MonoBehaviour
         SetValue(amountValue);
         slotButton.onClick.RemoveAllListeners();
         slotButton.onClick.AddListener(() => CustomShopManager.instance.BuyItem(itemData));
+        
+        
     }
     public void SetValue(int amountValue)
     {
@@ -34,5 +36,9 @@ public class ItemSlot : MonoBehaviour
         price.SetText("price: " + itemData.itemPrice);
         amount.SetText("amount: " + amountValue);
         
+    }
+    public void SetInteractable(bool isActive)
+    {
+        slotButton.interactable = isActive;
     }
 }
