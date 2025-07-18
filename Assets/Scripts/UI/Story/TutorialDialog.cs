@@ -6,22 +6,21 @@ using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StoryDialog : UI_Popup
+public class TutorialDialog : UI_Popup
 {
     public Text[] TestTexts;
     public Image[] StandingImage;
     public CharacterData[] cd;
     public GameObject TextPanel;
     public DOTweenAnimation[] StandingAnimations;
-    public GameObject TutorialDialog;
 
     public Vector2 panelOffset;
     public GameObject contents;
 
-    private char cursor_char = '|';
 
     private RectTransform panelRect;
     private Vector2 originalPanelPos;
+
     public List<DialogueScene> scenes;
     private void Awake()
     {
@@ -152,7 +151,7 @@ public class StoryDialog : UI_Popup
                 }
             }
 
-            // 텍스트 표시 (타이핑 효과)
+            
             TestTexts[idx].gameObject.SetActive(true);
             string full = scene.text;
             int len = full.GetTypingLength();
@@ -163,19 +162,25 @@ public class StoryDialog : UI_Popup
                 yield return new WaitForSeconds(0.025f);
             }
 
-
-            while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
+            if (scene is TutorialDialogScene tutorialScene && tutorialScene.requiredKey != KeyCode.None)
             {
-                TestTexts[idx].text = full;
-                yield return null;
+                while (!Input.GetKeyDown(tutorialScene.requiredKey))
+                {
+                    yield return null;
+                }
             }
-
+            else
+            {
+                // 일반 대사 : Space/Enter로 넘어감
+                while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
+                {
+                    yield return null;
+                }
+            }
 
             yield return new WaitForSeconds(scene.postDelay);
         }
         contents.SetActive(false);
-        TutorialDialog.SetActive(true);
     }
-
-
+            
 }

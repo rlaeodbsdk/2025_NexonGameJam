@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 public enum DialogueCharacter
 {
@@ -26,6 +27,7 @@ public class DialogueScene
     public float postDelay;        
     public bool showLeftCharacter;
     public bool showRightCharacter;
-
+    public bool isAnger;
+    public bool isSurprized;
 
 }
