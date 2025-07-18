@@ -32,4 +32,9 @@ public class FoodSlot : MonoBehaviour
         description.SetText(foodData.foodInfo);
         price.SetText("price: " + foodData.foodPrice);
     }
+
+    public void SetInteractable(bool isActive)
+    {
+        slotButton.interactable = isActive;
+    }
 }

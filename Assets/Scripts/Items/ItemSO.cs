@@ -12,9 +12,10 @@ public class ItemSO : ScriptableObject
     public itemType type;   
     public string itemName;
     public Sprite itemImage;
+    public int instantAmount;
     public int itemPrice;
     public int popularity;
-    public int itemAmount;
+    public int maxAmount;
     [TextArea]
     public string itemInfo;
 }

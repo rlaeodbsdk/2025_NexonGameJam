@@ -16,7 +16,8 @@ MonoBehaviour:
   type: 0
   itemName: DefaultTable
   itemImage: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  instantAmount: 1
   itemPrice: 213
   popularity: 123
-  itemAmount: 0
+  maxAmount: 4
   itemInfo: 1
