@@ -11,11 +11,13 @@ public class RecipeStep
     public CharacterType character;
     public ActionType action;
     public KeyCode key; // ´©¸¦ Å°
+    public Sprite sprite;
 }
 
 [CreateAssetMenu(menuName = "NodeRecipe")]
 public class NodeRecipe : ScriptableObject
 {
+    public Sprite startIngredient;
     public string dishName;
     public List<RecipeStep> steps;
 }
