@@ -1,28 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Passenger : MonoBehaviour
 {
     private List<FoodSO> foodList;
     public FoodSO selectedFood;
-    private CustomTableManager customTableManager;
+    public Table currentTable;
+    private TableManager TableManager;
+
+    public GameObject orderPanel;
+    public Image orderedImage;
 
     private void OnEnable()
     {
-        customTableManager = FindFirstObjectByType<CustomTableManager>();
-        Visit(1);
+        TableManager = FindFirstObjectByType<TableManager>();
+        foodList = CustomShopManager.instance.foodList;
+        StartCoroutine(Order());
     }
-    public void Visit(int tableNumber) { }
-    public void Order(FoodSO food, int tableNumber)
+    public void Visit(Table table)
     {
-        //음식선택, 가능음식 중 랜덤
-        int randomValidFood = Random.Range(0, foodList.Count);
-        selectedFood = foodList[randomValidFood];
-        //음식주문
-        //OrderFood(selectedFood);
+        currentTable = table;
+     
     }
-    public void Exit() { selectedFood = null; }
+    IEnumerator Order()
+    {
+        yield return new WaitForSeconds(2f);
+        
+        if (foodList == null || foodList.Count == 0) yield break;
+        orderPanel.SetActive(true);
+        int idx = Random.Range(0, foodList.Count);
+        selectedFood = foodList[idx];
+        orderedImage.sprite = selectedFood.foodImage;
+        Debug.Log($"손님이 {selectedFood.foodName} 주문함!");
+        yield break;
+    }
 
-    
+    // 퇴장
+    public void Exit()
+    {
+        selectedFood = null;
+       
+        gameObject.SetActive(false);
+    }
+    public void SetFoodList(List<FoodSO> foods)
+    {
+        foodList = foods;
+    }
+
 }
