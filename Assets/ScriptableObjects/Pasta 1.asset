@@ -15,5 +15,5 @@ MonoBehaviour:
   isActive: 1
   foodName: Steak
   foodImage: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  foodPrice: 2131
+  foodPrice: 80
   foodInfo: 123123
