@@ -12,8 +12,7 @@ public interface ILoader<Key, Value>
 
 public class DataManager
  {
-        public Define.Items Items;
-
+     public float TotalPrice = 0;
 
 }
 

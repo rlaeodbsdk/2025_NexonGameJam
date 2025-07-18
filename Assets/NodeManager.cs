@@ -16,7 +16,8 @@ public class NodeManager : MonoBehaviour
         Init();
         Managers.UI.ShowPopUpUI<UI_Test>(); // 테스트 Manager 호출
         StartCoroutine(PatternGoNode());
-        
+
+        Managers.UI.ShowPopUpUI<UI_Receipt>();
     }
 
     public NodeRecipe GetRecipe(int id)
@@ -63,7 +64,7 @@ public class NodeManager : MonoBehaviour
     }
     void NodeGo()
     {
-        if (nodeCount <= 6)
+        if (nodeCount <= 0)
         {
             int randomLine = Random.Range(0, 2);//어디에서 나올것인지에 대해
             int randomFood = Random.Range(0, 3);
@@ -78,6 +79,7 @@ public class NodeManager : MonoBehaviour
             else // 오른쪽에서 나오기
             {
                 Node SecondNodeCs = Instantiate(Node, nodeStart_2).GetComponent<Node>();
+                SecondNodeCs.GetWhereNodeLine(2);
                 SecondNodeCs.GetRecipe(nodeRecipes[randomFood]);
                 SecondNodeCs.setInstantiateData();
             }
