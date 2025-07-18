@@ -5,6 +5,7 @@ using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
+using static Define;
 
 public class FoodSlot : MonoBehaviour
 {
@@ -30,7 +31,15 @@ public class FoodSlot : MonoBehaviour
         image.sprite = foodData.foodImage;
         foodName.SetText(foodData.foodName);
         description.SetText(foodData.foodInfo);
-        price.SetText(foodData.foodPrice + " 냥");
+        
+        if (foodData.foodUnlockPrice == 0)
+        {
+            price.SetText("판매가: " + foodData.foodPrice + "냥");
+        }
+        else
+        {
+            price.SetText("판매가: " + foodData.foodPrice + "냥 / 해금: " + foodData.foodUnlockPrice + "냥");
+        }
     }
 
     public void SetInteractable(bool isActive)
