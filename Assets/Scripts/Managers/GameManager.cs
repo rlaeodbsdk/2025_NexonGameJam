@@ -11,9 +11,9 @@ public class GameManager
     //게임 상태를 나눠서 상태에 따라 스크립트들이 돌아가게 함
     public enum GameState
     {
-        Battle,
-        Store,
-        Bless,
+        InGame,
+        Option,
+        Lobby
 
     }
     public GameState currentState;
@@ -25,13 +25,18 @@ public class GameManager
     //인게임 데이터 초기화 
     public void GameStart()
     {
-
+        currentState = GameState.InGame;
     }
 
     public void Upgrade()
     {
         Time.timeScale = 0;
 
+    }
+
+    void Start()
+    {
+        GameStart(); //임시로 매니저 켜질떄 GameStart 취급
     }
 
 }
