@@ -30,7 +30,7 @@ public class FoodSlot : MonoBehaviour
         image.sprite = foodData.foodImage;
         foodName.SetText(foodData.foodName);
         description.SetText(foodData.foodInfo);
-        price.SetText("price: " + foodData.foodPrice);
+        price.SetText(foodData.foodPrice + " ³É");
     }
 
     public void SetInteractable(bool isActive)

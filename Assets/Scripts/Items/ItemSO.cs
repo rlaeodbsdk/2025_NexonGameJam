@@ -14,6 +14,7 @@ public class ItemSO : ScriptableObject
     public Sprite itemImage;
     public int instantAmount;
     public int itemPrice;
+    public int itemUnlockPrice;
     public int popularity;
     public int maxAmount;
     [TextArea]
