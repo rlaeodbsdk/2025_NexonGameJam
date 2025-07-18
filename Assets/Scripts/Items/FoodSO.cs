@@ -8,6 +8,7 @@ public class FoodSO : ScriptableObject
     public string foodName;
     public Sprite foodImage;
     public int foodPrice;
+    public int foodUnlockPrice;
 
     [TextArea]
     public string foodInfo;

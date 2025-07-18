@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 726599e70237e5b41819c2f2539883d8, type: 3}
-  m_Name: Pasta
+  m_Name: MeatBall
   m_EditorClassIdentifier: 
-  foodName: Pasta
+  isActive: 0
+  foodName: "\uC18C\uC2A4 \uBD80\uC6B4 \uBBF8\uD2B8\uBCFC"
   foodImage: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  foodPrice: 2131
-  foodInfo: 123123
+  foodPrice: 120
+  foodUnlockPrice: 300
+  foodInfo: "\uC9C1\uC811 \uB2E4\uC9C4 \uACE0\uAE30\uB97C \uAD6C\uC6CC\uB0B8 \uB4A4,
+    \uAC10\uCE60\uB9DB \uAC00\uB4DD\uD55C \uC18C\uC2A4\uB97C \uC785\uD78C \uC694\uB9AC."

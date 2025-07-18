@@ -478,9 +478,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'popularity ++
-
-    Price++'
+  m_text: "\uD3B8\uC548\uD568"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 51b7b868eb0d9ed4bad6982621fe2d0d, type: 2}
   m_sharedMaterial: {fileID: 8691653856562039407, guid: 51b7b868eb0d9ed4bad6982621fe2d0d, type: 2}
