@@ -106,16 +106,13 @@ public class Node : MonoBehaviour
         if(collision.CompareTag("FirstHitLine"))
         {
             isInFirstZone = true;
-            Debug.Log("First Hit");
         }
         else if(collision.CompareTag("SecondHitLine"))
         {
             isInSecondZone = true;
-            Debug.Log("Second Hit");
         }
         else
         {
-            Debug.Log("Nothing Trigger");
             isInFirstZone = false;
             isInSecondZone = false;
         }
@@ -158,6 +155,15 @@ public class Node : MonoBehaviour
         transform.position = transform.position + new Vector3(0, 2, 0);
         GetComponent<ParabolaMover>().StartParabolaMove(transform.position, this.gameObject);
         yield return new WaitForSecondsRealtime(0.7f);
+        if(isReady==true)
+        {
+            Managers.Data.TotalPrice += recipe.price;
+        }
+        else
+        {
+            Managers.Data.TotalPrice += recipe.price * ((float)currentStepIndex / recipe.steps.Count);
+        }
+        Debug.Log(Managers.Data.TotalPrice);
         DestroyNode();
         Destroy(this.gameObject);
     }

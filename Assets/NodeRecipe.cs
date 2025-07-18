@@ -20,4 +20,6 @@ public class NodeRecipe : ScriptableObject
     public Sprite startIngredient;
     public string dishName;
     public List<RecipeStep> steps;
+    public int price;
+  
 }
