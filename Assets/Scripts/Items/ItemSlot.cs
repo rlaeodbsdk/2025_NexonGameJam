@@ -33,8 +33,16 @@ public class ItemSlot : MonoBehaviour
         image.sprite = itemData.itemImage;
         itemName.SetText(itemData.itemName);
         description.SetText(itemData.itemInfo);
-        price.SetText("price: " + itemData.itemPrice);
-        amount.SetText("amount: " + amountValue);
+        if(itemData.itemUnlockPrice == 0)
+        {
+            price.SetText("판매가: " + itemData.itemPrice + "냥");
+        }
+        else
+        {
+            price.SetText("판매가: " + itemData.itemPrice + "냥 / 해금: " + itemData.itemUnlockPrice + "냥");
+        }
+
+            amount.SetText(amountValue + " 개");
         
     }
     public void SetInteractable(bool isActive)
