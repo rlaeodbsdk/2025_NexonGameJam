@@ -8,14 +8,23 @@ using UnityEngine.UI;
 public class CustomShopManager : MonoBehaviour
 {
     [Header("아이템상점 버튼")]
+    public Image upgradeBtnImage;
+    public Image foodBtnImage;
     public Button upgradeBtn;
     public Button foodBtn;
+    public Sprite upgradeBtnActiveSprite;
+    public Sprite upgradeBtnInactiveSprite;
+    public Sprite foodBtnActiveSprite;
+    public Sprite foodBtnInactiveSprite;
+    public RectTransform upgradeBtnRect;
+    public RectTransform foodBtnRect;
 
     [Header("상점 스크롤뷰")]
     public GameObject upgradeScroll;
     public GameObject upgradeScrollContents;
     public GameObject foodScroll;
     public GameObject foodScrollContents;
+
 
 
     [Header("아이템 데이터")]
@@ -80,12 +89,20 @@ public class CustomShopManager : MonoBehaviour
     {
         upgradeScroll?.SetActive(true);
         foodScroll?.SetActive(false);
+        upgradeBtnImage.sprite = upgradeBtnActiveSprite;
+        foodBtnImage.sprite = foodBtnInactiveSprite;
+        upgradeBtnRect.SetAsLastSibling();
+        foodBtnRect.SetAsFirstSibling();
     }
 
     public void ShowFoodMenu()
     {
         upgradeScroll?.SetActive(false);
         foodScroll?.SetActive(true);
+        upgradeBtnImage.sprite = upgradeBtnInactiveSprite;
+        foodBtnImage.sprite = foodBtnActiveSprite;
+        foodBtnRect.SetAsLastSibling();
+        upgradeBtnRect.SetAsFirstSibling();
     }
 
     public void BuyItem(ItemSO item)
