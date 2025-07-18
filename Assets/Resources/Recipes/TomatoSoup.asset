@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fe47920fa67a6444b94e28893fe8b94, type: 3}
-  m_Name: Steak
+  m_Name: TomatoSoup
   m_EditorClassIdentifier: 
-  startIngredient: {fileID: 21300000, guid: 404a2cc4d00712e4fbc0afa346fbd6cf, type: 3}
-  dishName: Steak
+  startIngredient: {fileID: 21300000, guid: df0eb8c130ac3864ba9db51e1e2236cd, type: 3}
+  dishName: TamatoSoup
   steps:
-  - character: 0
-    action: 0
-    key: 97
-    sprite: {fileID: 21300000, guid: 829d595d533254f4290550e86477a4be, type: 3}
   - character: 1
-    action: 3
-    key: 276
-    sprite: {fileID: 21300000, guid: f48dc3c0cede0d24a9e06c45ec9d785e, type: 3}
+    action: 4
+    key: 275
+    sprite: {fileID: 21300000, guid: ad147a2c6006c7d4f80450b22160978a, type: 3}
+  - character: 0
+    action: 1
+    key: 100
+    sprite: {fileID: 21300000, guid: d62e4a93ba4e3514290a22878b73d448, type: 3}
