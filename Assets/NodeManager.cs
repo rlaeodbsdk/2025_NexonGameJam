@@ -16,8 +16,6 @@ public class NodeManager : MonoBehaviour
         Init();
         Managers.UI.ShowPopUpUI<UI_Test>(); // 테스트 Manager 호출
         StartCoroutine(PatternGoNode());
-
-        Managers.UI.ShowPopUpUI<UI_Receipt>();
     }
 
     public NodeRecipe GetRecipe(int id)
