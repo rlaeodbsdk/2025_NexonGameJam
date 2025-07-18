@@ -53,14 +53,17 @@ public class UI_Receipt : UI_Popup
 
     void PlayReceiptAnimation()
     {
-        upDooroo.rectTransform.DOAnchorPosY(upStartPos.y + moveDistance, animationDuration).SetEase(Ease.OutQuad);
-        downDooroo.rectTransform.DOAnchorPosY(downStartPos.y - moveDistance, animationDuration).SetEase(Ease.OutQuad);
-        middlePaper.rectTransform.DOScaleY(10f, animationDuration).SetEase(Ease.OutQuad);
+        upDooroo.rectTransform.DOAnchorPosY(upStartPos.y + moveDistance, animationDuration)
+    .SetEase(Ease.OutQuad).SetUpdate(true);
+        downDooroo.rectTransform.DOAnchorPosY(downStartPos.y - moveDistance, animationDuration)
+            .SetEase(Ease.OutQuad).SetUpdate(true);
+        middlePaper.rectTransform.DOScaleY(10f, animationDuration)
+            .SetEase(Ease.OutQuad).SetUpdate(true);
     }
 
     IEnumerator ShowReceiptText()
     {
-        yield return new WaitForSeconds(animationDuration + 0.2f); // 애니 끝나고 시작
+        yield return new WaitForSecondsRealtime(animationDuration + 0.2f); // 애니 끝나고 시작
 
         // Title 타이핑
         yield return StartCoroutine(TypeText(TitleText, title));
@@ -88,7 +91,7 @@ public class UI_Receipt : UI_Popup
             }
 
             textComponent.text += fullText[i];
-            yield return new WaitForSeconds(typeSpeed);
+            yield return new WaitForSecondsRealtime(typeSpeed);
         }
     }
 }
