@@ -22,7 +22,7 @@ public class StoryDialog : UI_Popup
     private Vector2 originalPanelPos;
     public List<DialogueScene> scenes;
 
-    public bool canGoNextStep = true;
+    public Button shopCloseBtn;
     public CustomShopManager shopManager;
     public GameObject shop;
     private void Awake()
@@ -32,11 +32,11 @@ public class StoryDialog : UI_Popup
         originalPanelPos = panelRect.anchoredPosition;
         contents.SetActive(true);
     }
-        
+
     private void OnEnable()
     {
         Time.timeScale = 0f;
-        Managers.Game.isTutorial = true; 
+        Managers.Game.isTutorial = true;
         StartCoroutine(TypingCoroutine());
     }
 
@@ -173,7 +173,7 @@ public class StoryDialog : UI_Popup
             {
                 if (scene.requiredKey == KeyCode.None)
                 {
-                    while ((!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)) || canGoNextStep)
+                    while ((!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)))
                     {
                         TestTexts[idx].text = full;
                         yield return null;
@@ -223,16 +223,16 @@ public class StoryDialog : UI_Popup
                 FindFirstObjectByType<PassengerSpawner>().TrySpawnPassenger();
             }
 
-            if(scene.isShopingGo)
+            if (scene.isShopingGo)
             {
-                StartCoroutine(goShopingOn());
+                StartCoroutine(goShopingOn(idx));
             }
 
             if (scene.isTimeGoing)
             {
                 if (scene.requiredKey == KeyCode.None)
                 {
-                    while ((!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)) || canGoNextStep)
+                    while ((!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)))
                     {
                         TestTexts[idx].text = full;
                         yield return null;
@@ -267,11 +267,11 @@ public class StoryDialog : UI_Popup
                 TextPanel.SetActive(true);
                 continue;
             }
-            
+
 
             if (scene.requiredKey == KeyCode.None)
             {
-                while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)&&canGoNextStep)
+                while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
                 {
                     TestTexts[idx].text = full;
                     yield return null;
@@ -311,32 +311,39 @@ public class StoryDialog : UI_Popup
         }
 
     }
-    IEnumerator goShopingOn()
+    IEnumerator goShopingOn(int idx)
     {
-        canGoNextStep = false;
         shop.SetActive(true);
-        shopManager.OnShopClosed += OnShopClosedHandler; // 구독
+        shopManager.OnShopClosed += OnShopClosedHandler;
+
+        // 1. 텍스트 full 될 때까지 대기
+        while (TestTexts[idx].text != scenes[idx].text)
+            yield return null;
+
+        // 2. 2초 대기 후 TextPanel 비활성화
         yield return new WaitForSecondsRealtime(2f);
-        TextPanel.SetActive(false);
+        if (TextPanel != null)
+            TextPanel.SetActive(false);
 
+        // 3. exitBtn 선택될 때까지 대기
+        while (UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject != shopManager.exitBtn.gameObject)
+            yield return null;
+
+        // 4. shop 닫힌 후 TextPanel 켜고 "자동으로 다음 씬"
+        bool shopClosed = false;
+        void OnShopClosedHandler()
+        {
+            shopClosed = true;
+            shopManager.OnShopClosed -= OnShopClosedHandler;
+        }
+
+        // 5. shop이 닫힐 때까지 대기
+        while (!shopClosed)
+            yield return null;
+
+        if (TextPanel != null)
+            TextPanel.SetActive(true);
+        yield return new WaitForSecondsRealtime(0.5f); // 약간의 딜레이(선택)
+                                                       // 다음 대사로 자연스럽게 이동
     }
-
-    void OnShopClosedHandler()
-    {
-        // 다시 필요한 동작 수행
-        Debug.Log("Shop closed! Resume logic.");
-
-        shopManager.OnShopClosed -= OnShopClosedHandler;  // 구독 해제 (중요)
-
-        StartCoroutine(ResumeAfterShop()); // 원하는 로직 이어가기
-    }
-
-    IEnumerator ResumeAfterShop()
-    {
-        yield return new WaitForSeconds(1f);
-        canGoNextStep = true;
-        TextPanel.SetActive(true);
-    }
-
-
 }
