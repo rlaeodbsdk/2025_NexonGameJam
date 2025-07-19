@@ -15,9 +15,8 @@ MonoBehaviour:
   isActive: 0
   foodName: "\uC18C\uC2A4 \uBD80\uC6B4 \uBBF8\uD2B8\uBCFC"
   foodNodeName: MeatBall
-  foodImage: {fileID: 21300000, guid: 632c14d36db6d144485ac51768bd40bb, type: 3}
+  foodImage: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   foodPrice: 120
   foodUnlockPrice: 300
-  foodIngredientPrice: 50
   foodInfo: "\uC9C1\uC811 \uB2E4\uC9C4 \uACE0\uAE30\uB97C \uAD6C\uC6CC\uB0B8 \uB4A4,
     \uAC10\uCE60\uB9DB \uAC00\uB4DD\uD55C \uC18C\uC2A4\uB97C \uC785\uD78C \uC694\uB9AC."

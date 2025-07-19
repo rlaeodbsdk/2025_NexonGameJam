@@ -10,7 +10,7 @@ public class FoodSO : ScriptableObject
     public Sprite foodImage;
     public int foodPrice;
     public int foodUnlockPrice;
-    public int foodIngredientPrice;
+
     [TextArea]
     public string foodInfo;
 }

@@ -3,31 +3,24 @@ using UnityEngine;
 
 public class PassengerSpawner : MonoBehaviour
 {
-    public float spawnTime = 4f;
+    public float[] spawnTimes; 
     public Passenger passengerPrefab;
     public TableManager tableManager; 
 
     private int currentSpawnIndex = 0;
     private float timer = 0f;
-    private bool isFirstSpawn = true;
-
 
     private void Update()
     {
+        if (currentSpawnIndex >= spawnTimes.Length)
+            return;
 
-        if (Time.timeScale != 0f && spawnTime > 0)
+        timer += Time.deltaTime;
+        if (timer >= spawnTimes[currentSpawnIndex])
         {
-            timer += Time.deltaTime;
-            float targetTime = isFirstSpawn ? 2f : spawnTime;
-
-            if (timer >= targetTime)
-            {
-                TrySpawnPassenger();
-                timer = 0f;
-                isFirstSpawn = false;
-            }
+            TrySpawnPassenger();
+            currentSpawnIndex++;
         }
-
     }
 
     void TrySpawnPassenger()
