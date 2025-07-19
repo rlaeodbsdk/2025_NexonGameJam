@@ -22,6 +22,10 @@ public class PassengerSpawner : MonoBehaviour
 
             if (timer >= targetTime)
             {
+                if(Managers.Game.isTutorial&&isFirstSpawn==false)
+                {
+                    return;
+                }
                 TrySpawnPassenger();
                 timer = 0f;
                 isFirstSpawn = false;

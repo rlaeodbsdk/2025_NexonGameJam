@@ -22,9 +22,12 @@ public class StoryDialog : UI_Popup
     private Vector2 originalPanelPos;
     public List<DialogueScene> scenes;
 
+    public bool canGoNextStep = true;
+    public CustomShopManager shopManager;
     public GameObject shop;
     private void Awake()
     {
+        shopManager = FindObjectOfType<CustomShopManager>();
         panelRect = TextPanel.GetComponent<RectTransform>();
         originalPanelPos = panelRect.anchoredPosition;
         contents.SetActive(true);
@@ -170,11 +173,12 @@ public class StoryDialog : UI_Popup
             {
                 if (scene.requiredKey == KeyCode.None)
                 {
-                    while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
+                    while ((!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)) || canGoNextStep)
                     {
                         TestTexts[idx].text = full;
                         yield return null;
                     }
+
                 }
                 else
                 {
@@ -221,18 +225,19 @@ public class StoryDialog : UI_Popup
 
             if(scene.isShopingGo)
             {
-                shop.SetActive(true);
+                StartCoroutine(goShopingOn());
             }
 
             if (scene.isTimeGoing)
             {
                 if (scene.requiredKey == KeyCode.None)
                 {
-                    while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
+                    while ((!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)) || canGoNextStep)
                     {
                         TestTexts[idx].text = full;
                         yield return null;
                     }
+
                 }
                 else
                 {
@@ -266,7 +271,7 @@ public class StoryDialog : UI_Popup
 
             if (scene.requiredKey == KeyCode.None)
             {
-                while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
+                while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)&&canGoNextStep)
                 {
                     TestTexts[idx].text = full;
                     yield return null;
@@ -306,5 +311,32 @@ public class StoryDialog : UI_Popup
         }
 
     }
+    IEnumerator goShopingOn()
+    {
+        canGoNextStep = false;
+        shop.SetActive(true);
+        shopManager.OnShopClosed += OnShopClosedHandler; // 구독
+        yield return new WaitForSecondsRealtime(2f);
+        TextPanel.SetActive(false);
+
+    }
+
+    void OnShopClosedHandler()
+    {
+        // 다시 필요한 동작 수행
+        Debug.Log("Shop closed! Resume logic.");
+
+        shopManager.OnShopClosed -= OnShopClosedHandler;  // 구독 해제 (중요)
+
+        StartCoroutine(ResumeAfterShop()); // 원하는 로직 이어가기
+    }
+
+    IEnumerator ResumeAfterShop()
+    {
+        yield return new WaitForSeconds(1f);
+        canGoNextStep = true;
+        TextPanel.SetActive(true);
+    }
+
 
 }
