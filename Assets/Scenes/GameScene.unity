@@ -348,6 +348,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 173812616}
     - target: {fileID: 5273557353683227009, guid: 08760b1f29c60fa418be98fb35b46858, type: 3}
+      propertyPath: scenes.Array.data[0].text
+      value: "\uC77C\uC5B4\uB098 !!!!!!!!\n[ Enter \uD0A4\uB85C \uB300\uD654\uB97C
+        \uC9C4\uD589\uD569\uB2C8\uB2E4 ]"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273557353683227009, guid: 08760b1f29c60fa418be98fb35b46858, type: 3}
       propertyPath: scenes.Array.data[1].panelPositionOffset.x
       value: 264
       objectReference: {fileID: 0}
@@ -389,7 +394,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6734821384571857682, guid: 08760b1f29c60fa418be98fb35b46858, type: 3}
       propertyPath: m_IsActive
+
       value: 0
+
+
       objectReference: {fileID: 0}
     - target: {fileID: 7374971431601263012, guid: 08760b1f29c60fa418be98fb35b46858, type: 3}
       propertyPath: m_Pivot.x
@@ -497,7 +505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8510611024746484498, guid: 08760b1f29c60fa418be98fb35b46858, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1857,7 +1865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
       propertyPath: scenes.Array.data[10].goingTimeAmount
-      value: 2.5
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
       propertyPath: scenes.Array.data[11].goingTimeAmount
@@ -4499,7 +4507,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 2000
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1698033361
 RectTransform:

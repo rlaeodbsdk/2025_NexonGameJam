@@ -22,7 +22,7 @@ public class StoryDialog : UI_Popup
     private Vector2 originalPanelPos;
     public List<DialogueScene> scenes;
 
-    public Button shopCloseBtn;
+    public bool canGoNextStep = true;
     public CustomShopManager shopManager;
     public GameObject shop;
     private void Awake()
@@ -32,11 +32,11 @@ public class StoryDialog : UI_Popup
         originalPanelPos = panelRect.anchoredPosition;
         contents.SetActive(true);
     }
-
+        
     private void OnEnable()
     {
         Time.timeScale = 0f;
-        Managers.Game.isTutorial = true;
+        Managers.Game.isTutorial = true; 
         StartCoroutine(TypingCoroutine());
     }
 
@@ -94,23 +94,22 @@ public class StoryDialog : UI_Popup
                     if (scene.isFirstAppearance)
                     {
                         StandingImage[0].rectTransform.localScale = Vector3.one;
+
                         yield return new WaitForSecondsRealtime(2.2f);
                     }
-
                     else
                     {
-                        StandingImage[0].rectTransform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-
-
 
                     }
                     if (scene.isAnger)
                     {
+                        Debug.Log("왼쪽사람화내기!");
                         LeftCharacter.instance.frowningAnim.DORestartById("1");
                     }
                     if (scene.isSurprized)
                     {
-                        LeftCharacter.instance.surprisedAnim.DORestartById("2");
+                        Debug.Log("왼쪽사람놀라기!");
+                        LeftCharacter.instance.frowningAnim.DORestartById("2");
                     }
                 }
 
@@ -135,25 +134,31 @@ public class StoryDialog : UI_Popup
                 if (panelRect != null)
                     panelRect.anchoredPosition = originalPanelPos + scene.panelPositionOffset;
 
-                if (scene.isFirstAppearance)
+                if (scene.showRightCharacter)
                 {
-
-                    if (TextPanel != null)
-                        TextPanel.SetActive(false);
-
-
-                    if (TextPanel != null)
-                        TextPanel.SetActive(true);
-                }
-                else
-                {
-                    if (scene.isAnger)
+                    if (scene.isFirstAppearance)
                     {
-                        RightCharacter.instance.frowningAnim.DORestartById("1");
+
+                        if (TextPanel != null)
+                            TextPanel.SetActive(false);
+
+
+                        if (TextPanel != null)
+                            TextPanel.SetActive(true);
+
                     }
-                    if (scene.isSurprized)
+                    else
                     {
-                        RightCharacter.instance.surprisedAnim.DORestartById("2");
+                        if (scene.isAnger)
+                        {
+                            Debug.Log("오른쪽사람화내기!");
+                            RightCharacter.instance.frowningAnim.DORestartById("1");
+                        }
+                        if (scene.isSurprized)
+                        {
+                            Debug.Log("오른쪽사람놀라기!");
+                            RightCharacter.instance.surprisedAnim.DORestartById("2");
+                        }
                     }
                 }
             }
@@ -223,9 +228,14 @@ public class StoryDialog : UI_Popup
                 FindFirstObjectByType<PassengerSpawner>().TrySpawnPassenger();
             }
 
-            if (scene.isShopingGo)
+            if(scene.isShopingGo)
             {
-                StartCoroutine(goShopingOn(idx));
+                StartCoroutine(goShopingOn());
+            }
+
+            if(scene.isGivingMoney)
+            {
+                Managers.Game.playerTotalMoney -= scene.givingMoneyAmount;
             }
 
             if (scene.isTimeGoing)
@@ -272,8 +282,11 @@ public class StoryDialog : UI_Popup
                 TextPanel.SetActive(true);
                 continue;
             }
-
-
+            
+            if(scene.isEndDialogue==true)
+            {
+                StartCoroutine(IsEndGo());
+            }
             if (scene.requiredKey == KeyCode.None)
             {
                 while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
@@ -316,39 +329,37 @@ public class StoryDialog : UI_Popup
         }
 
     }
-    IEnumerator goShopingOn(int idx)
+    IEnumerator goShopingOn()
     {
+        canGoNextStep = false;
         shop.SetActive(true);
-        shopManager.OnShopClosed += OnShopClosedHandler;
-
-        // 1. 텍스트 full 될 때까지 대기
-        while (TestTexts[idx].text != scenes[idx].text)
-            yield return null;
-
-        // 2. 2초 대기 후 TextPanel 비활성화
+        shopManager.OnShopClosed += OnShopClosedHandler; // 구독
         yield return new WaitForSecondsRealtime(2f);
-        if (TextPanel != null)
-            TextPanel.SetActive(false);
+        TextPanel.SetActive(false);
 
-        // 3. exitBtn 선택될 때까지 대기
-        while (UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject != shopManager.exitBtn.gameObject)
-            yield return null;
-
-        // 4. shop 닫힌 후 TextPanel 켜고 "자동으로 다음 씬"
-        bool shopClosed = false;
-        void OnShopClosedHandler()
-        {
-            shopClosed = true;
-            shopManager.OnShopClosed -= OnShopClosedHandler;
-        }
-
-        // 5. shop이 닫힐 때까지 대기
-        while (!shopClosed)
-            yield return null;
-
-        if (TextPanel != null)
-            TextPanel.SetActive(true);
-        yield return new WaitForSecondsRealtime(0.5f); // 약간의 딜레이(선택)
-                                                       // 다음 대사로 자연스럽게 이동
     }
+
+    void OnShopClosedHandler()
+    {
+        // 다시 필요한 동작 수행
+        Debug.Log("Shop closed! Resume logic.");
+
+        shopManager.OnShopClosed -= OnShopClosedHandler;  // 구독 해제 (중요)
+
+        StartCoroutine(ResumeAfterShop()); // 원하는 로직 이어가기
+    }
+
+    IEnumerator ResumeAfterShop()
+    {
+        yield return new WaitForSeconds(1f);
+        canGoNextStep = true;
+        TextPanel.SetActive(true);
+    }
+    IEnumerator IsEndGo()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        Managers.UI.ShowPopUpUI<UI_Receipt>();
+    }
+
+
 }
