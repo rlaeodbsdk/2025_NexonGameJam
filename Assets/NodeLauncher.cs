@@ -137,11 +137,19 @@ public class NodeLauncher : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < duration)
         {
+            if(note==null)
+            {
+                break;
+            }
             elapsed += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
             note.transform.position = Vector3.Lerp(startPos, targetPos, t);
             yield return null;
         }
-        note.transform.position = targetPos;
+        if (note != null)
+        {
+
+            note.transform.position = targetPos;
+        }
     }
 }

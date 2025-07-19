@@ -21,6 +21,8 @@ public class StoryDialog : UI_Popup
     private RectTransform panelRect;
     private Vector2 originalPanelPos;
     public List<DialogueScene> scenes;
+
+    public GameObject shop;
     private void Awake()
     {
         panelRect = TextPanel.GetComponent<RectTransform>();
@@ -212,6 +214,15 @@ public class StoryDialog : UI_Popup
                 // 바로 다음 대사로!
                 continue;
             }
+            if (scene.isTomatoSoupGo)
+            {
+                FindFirstObjectByType<PassengerSpawner>().TrySpawnPassenger();
+            }
+
+            if(scene.isShopingGo)
+            {
+                shop.SetActive(true);
+            }
 
             if (scene.isTimeGoing)
             {
@@ -245,14 +256,13 @@ public class StoryDialog : UI_Popup
                 while (elapsed < targetDuration)
                 {
                     elapsed = Time.unscaledTime - startTime;
-                    Debug.Log($"[isTimeGoing] 경과시간: {elapsed:F2}초 / 목표: {targetDuration}초");
                     yield return null;
                 }
                 Time.timeScale = 0f;
                 TextPanel.SetActive(true);
                 continue;
             }
-
+            
 
             if (scene.requiredKey == KeyCode.None)
             {
@@ -285,6 +295,7 @@ public class StoryDialog : UI_Popup
 
         contents.SetActive(false);
         Managers.Game.isTutorial = false;
+
         if (TutorialDialog != null)
         {
             TutorialDialog.SetActive(true);
@@ -292,6 +303,19 @@ public class StoryDialog : UI_Popup
         else
         {
             Time.timeScale = 1f;
+
+            //게임 시작하기 위한 준비
+            GameObject[] nodes = GameObject.FindGameObjectsWithTag("Node");
+            foreach (GameObject node in nodes)
+            {
+                Destroy(node);
+            }
+            
+            Managers.Game.stageNumber++;
+            Managers.Game.cMoney = FindFirstObjectByType<ClockAndMoney>();
+            Managers.Game.GameStart();
+            
+
         }
 
     }

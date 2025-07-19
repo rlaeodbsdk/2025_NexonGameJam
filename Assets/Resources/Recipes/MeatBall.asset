@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe47920fa67a6444b94e28893fe8b94, type: 3}
   m_Name: MeatBall
   m_EditorClassIdentifier: 
-  startIngredient: {fileID: 21300000, guid: d337e00ed12228348897650921ddffac, type: 3}
-  ingredientMoney: 0
+
+  startIngredient: {fileID: 21300000, guid: 61f7d149e6830c14e8595f663dbf2b65, type: 3}
+  ingredientMoney: 40
+
   dishName: MeatBall
   steps:
   - character: 0
