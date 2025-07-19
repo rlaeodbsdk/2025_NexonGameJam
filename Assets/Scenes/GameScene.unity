@@ -4002,9 +4002,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnTimes:
   - 3
-  - 4
-  - 5
   - 6
+  - 9
+  - 12
   passengerPrefab: {fileID: 6966015654144533325, guid: c8ba39ebf873eb14b9b17a42d927ea88, type: 3}
   tableManager: {fileID: 989463413}
 --- !u!4 &1190802380
