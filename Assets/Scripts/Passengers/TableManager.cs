@@ -10,7 +10,6 @@ public class TableManager : MonoBehaviour
 
     private DOTweenAnimation tableAnim;
     public List<Table> tables = new List<Table>();
-
     private int tableCount = 0;
 
     private HorizontalLayoutGroup layoutGroup;
@@ -20,7 +19,11 @@ public class TableManager : MonoBehaviour
         layoutGroup = tableParent.GetComponent<HorizontalLayoutGroup>();
         tables.Clear();
         foreach (var table in FindObjectsByType<Table>(FindObjectsSortMode.None))
+        {
             tables.Add(table);
+            table.SetTable(0);
+        }
+           
     }
 
     // 호출: 테이블을 구매할 때
@@ -37,6 +40,7 @@ public class TableManager : MonoBehaviour
             tableAnim.DORestart();
         }
 
+        tableComp.SetTable(tableCount+1);
         tableCount++;
 
     }
@@ -46,4 +50,6 @@ public class TableManager : MonoBehaviour
         if (emptyTables.Count == 0) return null;
         return emptyTables[Random.Range(0, emptyTables.Count)];
     }
+
+ 
 }

@@ -8,7 +8,7 @@ public class Node : MonoBehaviour
     private int currentStepIndex = 0;
     private bool isInFirstZone;
     private bool isInSecondZone;
-    public float nodeSpeed = 1;
+    public float nodeSpeed = 1f;
     private bool upThrow = false;
     private bool isReady = false;
     private NodeManager nodeManager;
@@ -17,6 +17,8 @@ public class Node : MonoBehaviour
 
     private NodeRecipe recipe;
     private RecipeStep currentStep;
+    public Table requestedTable;
+    
 
     enum NodeState
     {
@@ -38,16 +40,20 @@ public class Node : MonoBehaviour
     private void Update()
     {
 
-
-        if (nodeLine == 1) // 왼쪽 노드라인
+        if (Time.timeScale != 0f)
         {
-            transform.position = transform.position + new Vector3(1f * nodeSpeed * Time.fixedDeltaTime, 0, 0); // 노드 생성시 자동움직임 오른쪽으로
+            if (nodeLine == 1) // 왼쪽 노드라인
+            {
+                transform.position = transform.position + new Vector3(1f * nodeSpeed * Time.deltaTime, 0, 0); // 노드 생성시 자동움직임 오른쪽으로
 
+            }
+            else if (nodeLine == 2) // 오른쪽 노드라인
+            {
+                transform.position = transform.position + new Vector3(-1f * nodeSpeed * Time.deltaTime, 0, 0); // 노드 생성시 자동움직임 왼쪽으로
+            }
         }
-        else if (nodeLine == 2) // 오른쪽 노드라인
-        {
-            transform.position = transform.position + new Vector3(-1f * nodeSpeed * Time.fixedDeltaTime, 0, 0); // 노드 생성시 자동움직임 왼쪽으로
-        }
+    
+       
 
 
 
@@ -147,7 +153,7 @@ public class Node : MonoBehaviour
         recipe = r;
     }
 
-    IEnumerator CompleteGoDestroy()//완성됐으니 없애는 과정
+    IEnumerator CompleteGoDestroy() //완성됐으니 없애는 과정
     {
         upThrow = true;
         currentState = NodeState.Flying;
@@ -155,16 +161,38 @@ public class Node : MonoBehaviour
         transform.position = transform.position + new Vector3(0, 2, 0);
         GetComponent<ParabolaMover>().StartParabolaMove(transform.position, this.gameObject);
         yield return new WaitForSecondsRealtime(0.7f);
+        float sellingPrice;
+        Managers.Game.OrderCount++;
         if(isReady==true)
         {
-            Managers.Data.TotalPrice += recipe.price;
+             recipe.price = recipe.price; // 진짜로 완성됐을떄
+            Managers.Game.completeOrderCount++;
+            
         }
         else
         {
-            Managers.Data.TotalPrice += recipe.price * ((float)currentStepIndex / recipe.steps.Count);
+            recipe.price = recipe.price * ((float)currentStepIndex / recipe.steps.Count);
         }
-        Debug.Log(Managers.Data.TotalPrice);
-        DestroyNode();
+        Debug.Log($"{currentStepIndex}/{recipe.steps.Count}");
+        
+        if(currentStepIndex!=0)
+        {
+            recipe.currentstepIndex = --currentStepIndex;
+            nodeManager.readyOnBulltet(recipe);
+        }
+        else {
+            nodeManager.nodeBroken = true;
+            if (requestedTable != null && requestedTable.currentPassenger != null)
+            {
+                requestedTable.currentPassenger.Exit(false, 0,recipe);
+                requestedTable.ResetTable();
+            }
+            DestroyNode(); }
+        Managers.Game.totalIngredientMoney += recipe.ingredientMoney;
+        Debug.Log(Managers.Game.totalIngredientMoney);
+
+
+
         Destroy(this.gameObject);
     }
     private void ThrowUpNode()

@@ -10,6 +10,21 @@ public class GameManager
     public int beltCount = 0;
     public int roundNumber = 1;
     //게임 상태를 나눠서 상태에 따라 스크립트들이 돌아가게 함
+
+    public float completeOrderCount;
+    public float OrderCount;
+    public float playerTotalMoney = 1000;
+    public bool isTutorial;
+    public float todaySelling=0;
+
+
+    public float totalIngredientMoney = 0;
+    public float ingredientDiscount = 0f;
+
+    public float villainRate = 0f;
+
+    public float addDaytime = 0f;
+
     public enum GameState
     {
         InGame,
@@ -28,7 +43,11 @@ public class GameManager
     public void GameStart()
     {
         currentState = GameState.InGame;
-    }
+        todaySelling = 0;
+        completeOrderCount=0;
+        OrderCount=0;
+        totalIngredientMoney = 0;
+}
 
     public void Upgrade()
     {
@@ -40,12 +59,18 @@ public class GameManager
     {
         
         Managers.UI.ShowPopUpUI<UI_Receipt>();
+        
         Time.timeScale = 0;
+    }
+
+    public void openShop()
+    {
+        GameObject.FindFirstObjectByType<CustomShopManager>().openShop();
     }
 
     public void resetRound()
     {
-
+        
     }
 
     void Start()
@@ -54,4 +79,70 @@ public class GameManager
 
     }
 
+    public void ApplyIngredientDiscount(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                ingredientDiscount = 0.2f;
+                break;
+            case 2:
+                ingredientDiscount = 0.4f;
+                break;
+            case 3:
+                ingredientDiscount = 0.6f;
+                break;
+            default:
+                ingredientDiscount = 0f;
+                break;
+        }
+    }
+
+    public int GetDiscountedIngredientPrice(int originalPrice)
+    {
+        return Mathf.RoundToInt(originalPrice * (1f - ingredientDiscount));
+    }
+
+    public void ApplyVillainRate(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                villainRate = 0.08f;
+                break;
+            case 2:
+                villainRate = 0.06f;
+                break;
+            case 3:
+                villainRate = 0.04f;
+                break;
+            default:
+                villainRate = 0.10f;
+                break;
+        }
+    }
+
+    public void ApplyDaytimeAddition(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                addDaytime = 5f;
+                break;
+            case 2:
+                addDaytime = 10f;
+                break;
+            case 3:
+                addDaytime = 15f;
+                break;
+            default:
+                addDaytime = 0f;
+                break;
+        }
+    }
+
+    public float GetAddedDaytime(float originalDaytime)
+    {
+        return originalDaytime + addDaytime;
+    }
 }

@@ -12,19 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe47920fa67a6444b94e28893fe8b94, type: 3}
   m_Name: ChickenSoup
   m_EditorClassIdentifier: 
-  startIngredient: {fileID: 0}
+  startIngredient: {fileID: 21300000, guid: 81ebf66686c013f4faff359eff088379, type: 3}
+  ingredientMoney: 0
   dishName: ChickenSoup
   steps:
   - character: 0
     action: 0
     key: 97
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: bbe77456c099ea743860ff6e60366732, type: 3}
   - character: 0
     action: 3
     key: 276
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 7087628ec97e02b4aaccbd9fdd563e0d, type: 3}
   - character: 0
     action: 4
     key: 275
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 1da0bdc491620b349be0117e93853cf7, type: 3}
   price: 150
+  eatingTime: 6
+  currentstepIndex: 0
+  orderTableNumber: 0

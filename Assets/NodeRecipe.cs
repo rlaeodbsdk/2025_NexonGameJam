@@ -18,8 +18,12 @@ public class RecipeStep
 public class NodeRecipe : ScriptableObject
 {
     public Sprite startIngredient;
+    public float ingredientMoney;
     public string dishName;
     public List<RecipeStep> steps;
-    public int price;
+    public float price;
+    public int eatingTime = 6;
+    public int currentstepIndex;
+    public int orderTableNumber;
   
 }

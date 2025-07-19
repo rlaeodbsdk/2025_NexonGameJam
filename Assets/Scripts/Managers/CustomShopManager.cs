@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -12,6 +13,7 @@ public class CustomShopManager : MonoBehaviour
     public Image foodBtnImage;
     public Button upgradeBtn;
     public Button foodBtn;
+    public Button exitBtn;
     public Sprite upgradeBtnActiveSprite;
     public Sprite upgradeBtnInactiveSprite;
     public Sprite foodBtnActiveSprite;
@@ -20,10 +22,15 @@ public class CustomShopManager : MonoBehaviour
     public RectTransform foodBtnRect;
 
     [Header("상점 스크롤뷰")]
+    public GameObject shopStage;
+    public GameObject shopPanel;
+    public GameObject leftShopCharacter;
+    public GameObject rightShopCharacter;
     public GameObject upgradeScroll;
     public GameObject upgradeScrollContents;
     public GameObject foodScroll;
     public GameObject foodScrollContents;
+    
 
 
 
@@ -40,6 +47,8 @@ public class CustomShopManager : MonoBehaviour
     private Dictionary<FoodSO, FoodSlot> foodSlotDict = new Dictionary<FoodSO, FoodSlot>();
     public static CustomShopManager instance;
     public List<FoodSO> foodList = new List<FoodSO>();
+    
+    
     private void Awake()
     {
         if(instance == null)
@@ -54,6 +63,7 @@ public class CustomShopManager : MonoBehaviour
         {
             upgradeBtn.onClick.AddListener(ShowUpgradeMenu);
             foodBtn.onClick.AddListener(ShowFoodMenu);
+            exitBtn.onClick.AddListener(CloseShop);
         }
         for (int i = 0; i < itemData.Length; i++)
         {
@@ -83,6 +93,7 @@ public class CustomShopManager : MonoBehaviour
                 }
             }
         }
+       
     }
 
     public void ShowUpgradeMenu()
@@ -105,36 +116,101 @@ public class CustomShopManager : MonoBehaviour
         upgradeBtnRect.SetAsFirstSibling();
     }
 
+    public void CloseShop()
+    {
+        shopPanel.gameObject.GetComponent<DOTweenAnimation>().DOPlayBackwards();
+        leftShopCharacter.gameObject.GetComponent<DOTweenAnimation>().DOPlayBackwards();
+        rightShopCharacter.gameObject.GetComponent<DOTweenAnimation>().DOPlayBackwards();
+    }
+
     public void BuyItem(ItemSO item)
     {
-        if (!playerInventory.ContainsKey(item))
-            playerInventory[item] = item.instantAmount;
-
-        if(playerInventory[item] < item.maxAmount)
-            playerInventory[item] += 1;
-
-        
-        if (itemSlotDict.ContainsKey(item))
+        if (Managers.Game.playerTotalMoney >= item.itemPrice) // 만약 구매 가능하다면
         {
-            itemSlotDict[item].SetData(item, playerInventory[item]);
-            if (playerInventory[item] >= item.maxAmount)
-                itemSlotDict[item].SetInteractable(false);
-            else
-                itemSlotDict[item].SetInteractable(true);
+
+
+            if (!playerInventory.ContainsKey(item))
+                playerInventory[item] = item.instantAmount;
+            if (playerInventory[item] < item.maxAmount)
+                playerInventory[item] += 1;
+            int curLevel = playerInventory[item];
+
+            
+
+            if (item.itemName == "식재료 가격 감소")
+            {
+                Managers.Game.ApplyIngredientDiscount(playerInventory[item]);
+                if (curLevel == 2) item.itemPrice = 300;
+                else if (curLevel == 3) item.itemPrice = 500;
+
+            }
+
+            if (item.itemName == "진상 등장 확률 감소")
+            {
+                Managers.Game.ApplyVillainRate(playerInventory[item]);
+                if (curLevel == 1) item.itemPrice = 300;
+                else if (curLevel == 2) item.itemPrice = 500;
+
+            }
+
+            if (item.itemName == "하루 시간 증가")
+            {
+                Managers.Game.ApplyDaytimeAddition(playerInventory[item]);
+                if (curLevel == 1) item.itemPrice = 400;
+                else if (curLevel == 2) item.itemPrice = 600;
+
+            }
+
+            if (item.type == ItemSO.itemType.Table)
+            {
+                tableManager.AddTable();
+                if (curLevel == 1) item.itemPrice = 250;
+                else if (curLevel == 2) item.itemPrice = 400;
+            }
+
+            if (itemSlotDict.ContainsKey(item))
+            {
+                itemSlotDict[item].SetData(item, playerInventory[item]);
+                if (playerInventory[item] >= item.maxAmount)
+                    itemSlotDict[item].SetInteractable(false);
+                else
+                    itemSlotDict[item].SetInteractable(true);
+            }
+
+           
+
+            
+
+            Managers.Game.playerTotalMoney -= item.itemPrice;
+            Managers.Sound.Play("SFX/purchase1");
         }
-
-        if (item.type == ItemSO.itemType.Table)
+        else // 구매 실패
         {
-            tableManager.AddTable();
+            Managers.Sound.Play("SFX/purchaseFailed1");
         }
     }
 
     public void BuyFood(FoodSO food)
     {
-        if (foodSlotDict.ContainsKey(food))
-            foodSlotDict[food].SetInteractable(false);
+        if (Managers.Game.playerTotalMoney >= food.foodUnlockPrice)
+        {
+            if (foodSlotDict.ContainsKey(food))
+                foodSlotDict[food].SetInteractable(false);
 
-        if (!foodList.Contains(food))
-            foodList.Add(food);
+            if (!foodList.Contains(food))
+                foodList.Add(food);
+
+            Managers.Game.playerTotalMoney -= food.foodUnlockPrice;
+            Managers.Sound.Play("SFX/purchase1");
+        }
+        else // 구매실패
+        {
+            Managers.Sound.Play("SFX/purchaseFailed1");
+        }
+    }
+
+    public void openShop()
+    {
+        shopStage.SetActive(true);
     }
 }

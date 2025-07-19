@@ -7,6 +7,7 @@ public class ItemSO : ScriptableObject
 
     public enum itemType{
         Table,
+        Passive
     }
     public bool isActive;
     public itemType type;   

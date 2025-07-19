@@ -17,13 +17,13 @@ public class MainTitle : BaseScene
     private void Start()
     {
         Init();
-        SoundManager.Instance.AudioPlay("MainTitle");
+        Managers.Sound.Play("BGM/titleBGM1",Define.Sound.BGM);
+        Managers.UI.ShowPopUpUI<UI_MainScene>();
     }
 
     public void GameStart()
     {
-        Managers.Scene.LoadScene(Define.Scene.MainGame);
-        SoundManager.Instance.AudioPlay("InGame");
+
     }
     public void GameQuit()
     {

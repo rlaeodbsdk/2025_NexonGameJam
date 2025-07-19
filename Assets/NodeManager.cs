@@ -9,13 +9,20 @@ public class NodeManager : MonoBehaviour
     public Transform nodeStart_2;
 
     public int nodeCount = 0;
+    public bool nodeBroken = false;
+    private int tutorialNodeLineIdx = 0;
+    public NodeLauncher launcher;
+    public TableManager tableManager;
+    
 
     private List<NodeRecipe> nodeRecipes = new List<NodeRecipe>();
     void Start()
     {
         Init();
         Managers.UI.ShowPopUpUI<UI_Test>(); // 테스트 Manager 호출
-        StartCoroutine(PatternGoNode());
+        //StartCoroutine(PatternGoNode());
+        tableManager = FindFirstObjectByType<TableManager>();
+        Managers.Sound.Play("BGM/stageBGM1", Define.Sound.BGM);
     }
 
     public NodeRecipe GetRecipe(int id)
@@ -36,6 +43,8 @@ public class NodeManager : MonoBehaviour
         }
     }
 
+
+
     void Init()
     {
         for(int i=0;i<3;i++)
@@ -52,37 +61,56 @@ public class NodeManager : MonoBehaviour
   
     }
 
-    IEnumerator PatternGoNode()
+
+    public void NodeGo(int tableNumber, string recipeName=null, Table requestedTable = null)
     {
-        while(true)
+        if (nodeCount <= 6)
         {
-            NodeGo();
-            yield return new WaitForSeconds(3);
-        }
-    }
-    void NodeGo()
-    {
-        if (nodeCount <= 0)
-        {
-            int randomLine = Random.Range(0, 2);//어디에서 나올것인지에 대해
-            int randomFood = Random.Range(0, 3);
+            int randomLine;
+            if (Managers.Game.isTutorial)
+            {
+                
+                randomLine = tutorialNodeLineIdx;
+                tutorialNodeLineIdx = (tutorialNodeLineIdx + 1) % 2;
+            }
+            else
+            {
+                randomLine = Random.Range(0, 2);
+            }
+
+            NodeRecipe recipeToUse = null;
+            if (!string.IsNullOrEmpty(recipeName))
+            {
+                recipeToUse = nodeRecipes.Find(r => r.dishName == recipeName);
+                recipeToUse.orderTableNumber = tableNumber;
+            }
             if (randomLine == 0) // 왼쪽에서 나오기
             {
                 Node FirstNodeCs = Instantiate(Node, nodeStart_1).GetComponent<Node>();
                 FirstNodeCs.GetWhereNodeLine(1);
-                FirstNodeCs.GetRecipe(nodeRecipes[randomFood]);
+                FirstNodeCs.GetRecipe(recipeToUse);
+                FirstNodeCs.requestedTable = requestedTable;
                 FirstNodeCs.setInstantiateData();
+                //FirstNodeCs.GetRecipe(nodeRecipes[randomFood]);
+                //FirstNodeCs.setInstantiateData();
+
 
             }
             else // 오른쪽에서 나오기
             {
                 Node SecondNodeCs = Instantiate(Node, nodeStart_2).GetComponent<Node>();
                 SecondNodeCs.GetWhereNodeLine(2);
-                SecondNodeCs.GetRecipe(nodeRecipes[randomFood]);
+                SecondNodeCs.GetRecipe(recipeToUse);
+                SecondNodeCs.requestedTable = requestedTable;
                 SecondNodeCs.setInstantiateData();
             }
             nodeCount++;
         }
+    }
+
+    public void readyOnBulltet(NodeRecipe recipe)
+    {
+        launcher.SpawnNote(recipe);
     }
 
     

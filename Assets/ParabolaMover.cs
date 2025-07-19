@@ -30,7 +30,7 @@ public class ParabolaMover : MonoBehaviour // 포물선 이동 할 수 있게 도와주는 코
             currentPos.y += 4 * height * t * (1 - t);
 
             transform.position = currentPos;
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             yield return null;
         }
 

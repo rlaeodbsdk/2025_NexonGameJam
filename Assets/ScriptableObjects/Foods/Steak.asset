@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   foodName: "\uC2A4\uD14C\uC774\uD06C"
-  foodImage: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  foodNodeName: Steak
+  foodImage: {fileID: 21300000, guid: 4a56232e3731b1344a3cd885582aa282, type: 3}
   foodPrice: 80
+  foodUnlockPrice: 0
+  foodIngredientPrice: 30
   foodInfo: "\uB450\uD23C\uD558\uAC8C \uC190\uC9C8\uD55C \uC18C\uACE0\uAE30\uB97C
     \uC815\uC131\uAECF \uAD6C\uC6CC\uB0B8 \uC11C\uC591\uC2DD \uC2A4\uD14C\uC774\uD06C."
