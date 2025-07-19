@@ -84,6 +84,10 @@ public class CustomShopManager : MonoBehaviour
             slot.SetData(itemData[i], level);
             itemSlotDict[itemData[i]] = slot;
             playerInventory[itemData[i]] = level;
+            if (level >= itemData[i].maxAmount)
+                slot.SetInteractable(false);
+            else
+                slot.SetInteractable(true);
         }
 
         // 음식 슬롯 초기화
@@ -98,8 +102,14 @@ public class CustomShopManager : MonoBehaviour
                 foodList.Add(foodData[i]);
                 slot.SetInteractable(false);
             }
-        }
+            
 
+        }
+        int tableCount = ShopDataManager.instance.GetItemLevel("테이블");
+        for (int i = 0; i < tableCount; i++)
+        {
+            tableManager.AddTable();
+        }
         // 해금된 음식 다시 정리
         foodList.Clear();
         foreach (var food in foodData)
@@ -164,7 +174,7 @@ public class CustomShopManager : MonoBehaviour
                 Managers.Game.ApplyIngredientDiscount(playerInventory[item]);
                 if (curLevel == 2) item.itemPrice = 300;
                 else if (curLevel == 3) item.itemPrice = 500;
-
+                ShopDataManager.instance.SaveItemLevel(item.itemName, playerInventory[item]);
             }
 
             if (item.itemName == "진상 등장 확률 감소")
@@ -172,7 +182,7 @@ public class CustomShopManager : MonoBehaviour
                 Managers.Game.ApplyVillainRate(playerInventory[item]);
                 if (curLevel == 1) item.itemPrice = 300;
                 else if (curLevel == 2) item.itemPrice = 500;
-
+                ShopDataManager.instance.SaveItemLevel(item.itemName, playerInventory[item]);
             }
 
             if (item.itemName == "하루 시간 증가")
@@ -180,7 +190,7 @@ public class CustomShopManager : MonoBehaviour
                 Managers.Game.ApplyDaytimeAddition(playerInventory[item]);
                 if (curLevel == 1) item.itemPrice = 400;
                 else if (curLevel == 2) item.itemPrice = 600;
-
+                ShopDataManager.instance.SaveItemLevel(item.itemName, playerInventory[item]);
             }
 
             if (item.type == ItemSO.itemType.Table)
@@ -188,6 +198,8 @@ public class CustomShopManager : MonoBehaviour
                 tableManager.AddTable();
                 if (curLevel == 1) item.itemPrice = 250;
                 else if (curLevel == 2) item.itemPrice = 400;
+              
+                ShopDataManager.instance.SaveItemLevel(item.itemName, playerInventory[item]);
             }
 
             if (itemSlotDict.ContainsKey(item))
@@ -237,6 +249,7 @@ public class CustomShopManager : MonoBehaviour
             GameObject obj = new GameObject("ShopDataManager");
             obj.AddComponent<ShopDataManager>();
         }
+        
     }
 
     public void openShop()
