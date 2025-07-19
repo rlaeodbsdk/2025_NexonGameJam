@@ -9,9 +9,11 @@ public class NodeManager : MonoBehaviour
     public Transform nodeStart_2;
 
     public int nodeCount = 0;
+    public bool nodeBroken = false;
 
     public NodeLauncher launcher;
     public TableManager tableManager;
+    
 
     private List<NodeRecipe> nodeRecipes = new List<NodeRecipe>();
     void Start()

@@ -171,8 +171,8 @@ public class Node : MonoBehaviour
             recipe.currentstepIndex = --currentStepIndex;
             nodeManager.readyOnBulltet(recipe);
         }
-        else { 
-            
+        else {
+            nodeManager.nodeBroken = true;
             DestroyNode(); }
         Debug.Log(Managers.Data.TotalPrice);
         
