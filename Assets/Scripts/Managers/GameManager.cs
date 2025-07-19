@@ -10,6 +10,10 @@ public class GameManager
     public int beltCount = 0;
     public int roundNumber = 1;
     //게임 상태를 나눠서 상태에 따라 스크립트들이 돌아가게 함
+
+    public int completeOrderCount;
+    public int OrderCount;
+   
     public enum GameState
     {
         InGame,

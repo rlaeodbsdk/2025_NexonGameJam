@@ -20,6 +20,7 @@ public class NodeManager : MonoBehaviour
         Managers.UI.ShowPopUpUI<UI_Test>(); // 테스트 Manager 호출
         //StartCoroutine(PatternGoNode());
         tableManager = FindFirstObjectByType<TableManager>();
+        Managers.Sound.Play("BGM/stageBGM1", Define.Sound.BGM);
     }
 
     public NodeRecipe GetRecipe(int id)

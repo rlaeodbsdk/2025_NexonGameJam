@@ -1,107 +1,159 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager
 {
-    public static SoundManager Instance { get; private set; }
+    public AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
+    Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
+    [SerializeField]
+    public AudioMixer audioMixer;
+    public AudioMixerGroup[] audioMixerGroups;
+    public AudioSource BGM;
+    public AudioSource SFX;
 
-    public AudioSource audioSource;       // BGM용
-    public AudioSource onlyFireSource;    // 루프 사운드 (예: 화염방사기)
-    public AudioSource SFXSource;         // 일반 효과음용
-    public List<AudioClip> clipList;
 
-    public void Awake()
+    public void Init()
     {
-        if (Instance != null)
+        GameObject root = GameObject.Find("@Sound");
+        if (root == null)
         {
-            Destroy(this);
+            audioMixer = Resources.Load<AudioMixer>("Sounds/SoundSetting");
+            root = new GameObject { name = "@Sound" };
+            Object.DontDestroyOnLoad(root);
+
+            string[] soundNames = System.Enum.GetNames(typeof(Define.Sound));
+            for (int i = 0; i < soundNames.Length - 1; i++)
+            {
+                GameObject go = new GameObject { name = soundNames[i] };
+                _audioSources[i] = go.AddComponent<AudioSource>();
+                _audioSources[i].outputAudioMixerGroup = audioMixer.FindMatchingGroups($"{soundNames[i]}")[0];
+                go.transform.parent = root.transform;
+            }
+        }
+        if (audioMixer == null) { Debug.Log("audioMixer is Null"); }
+
+    }
+    public void Play(AudioClip audioClip, Define.Sound type = Define.Sound.SFX, float pitch = 1.0f)
+    {
+        if (audioClip == null)
+        {
             return;
         }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-    // 🎵 배경음악 재생
-    public void AudioPlay(string audioName)
-    {
-        audioSource.clip = clipList.Find(x => x.name == audioName);
-
-        if (audioSource.clip == null)
+        if (type == Define.Sound.BGM)
         {
-            Debug.LogWarning($"BGM '{audioName}' not found in clipList!");
+            AudioSource audioSource = _audioSources[(int)Define.Sound.BGM];
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+            audioSource.pitch = pitch;
+            audioSource.clip = audioClip;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+        else
+        {
+            AudioSource audioSource = _audioSources[(int)Define.Sound.SFX];
+            audioSource.pitch = pitch;
+            audioSource.PlayOneShot(audioClip);
+        }
+    }
+    public void PlayDelayed(AudioClip audioClip, float delay, Define.Sound type = Define.Sound.BGM, float pitch = 1.0f)
+    {
+        //audioMixer = Managers.Resource.Load<AudioMixer>("AudioMixer/SoundSetting");
+        if (audioClip == null)
+        {
             return;
         }
-
-        audioSource.loop = true;
-        audioSource.Play();
+        if (type == Define.Sound.BGM)
+        {
+            AudioSource audioSource = _audioSources[(int)Define.Sound.BGM];
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+            audioSource.pitch = pitch;
+            audioSource.clip = audioClip;
+            //audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("BGM")[0];
+            audioSource.PlayDelayed(3.0f);
+        }
+        else
+        {
+            AudioSource audioSource = _audioSources[(int)Define.Sound.SFX];
+            audioSource.pitch = pitch;
+            //audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("SFX")[0];
+            audioSource.PlayOneShot(audioClip);
+        }
+    }
+    public void Play(string path, Define.Sound type = Define.Sound.SFX, float pitch = 1.0f)
+    {
+        AudioClip audioClip = GetOrAddAudioClip(path, type);
+        Play(audioClip, type, pitch);
+    }
+    public void PlayDelayed(string path, float delay, Define.Sound type = Define.Sound.BGM, float pitch = 1.0f)
+    {
+        AudioClip audioClip = GetOrAddAudioClip(path, type);
+        PlayDelayed(audioClip, delay, type, pitch);
     }
 
-    // ⏹️ 배경음악 정지
-    public void AudioStop()
+    AudioClip GetOrAddAudioClip(string path, Define.Sound type = Define.Sound.SFX)
+    {
+        if (path.Contains("Sounds/") == false)
+        {
+            path = $"Sounds/{path}";
+        }
+        AudioClip audioClip = null;
+        if (type == Define.Sound.BGM)
+        {
+            audioClip = Managers.Resource.Load<AudioClip>(path);
+        }
+        else
+        {
+            if (_audioClips.TryGetValue(path, out audioClip) == false)
+            {
+                audioClip = Managers.Resource.Load<AudioClip>(path);
+                _audioClips.Add(path, audioClip);
+            }
+        }
+        if (audioClip == null)
+        {
+            Debug.Log($"AudioClip Missing : {path}");
+        }
+        return audioClip;
+    }
+    public void Stop(AudioSource audioSource)
     {
         audioSource.Stop();
     }
-
-    // 🔊 일반 효과음 재생
-    public void SFXPlay(string SFXName)
+    public void Clear()
     {
-        AudioClip clip = clipList.Find(x => x.name == SFXName);
-        if (clip == null)
+        foreach (AudioSource audioSource in _audioSources)
         {
-            Debug.LogWarning($"SFX '{SFXName}' not found in clipList!");
-            return;
-        }   
-
-        float volume = 1.0f;
-        if (SFXName == "heal")
-        {
-            volume = 3.0f;
+            audioSource.clip = null;
+            audioSource.Stop();
         }
-
-        SFXSource.PlayOneShot(clip, volume);
+        _audioClips.Clear();
     }
-
-    // 🔁 루프 효과음 재생
-    public void SFXPlay(string SFXName, bool loop)
+    public void Audiorate(int volume)
     {
-        if (!loop)
-        {
-            SFXPlay(SFXName);
-            return;
-        }
+        AudioSource audioSource1 = _audioSources[(int)Define.Sound.BGM];
+        audioSource1.pitch = volume;
+        AudioSource audioSource2 = _audioSources[(int)Define.Sound.SFX];
+        audioSource2.pitch = volume;
 
-        AudioClip clip = clipList.Find(x => x.name == SFXName);
-        if (clip == null)
-        {
-            Debug.LogWarning($"Looping SFX '{SFXName}' not found in clipList!");
-            return;
-        }
-
-        if (onlyFireSource.isPlaying && onlyFireSource.clip == clip)
-            return; // 이미 재생 중이면 중복 방지
-
-        onlyFireSource.clip = clip;
-        onlyFireSource.loop = true;
-        onlyFireSource.Play();
     }
-
-    // 🔇 루프 사운드 중단
-    public void SFXStop(string SFXName)
+    public void AudiorateBGM(int volume)
     {
-        if (onlyFireSource.isPlaying && onlyFireSource.clip != null && onlyFireSource.clip.name == SFXName)
-        {
-            onlyFireSource.Stop();
-            onlyFireSource.clip = null;
-        }
+
     }
-
-    // 🔊 볼륨 조절
-    public void ChangeVolume(float value)
+    public void AudiorateSFX(int volume)
     {
-        audioSource.volume = value;
-        SFXSource.volume = value;
-        onlyFireSource.volume = value;
+        AudioSource audioSource2 = _audioSources[(int)Define.Sound.SFX];
+        audioSource2.pitch = volume;
+
     }
 }

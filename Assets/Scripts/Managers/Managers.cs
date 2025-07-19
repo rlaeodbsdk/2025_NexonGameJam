@@ -16,6 +16,7 @@ public class Managers : MonoBehaviour
     SceneManagerEx _scene = new SceneManagerEx();
     DataManager _data = new DataManager(); 
     JsonManager _json = new JsonManager();
+    SoundManager _sound = new SoundManager();
 
     public static GameManager Game { get { return Instance._game; } }
     public static UI_Manager UI { get { return Instance._ui; } }
@@ -27,6 +28,8 @@ public class Managers : MonoBehaviour
 
 
     public static SceneManagerEx Scene { get { return Instance._scene; } }
+
+    public static SoundManager Sound { get { return Instance._sound; } }
 
     void Start()
     {
@@ -54,6 +57,7 @@ public class Managers : MonoBehaviour
 
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
+            s_instance._sound.Init();
         }
     }
 
