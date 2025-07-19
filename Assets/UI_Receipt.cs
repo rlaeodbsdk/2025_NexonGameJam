@@ -141,16 +141,29 @@ public class UI_Receipt : UI_Popup
 
             // 애니메이션이 끝난 뒤 팝업 제거
             yield return new WaitForSecondsRealtime(1.0f);
-            Managers.Game.openShop();
-            Destroy(this.gameObject);
+
+            StartCoroutine(waitForNextStage());
+         
         }
 
         count++;
     }
 
 
+ 
 
-    IEnumerator End()
+IEnumerator waitForNextStage()
+{
+    yield return new WaitForSecondsRealtime(2.1f);
+
+    Managers.Game.GoNextStage();
+
+    Destroy(this.gameObject);
+}
+
+
+
+IEnumerator End()
     {
         yield return new WaitForSecondsRealtime(1.5f); // 대기
         TitleText.text = "";

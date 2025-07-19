@@ -64,10 +64,13 @@ public class Define
     public enum Scene
     {
         Unknown,
-        TitleScene,
-        MainGame,
         MainTitle,
-        GameScene
+        GameScene,
+        Stage1,
+        Stage2,
+        Stage3,
+        Stage4,
+
     }
     public enum Sound
     {
