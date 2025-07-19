@@ -173,7 +173,7 @@ public class StoryDialog : UI_Popup
             {
                 if (scene.requiredKey == KeyCode.None)
                 {
-                    while ((!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)) || canGoNextStep)
+                    while ((!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)))
                     {
                         TestTexts[idx].text = full;
                         yield return null;
@@ -232,7 +232,7 @@ public class StoryDialog : UI_Popup
             {
                 if (scene.requiredKey == KeyCode.None)
                 {
-                    while ((!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)) || canGoNextStep)
+                    while ((!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)))
                     {
                         TestTexts[idx].text = full;
                         yield return null;
@@ -268,10 +268,13 @@ public class StoryDialog : UI_Popup
                 continue;
             }
             
-
+            if(scene.isEndDialogue==true)
+            {
+                StartCoroutine(IsEndGo());
+            }
             if (scene.requiredKey == KeyCode.None)
             {
-                while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)&&canGoNextStep)
+                while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
                 {
                     TestTexts[idx].text = full;
                     yield return null;
@@ -336,6 +339,11 @@ public class StoryDialog : UI_Popup
         yield return new WaitForSeconds(1f);
         canGoNextStep = true;
         TextPanel.SetActive(true);
+    }
+    IEnumerator IsEndGo()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        Managers.UI.ShowPopUpUI<UI_Receipt>();
     }
 
 
