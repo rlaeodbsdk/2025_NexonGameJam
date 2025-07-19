@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class NodeManager : MonoBehaviour
@@ -69,7 +70,7 @@ public class NodeManager : MonoBehaviour
             yield return new WaitForSeconds(3);
         }
     }
-    public void NodeGo(string recipeName=null)
+    public void NodeGo(string recipeName=null, Table requestedTable = null)
     {
         if (nodeCount <= 6)
         {
@@ -86,6 +87,7 @@ public class NodeManager : MonoBehaviour
                 Node FirstNodeCs = Instantiate(Node, nodeStart_1).GetComponent<Node>();
                 FirstNodeCs.GetWhereNodeLine(1);
                 FirstNodeCs.GetRecipe(recipeToUse);
+                FirstNodeCs.requestedTable = requestedTable;
                 FirstNodeCs.setInstantiateData();
                 //FirstNodeCs.GetRecipe(nodeRecipes[randomFood]);
                 //FirstNodeCs.setInstantiateData();
@@ -97,6 +99,7 @@ public class NodeManager : MonoBehaviour
                 Node SecondNodeCs = Instantiate(Node, nodeStart_2).GetComponent<Node>();
                 SecondNodeCs.GetWhereNodeLine(2);
                 SecondNodeCs.GetRecipe(recipeToUse);
+                SecondNodeCs.requestedTable = requestedTable;
                 SecondNodeCs.setInstantiateData();
             }
             nodeCount++;

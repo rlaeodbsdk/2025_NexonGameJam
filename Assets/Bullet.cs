@@ -21,6 +21,7 @@ public class Bullet : MonoBehaviour
         {
            
             var collidingTable = collision.gameObject.GetComponent<Table>();
+
             if (collidingTable == null)
             {
                 Debug.Log("Table 컴포넌트 없음!");

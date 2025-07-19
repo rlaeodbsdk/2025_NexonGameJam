@@ -25,7 +25,7 @@ public class Table : MonoBehaviour
        
 
         var nodeManager = FindFirstObjectByType<NodeManager>();
-        nodeManager.NodeGo(passenger.selectedFood.foodNodeName);
+        nodeManager.NodeGo(passenger.selectedFood.foodNodeName, this);
 
 
         passenger.transform.position = passengerPoint.position;

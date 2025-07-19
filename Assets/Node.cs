@@ -17,6 +17,7 @@ public class Node : MonoBehaviour
 
     private NodeRecipe recipe;
     private RecipeStep currentStep;
+    public Table requestedTable;
 
     enum NodeState
     {
@@ -173,6 +174,11 @@ public class Node : MonoBehaviour
         }
         else {
             nodeManager.nodeBroken = true;
+            if (requestedTable != null && requestedTable.currentPassenger != null)
+            {
+                requestedTable.currentPassenger.Exit(false, 0);
+                requestedTable.ResetTable();
+            }
             DestroyNode(); }
         Debug.Log(Managers.Data.TotalPrice);
         
