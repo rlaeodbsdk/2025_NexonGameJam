@@ -13,8 +13,9 @@ public class GameManager
 
     public float completeOrderCount;
     public float OrderCount;
-    public float todaySelling;
+    public float todaySelling=0;
     public float playerTotalMoney = 0;
+    public float totalIngredientMoney = 0;
    
     public enum GameState
     {
@@ -37,6 +38,7 @@ public class GameManager
         todaySelling = 0;
         completeOrderCount=0;
         OrderCount=0;
+        totalIngredientMoney = 0;
 }
 
     public void Upgrade()
