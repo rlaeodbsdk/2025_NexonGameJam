@@ -30,6 +30,7 @@ public class UI_Receipt : UI_Popup
 
     private Vector3 upStartPos;
     private Vector3 downStartPos;
+    private int count = 0;
 
     private bool skipTyping = false; // 클릭 시 전체 출력용
 
@@ -87,11 +88,73 @@ public class UI_Receipt : UI_Popup
             if (skipTyping)
             {
                 textComponent.text = fullText;
+                StartCoroutine(End());
                 yield break;
             }
 
             textComponent.text += fullText[i];
             yield return new WaitForSecondsRealtime(typeSpeed);
         }
+        
+        //여기 아래
+        if (count == 1)
+        {
+            yield return new WaitForSecondsRealtime(1.5f); // 대기
+            TitleText.text = "";
+            InnerTexts.text = "";
+
+            // 두루마리와 종이를 원래 위치로 복구 (접히는 애니메이션)
+            upDooroo.rectTransform.DOAnchorPosY(upStartPos.y, animationDuration*0.5f)
+                .SetEase(Ease.InQuad).SetUpdate(true);
+            downDooroo.rectTransform.DOAnchorPosY(downStartPos.y, animationDuration*0.5f)
+                .SetEase(Ease.InQuad).SetUpdate(true);
+            middlePaper.rectTransform.DOScaleY(0f, animationDuration*0.5f)
+                .SetEase(Ease.InQuad).SetUpdate(true);
+
+            yield return new WaitForSecondsRealtime(animationDuration*0.5f + 0.2f); // 접히는 애니 끝난 후
+
+            // 전체 UI를 아래로 내려서 사라지게 하기
+            RectTransform canvasRect = GetComponent<RectTransform>();
+            if (canvasRect != null)
+            {
+                canvasRect.DOAnchorPosY(-Screen.height, 5f)
+                    .SetEase(Ease.InCubic).SetUpdate(true);
+            }
+
+            // 애니메이션이 끝난 뒤 팝업 제거하거나 비활성화하려면 아래 코드 추가
+            yield return new WaitForSecondsRealtime(1.0f);
+            Destroy(this.gameObject);
+        }
+        count++;
+
+    }
+
+    IEnumerator End()
+    {
+        yield return new WaitForSecondsRealtime(1.5f); // 대기
+        TitleText.text = "";
+        InnerTexts.text = "";
+
+        // 두루마리와 종이를 원래 위치로 복구 (접히는 애니메이션)
+        upDooroo.rectTransform.DOAnchorPosY(upStartPos.y, animationDuration)
+            .SetEase(Ease.InQuad).SetUpdate(true);
+        downDooroo.rectTransform.DOAnchorPosY(downStartPos.y, animationDuration)
+            .SetEase(Ease.InQuad).SetUpdate(true);
+        middlePaper.rectTransform.DOScaleY(0f, animationDuration)
+            .SetEase(Ease.InQuad).SetUpdate(true);
+
+        yield return new WaitForSecondsRealtime(animationDuration + 0.2f); // 접히는 애니 끝난 후
+
+        // 전체 UI를 아래로 내려서 사라지게 하기
+        RectTransform canvasRect = GetComponent<RectTransform>();
+        if (canvasRect != null)
+        {
+            canvasRect.DOAnchorPosY(-Screen.height, 5f)
+                .SetEase(Ease.InCubic).SetUpdate(true);
+        }
+
+        // 애니메이션이 끝난 뒤 팝업 제거하거나 비활성화하려면 아래 코드 추가
+        yield return new WaitForSecondsRealtime(1.0f);
+        Destroy(this.gameObject);
     }
 }

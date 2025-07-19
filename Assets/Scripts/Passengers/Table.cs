@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
+
+    private int tableNumber; // 각테이블이 가지는 고유한 ID
     [Header("손님이 앉는 위치")]
     public Transform passengerPoint;
 
@@ -33,5 +35,11 @@ public class Table : MonoBehaviour
     {
         currentPassenger = null;
         orderedFood = null;
+    }
+    
+    // 테이블 id 등록
+    public void SetTable(int id)
+    {
+        tableNumber = id;
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - FirstHitLine
   - SecondHitLine
   - DestroyZone
+  - Table
   layers:
   - Default
   - TransparentFX

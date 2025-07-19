@@ -147,7 +147,7 @@ public class Node : MonoBehaviour
         recipe = r;
     }
 
-    IEnumerator CompleteGoDestroy()//완성됐으니 없애는 과정
+    IEnumerator CompleteGoDestroy() //완성됐으니 없애는 과정
     {
         upThrow = true;
         currentState = NodeState.Flying;
@@ -155,16 +155,27 @@ public class Node : MonoBehaviour
         transform.position = transform.position + new Vector3(0, 2, 0);
         GetComponent<ParabolaMover>().StartParabolaMove(transform.position, this.gameObject);
         yield return new WaitForSecondsRealtime(0.7f);
+        float sellingPrice;
         if(isReady==true)
         {
-            Managers.Data.TotalPrice += recipe.price;
+             recipe.price = recipe.price; // 진짜로 완성됐을떄
         }
         else
         {
-            Managers.Data.TotalPrice += recipe.price * ((float)currentStepIndex / recipe.steps.Count);
+            recipe.price = recipe.price * ((float)currentStepIndex / recipe.steps.Count);
         }
+        Debug.Log($"{currentStepIndex}/{recipe.steps.Count}");
+        
+        if(currentStepIndex!=0)
+        {
+            recipe.currentstepIndex = --currentStepIndex;
+            nodeManager.readyOnBulltet(recipe);
+        }
+        else { DestroyNode(); }
         Debug.Log(Managers.Data.TotalPrice);
-        DestroyNode();
+        
+        
+
         Destroy(this.gameObject);
     }
     private void ThrowUpNode()
