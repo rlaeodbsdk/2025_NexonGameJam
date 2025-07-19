@@ -1,4 +1,7 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Table : MonoBehaviour
 {
@@ -12,6 +15,8 @@ public class Table : MonoBehaviour
 
     [Header("현재 주문된 음식 (없으면 null)")]
     public FoodSO orderedFood;
+
+    public Image dishImage;
     
     // 손님 배치
     public void AssignPassenger(Passenger passenger)
@@ -31,6 +36,24 @@ public class Table : MonoBehaviour
     {
         orderedFood = food;
        
+    }
+
+    public void ReceivedFood(Sprite foodImage, bool correctTable)
+    {
+        if (correctTable)
+        {
+            StartCoroutine(ReceivedFoodRoutine(foodImage));
+        }
+    }
+    
+    IEnumerator ReceivedFoodRoutine(Sprite foodImage)
+    {
+        dishImage.sprite = foodImage;
+        dishImage.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        dishImage.gameObject.SetActive(false);
+        ResetTable();
+        yield break;
     }
 
     // 테이블 리셋

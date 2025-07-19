@@ -12,6 +12,9 @@ public class Passenger : MonoBehaviour
 
     public GameObject orderPanel;
     public Image orderedImage;
+    public Sprite angrySprite;
+    public Sprite dissatisfactionSprite;
+    public Sprite satisfactionSprite;
 
     private void OnEnable()
     {
@@ -40,15 +43,34 @@ public class Passenger : MonoBehaviour
     }
 
     // Επΐε
-    public void Exit()
+    public void Exit(bool correctTable, int correctness)
     {
-        selectedFood = null;
-       
-        gameObject.SetActive(false);
+
+        StartCoroutine(ExitRoutine(correctTable, correctness));
     }
     public void SetFoodList(List<FoodSO> foods)
     {
         foodList = foods;
     }
 
+    IEnumerator ExitRoutine(bool correctTable, int correctness)
+    {
+        if (correctTable && correctness == 1)
+        {
+            orderedImage.sprite = satisfactionSprite;
+            yield return new WaitForSeconds(2f);
+        }else if(correctTable && correctness == 0)
+        {
+            orderedImage.sprite = dissatisfactionSprite;
+            yield return new WaitForSeconds(2f);
+        }
+        else
+        {
+            orderedImage.sprite = angrySprite;
+            yield return new WaitForSeconds(2f);
+        }
+
+            selectedFood = null;
+        Destroy(gameObject);
+    }
 }
