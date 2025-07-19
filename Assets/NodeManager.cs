@@ -18,7 +18,7 @@ public class NodeManager : MonoBehaviour
     {
         Init();
         Managers.UI.ShowPopUpUI<UI_Test>(); // 테스트 Manager 호출
-        StartCoroutine(PatternGoNode());
+        //StartCoroutine(PatternGoNode());
         tableManager = FindFirstObjectByType<TableManager>();
     }
 
@@ -66,18 +66,26 @@ public class NodeManager : MonoBehaviour
             yield return new WaitForSeconds(3);
         }
     }
-    void NodeGo(string recipeName=null)
+    public void NodeGo(string recipeName=null)
     {
         if (nodeCount <= 3)
         {
             int randomLine = Random.Range(0, 2);//어디에서 나올것인지에 대해
-            int randomFood = Random.Range(0, 3);
+            //int randomFood = Random.Range(0, 3);
+
+            NodeRecipe recipeToUse = null;
+            if (!string.IsNullOrEmpty(recipeName))
+            {
+                recipeToUse = nodeRecipes.Find(r => r.dishName == recipeName);
+            }
             if (randomLine == 0) // 왼쪽에서 나오기
             {
                 Node FirstNodeCs = Instantiate(Node, nodeStart_1).GetComponent<Node>();
                 FirstNodeCs.GetWhereNodeLine(1);
-                FirstNodeCs.GetRecipe(nodeRecipes[randomFood]);
+                FirstNodeCs.GetRecipe(recipeToUse);
                 FirstNodeCs.setInstantiateData();
+                //FirstNodeCs.GetRecipe(nodeRecipes[randomFood]);
+                //FirstNodeCs.setInstantiateData();
 
 
             }
@@ -85,7 +93,7 @@ public class NodeManager : MonoBehaviour
             {
                 Node SecondNodeCs = Instantiate(Node, nodeStart_2).GetComponent<Node>();
                 SecondNodeCs.GetWhereNodeLine(2);
-                SecondNodeCs.GetRecipe(nodeRecipes[randomFood]);
+                SecondNodeCs.GetRecipe(recipeToUse);
                 SecondNodeCs.setInstantiateData();
             }
             nodeCount++;
