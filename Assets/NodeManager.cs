@@ -35,6 +35,10 @@ public class NodeManager : MonoBehaviour
                 return Resources.Load<NodeRecipe>("Recipes/TomatoSoup");
             case 2:
                 return Resources.Load<NodeRecipe>("Recipes/MeatBall");
+            case 3:
+                return Resources.Load<NodeRecipe>("Recipes/CornSoup");
+            case 4:
+                return Resources.Load<NodeRecipe>("Recipes/ChickenSoup");
 
 
             default:
@@ -47,7 +51,7 @@ public class NodeManager : MonoBehaviour
 
     void Init()
     {
-        for(int i=0;i<3;i++)
+        for(int i=0;i<5;i++)
         {
             nodeRecipes.Add(GetRecipe(i));
         }

@@ -14,6 +14,15 @@ public class ClockAndMoney : MonoBehaviour
 
     private void Start()
     {
+        switch(Managers.Game.roundNumber)
+        {
+            case 2: currentTime = 60f;
+                break;
+            case 3: currentTime = 90f;
+                break;
+            case 4: currentTime = 120f;
+                break;
+        }
         dayText.SetText("Day" + Managers.Game.roundNumber);
     }
 
@@ -26,7 +35,6 @@ public class ClockAndMoney : MonoBehaviour
             if (currentTime < 0f)
             {
                 currentTime = 0f;
-                Managers.Game.roundNumber++;
                 dayText.SetText("Day" + Managers.Game.roundNumber);
                 Managers.Game.onRoundOver();
             }

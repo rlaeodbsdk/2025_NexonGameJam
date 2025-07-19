@@ -302,19 +302,6 @@ public class StoryDialog : UI_Popup
         }
         else
         {
-            Time.timeScale = 1f;
-
-            //게임 시작하기 위한 준비
-            GameObject[] nodes = GameObject.FindGameObjectsWithTag("Node");
-            foreach (GameObject node in nodes)
-            {
-                Destroy(node);
-            }
-            
-            Managers.Game.stageNumber++;
-            Managers.Game.cMoney = FindFirstObjectByType<ClockAndMoney>();
-            Managers.Game.GameStart();
-            
 
         }
 
