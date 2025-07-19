@@ -94,23 +94,22 @@ public class StoryDialog : UI_Popup
                     if (scene.isFirstAppearance)
                     {
                         StandingImage[0].rectTransform.localScale = Vector3.one;
+
                         yield return new WaitForSecondsRealtime(2.2f);
                     }
-
                     else
                     {
-                        StandingImage[0].rectTransform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-
-
 
                     }
                     if (scene.isAnger)
                     {
+                        Debug.Log("왼쪽사람화내기!");
                         LeftCharacter.instance.frowningAnim.DORestartById("1");
                     }
                     if (scene.isSurprized)
                     {
-                        LeftCharacter.instance.surprisedAnim.DORestartById("2");
+                        Debug.Log("왼쪽사람놀라기!");
+                        LeftCharacter.instance.frowningAnim.DORestartById("2");
                     }
                 }
 
@@ -135,25 +134,31 @@ public class StoryDialog : UI_Popup
                 if (panelRect != null)
                     panelRect.anchoredPosition = originalPanelPos + scene.panelPositionOffset;
 
-                if (scene.isFirstAppearance)
+                if (scene.showRightCharacter)
                 {
-
-                    if (TextPanel != null)
-                        TextPanel.SetActive(false);
-
-
-                    if (TextPanel != null)
-                        TextPanel.SetActive(true);
-                }
-                else
-                {
-                    if (scene.isAnger)
+                    if (scene.isFirstAppearance)
                     {
-                        RightCharacter.instance.frowningAnim.DORestartById("1");
+
+                        if (TextPanel != null)
+                            TextPanel.SetActive(false);
+
+
+                        if (TextPanel != null)
+                            TextPanel.SetActive(true);
+
                     }
-                    if (scene.isSurprized)
+                    else
                     {
-                        RightCharacter.instance.surprisedAnim.DORestartById("2");
+                        if (scene.isAnger)
+                        {
+                            Debug.Log("오른쪽사람화내기!");
+                            RightCharacter.instance.frowningAnim.DORestartById("1");
+                        }
+                        if (scene.isSurprized)
+                        {
+                            Debug.Log("오른쪽사람놀라기!");
+                            RightCharacter.instance.surprisedAnim.DORestartById("2");
+                        }
                     }
                 }
             }
@@ -226,6 +231,11 @@ public class StoryDialog : UI_Popup
             if(scene.isShopingGo)
             {
                 StartCoroutine(goShopingOn());
+            }
+
+            if(scene.isGivingMoney)
+            {
+                Managers.Game.playerTotalMoney -= scene.givingMoneyAmount;
             }
 
             if (scene.isTimeGoing)
