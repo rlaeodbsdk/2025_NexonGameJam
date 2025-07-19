@@ -18,12 +18,12 @@ public class MainTitle : BaseScene
     {
         Init();
         Managers.Sound.Play("BGM/titleBGM1",Define.Sound.BGM);
+        Managers.UI.ShowPopUpUI<UI_MainScene>();
     }
 
     public void GameStart()
     {
-        Managers.Scene.LoadScene(Define.Scene.MainGame);
-        Managers.Sound.Play("BGM/stageBGM1",Define.Sound.BGM);
+
     }
     public void GameQuit()
     {

@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     public IEnumerator DestroyDelay()
     {
         yield return new WaitForSeconds(delay);
-        if (this.gameObject != null)
+        if (this != null)
         {
             Destroy(this.gameObject);
         }

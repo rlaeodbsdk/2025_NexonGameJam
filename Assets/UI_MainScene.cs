@@ -18,6 +18,7 @@ public class UI_MainScene : UI_Popup
 
     public override void Init()
     {
+        Managers.Sound.Play("BGM/titleBGM1");
         base.Init();
         Bind<Button>(typeof(Buttons));
 
@@ -28,12 +29,18 @@ public class UI_MainScene : UI_Popup
 
     void StartClicked(PointerEventData eventData)
     {
-        Debug.Log("게임시작");
+        Managers.Sound.Play("SFX/buttonClick1");
+        Managers.Scene.LoadScene(Define.Scene.GameScene);
+        Managers.Sound.Play("BGM/stageBGM1", Define.Sound.BGM);
     }
 
     void EndClicked(PointerEventData eventData)
     {
-        Debug.Log("게임종료");
-        
+        Managers.Sound.Play("SFX/buttonClick1");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit(); // 어플리케이션 종료
+#endif
     }
 }

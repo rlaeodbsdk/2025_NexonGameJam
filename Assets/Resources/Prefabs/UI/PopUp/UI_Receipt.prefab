@@ -65,7 +65,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: '
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 51b7b868eb0d9ed4bad6982621fe2d0d, type: 2}
   m_sharedMaterial: {fileID: 8691653856562039407, guid: 51b7b868eb0d9ed4bad6982621fe2d0d, type: 2}
@@ -98,11 +100,11 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 40
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -507,6 +509,7 @@ GameObject:
   - component: {fileID: 8627999613334665063}
   - component: {fileID: 6913039875442659245}
   - component: {fileID: 3012311550786129231}
+  - component: {fileID: 7016478040249514795}
   m_Layer: 0
   m_Name: UI_Receipt
   m_TagString: Untagged
@@ -642,10 +645,27 @@ MonoBehaviour:
   animationDuration: 1
   moveDistance: 400
   typeSpeed: 0.03
-  title: "\uC624\uB298\uC758 \uC601\uC218\uC99D"
+  title: "\uC77C\uC77C\uC815\uC0B0"
   totalSales: "120,000\uC6D0"
   successCount: "23\uD68C"
   failCount: "2\uD68C"
   successRate: 92%
   netProfit: "95,000\uC6D0"
   rank: S+
+--- !u!114 &7016478040249514795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710546207648198908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295

@@ -21,6 +21,7 @@ public class NodeManager : MonoBehaviour
         //StartCoroutine(PatternGoNode());
         tableManager = FindFirstObjectByType<TableManager>();
         Managers.Sound.Play("BGM/stageBGM1", Define.Sound.BGM);
+        Managers.UI.ShowPopUpUI<UI_Receipt>();
     }
 
     public NodeRecipe GetRecipe(int id)

@@ -11,8 +11,10 @@ public class GameManager
     public int roundNumber = 1;
     //게임 상태를 나눠서 상태에 따라 스크립트들이 돌아가게 함
 
-    public int completeOrderCount;
-    public int OrderCount;
+    public float completeOrderCount;
+    public float OrderCount;
+    public float todaySelling;
+    public float playerTotalMoney = 0;
    
     public enum GameState
     {
@@ -32,7 +34,10 @@ public class GameManager
     public void GameStart()
     {
         currentState = GameState.InGame;
-    }
+        todaySelling = 0;
+        completeOrderCount=0;
+        OrderCount=0;
+}
 
     public void Upgrade()
     {
