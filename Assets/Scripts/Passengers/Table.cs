@@ -10,8 +10,12 @@ public class Table : MonoBehaviour
     [Header("손님이 앉는 위치")]
     public Transform passengerPoint;
 
+    [Header("빌런이 앉는 위치")]
+    public Transform villainPoint;
+
     [Header("이 테이블에 앉아있는 손님(없으면 null)")]
     public Passenger currentPassenger;
+    public VillainPassenger currentVillain;
 
     [Header("현재 주문된 음식 (없으면 null)")]
     public FoodSO orderedFood;
@@ -57,10 +61,27 @@ public class Table : MonoBehaviour
         yield break;
     }
 
+    public void AssignVillain(VillainPassenger villain)
+    {
+        currentVillain = villain;
+        villain.transform.position = villainPoint.position;
+    }
+    public void ExpelVillain()
+    {
+        if (currentVillain != null)
+        {
+            
+
+            Destroy(currentVillain.gameObject);
+            currentVillain = null;
+            ResetTable();
+        }
+    }
     // 테이블 리셋
     public void ResetTable()
     {
         currentPassenger = null;
+        currentVillain = null;
         orderedFood = null;
     }
     

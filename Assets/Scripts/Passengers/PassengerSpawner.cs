@@ -1,16 +1,28 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PassengerSpawner : MonoBehaviour
 {
     public float spawnTime = 4f;
     public Passenger passengerPrefab;
-    public TableManager tableManager; 
-
+    public VillainPassenger villainPrefab;
+    public TableManager tableManager;
+    public Sprite[] passengerSprites;
     private int currentSpawnIndex = 0;
     private float timer = 0f;
     private bool isFirstSpawn = true;
+    private float villainSpawnRate = 0f;
 
+    private void Start()
+    {
+        switch(Managers.Game.roundNumber)
+        {
+            case 1: villainSpawnRate = 0f; break;
+            case 2: villainSpawnRate = 0f; break;
+            case 3: villainSpawnRate = Managers.Game.villainRate ; break;
+        }
+    }
 
     private void Update()
     {
@@ -43,7 +55,13 @@ public class PassengerSpawner : MonoBehaviour
             Debug.Log("ºó Å×ÀÌºí ¾øÀ½!");
             return;
         }
-
+        if (Random.value < villainSpawnRate) // 10% È®·ü
+        {
+            var villain = Instantiate(villainPrefab, emptyTable.villainPoint.position, Quaternion.identity, emptyTable.villainPoint);
+            villain.Init(emptyTable);
+            emptyTable.AssignVillain(villain);
+            return;
+        }
         // ¼Õ´Ô »ý¼º
         var passenger = Instantiate(
         passengerPrefab,
@@ -51,7 +69,14 @@ public class PassengerSpawner : MonoBehaviour
         Quaternion.identity,
         emptyTable.passengerPoint
     );
+        if (passengerSprites != null && passengerSprites.Length > 0)
+        {
+            int randIdx = Random.Range(0, passengerSprites.Length);
+            var img = passenger.GetComponentInChildren<Image>();
+            if (img != null)
+                img.sprite = passengerSprites[randIdx];
 
+        }
         passenger.SetFoodList(CustomShopManager.instance.foodList);
 
         passenger.Visit(emptyTable);  // currentTable ¼¼ÆÃ µî
