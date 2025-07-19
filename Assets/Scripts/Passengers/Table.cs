@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Table : MonoBehaviour
 {
 
-    private int tableNumber; // 각테이블이 가지는 고유한 ID
+    public int tableNumber; // 각테이블이 가지는 고유한 ID
     [Header("손님이 앉는 위치")]
     public Transform passengerPoint;
 
@@ -25,7 +25,7 @@ public class Table : MonoBehaviour
        
 
         var nodeManager = FindFirstObjectByType<NodeManager>();
-        nodeManager.NodeGo(passenger.selectedFood.foodNodeName);
+        nodeManager.NodeGo(tableNumber, passenger.selectedFood.foodNodeName, this);
 
 
         passenger.transform.position = passengerPoint.position;

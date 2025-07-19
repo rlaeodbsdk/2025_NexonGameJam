@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -12,6 +13,7 @@ public class CustomShopManager : MonoBehaviour
     public Image foodBtnImage;
     public Button upgradeBtn;
     public Button foodBtn;
+    public Button exitBtn;
     public Sprite upgradeBtnActiveSprite;
     public Sprite upgradeBtnInactiveSprite;
     public Sprite foodBtnActiveSprite;
@@ -20,10 +22,14 @@ public class CustomShopManager : MonoBehaviour
     public RectTransform foodBtnRect;
 
     [Header("상점 스크롤뷰")]
+    public GameObject shopPanel;
+    public GameObject leftShopCharacter;
+    public GameObject rightShopCharacter;
     public GameObject upgradeScroll;
     public GameObject upgradeScrollContents;
     public GameObject foodScroll;
     public GameObject foodScrollContents;
+    
 
 
 
@@ -54,6 +60,7 @@ public class CustomShopManager : MonoBehaviour
         {
             upgradeBtn.onClick.AddListener(ShowUpgradeMenu);
             foodBtn.onClick.AddListener(ShowFoodMenu);
+            exitBtn.onClick.AddListener(CloseShop);
         }
         for (int i = 0; i < itemData.Length; i++)
         {
@@ -83,6 +90,7 @@ public class CustomShopManager : MonoBehaviour
                 }
             }
         }
+       
     }
 
     public void ShowUpgradeMenu()
@@ -103,6 +111,13 @@ public class CustomShopManager : MonoBehaviour
         foodBtnImage.sprite = foodBtnActiveSprite;
         foodBtnRect.SetAsLastSibling();
         upgradeBtnRect.SetAsFirstSibling();
+    }
+
+    public void CloseShop()
+    {
+        shopPanel.gameObject.GetComponent<DOTweenAnimation>().DOPlayBackwards();
+        leftShopCharacter.gameObject.GetComponent<DOTweenAnimation>().DOPlayBackwards();
+        rightShopCharacter.gameObject.GetComponent<DOTweenAnimation>().DOPlayBackwards();
     }
 
     public void BuyItem(ItemSO item)

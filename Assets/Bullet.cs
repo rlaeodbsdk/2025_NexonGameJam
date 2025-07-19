@@ -5,12 +5,25 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private NodeRecipe recipe;
+    
+
     public float delay = 0.7f;
 
     public IEnumerator DestroyDelay()
     {
+        TableManager tableManager = FindAnyObjectByType<TableManager>();
+        foreach(Table table in tableManager.tables)
+        {
+            if(recipe.orderTableNumber == table.tableNumber)
+            {
+                table.currentPassenger.Exit(false, 0);
+                table.ResetTable();
+            }
+        }
         yield return new WaitForSeconds(delay);
+
         if (this != null)
+
         {
             Destroy(this.gameObject);
         }
@@ -21,19 +34,20 @@ public class Bullet : MonoBehaviour
         {
            
             var collidingTable = collision.gameObject.GetComponent<Table>();
+
             if (collidingTable == null)
             {
-                Debug.Log("Table ÄÄÆ÷³ÍÆ® ¾øÀ½!");
+                Debug.Log("Table ì»´í¬ë„ŒíŠ¸ ì—†ìŒ!");
                 return;
             }
             if (collidingTable.currentPassenger == null)
             {
-                Debug.Log("currentPassenger ¾øÀ½!");
+                Debug.Log("currentPassenger ì—†ìŒ!");
                 return;
             }
             if (collidingTable.currentPassenger.selectedFood == null)
             {
-                Debug.Log("selectedFood ¾øÀ½!");
+                Debug.Log("selectedFood ì—†ìŒ!");
                 return;
             }
             Debug.Log(collidingTable.currentPassenger.selectedFood.foodNodeName);
@@ -46,7 +60,7 @@ public class Bullet : MonoBehaviour
                    
                 }
             
-            Debug.Log("Å×ÀÌºí°úÀÇ Á¢ÃË");
+            Debug.Log("í…Œì´ë¸”ê³¼ì˜ ì ‘ì´‰");
             
 
             Destroy(this.gameObject);

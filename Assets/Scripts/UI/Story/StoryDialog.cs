@@ -31,6 +31,7 @@ public class StoryDialog : UI_Popup
         
     private void OnEnable()
     {
+        Time.timeScale = 0f;
         StartCoroutine(TypingCoroutine());
     }
 
@@ -43,7 +44,7 @@ public class StoryDialog : UI_Popup
 
             DialogueScene scene = scenes[idx];
 
-            yield return new WaitForSeconds(scene.preDelay);
+            yield return new WaitForSecondsRealtime(scene.preDelay);
 
             // ======================
             // 0. Hide Dialog Ã³¸®
@@ -88,7 +89,7 @@ public class StoryDialog : UI_Popup
                     if (scene.isFirstAppearance)
                     {
                         StandingImage[0].rectTransform.localScale = Vector3.one;
-                        yield return new WaitForSeconds(2.2f);
+                        yield return new WaitForSecondsRealtime(2.2f);
                     }
                         
                     else
@@ -160,7 +161,7 @@ public class StoryDialog : UI_Popup
             for (int i = 0; i <= len; i++)
             {
                 TestTexts[idx].text = full.Typing(i);
-                yield return new WaitForSeconds(0.025f);
+                yield return new WaitForSecondsRealtime(0.025f);
             }
 
 
@@ -183,7 +184,7 @@ public class StoryDialog : UI_Popup
             }
 
 
-            yield return new WaitForSeconds(scene.postDelay);
+            yield return new WaitForSecondsRealtime(scene.postDelay);
         }
         if(dimmedPanel != null)
         {
@@ -191,10 +192,11 @@ public class StoryDialog : UI_Popup
             StandingImage[1].gameObject.SetActive(false);
             TextPanel.SetActive(false);
             dimmedPanel.GetComponent<DOTweenAnimation>().DORestart();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f);
         }
         
         contents.SetActive(false);
+        Time.timeScale = 1f;
         if (TutorialDialog != null)
         {
             TutorialDialog.SetActive(true);
