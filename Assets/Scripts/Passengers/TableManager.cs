@@ -19,7 +19,11 @@ public class TableManager : MonoBehaviour
         layoutGroup = tableParent.GetComponent<HorizontalLayoutGroup>();
         tables.Clear();
         foreach (var table in FindObjectsByType<Table>(FindObjectsSortMode.None))
+        {
             tables.Add(table);
+            table.SetTable(0);
+        }
+           
     }
 
     // 호출: 테이블을 구매할 때
@@ -36,7 +40,7 @@ public class TableManager : MonoBehaviour
             tableAnim.DORestart();
         }
 
-        tableComp.SetTable(tableCount);
+        tableComp.SetTable(tableCount+1);
         tableCount++;
 
     }

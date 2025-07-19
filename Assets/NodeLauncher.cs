@@ -63,6 +63,8 @@ public class NodeLauncher : MonoBehaviour
             currentNote.transform.SetParent(noteSpawnPoint);
             currentNote.GetComponentInChildren<SpriteRenderer>().sprite = recipe.steps[recipe.currentstepIndex].sprite;
             Managers.Sound.Play("SFX/cannonLoad1");
+            var bullet = currentNote.GetComponent<Bullet>();
+            bullet.getNodeRecipe(recipe);
         }
         else
         {

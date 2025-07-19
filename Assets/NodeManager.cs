@@ -62,15 +62,8 @@ public class NodeManager : MonoBehaviour
   
     }
 
-    IEnumerator PatternGoNode()
-    {
-        while(true)
-        {
-            NodeGo();
-            yield return new WaitForSeconds(3);
-        }
-    }
-    public void NodeGo(string recipeName=null, Table requestedTable = null)
+
+    public void NodeGo(int tableNumber, string recipeName=null, Table requestedTable = null)
     {
         if (nodeCount <= 6)
         {
@@ -81,6 +74,7 @@ public class NodeManager : MonoBehaviour
             if (!string.IsNullOrEmpty(recipeName))
             {
                 recipeToUse = nodeRecipes.Find(r => r.dishName == recipeName);
+                recipeToUse.orderTableNumber = tableNumber;
             }
             if (randomLine == 0) // 왼쪽에서 나오기
             {

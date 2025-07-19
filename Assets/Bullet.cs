@@ -5,11 +5,24 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private NodeRecipe recipe;
+    
+
     public float delay = 0.7f;
 
     public IEnumerator DestroyDelay()
     {
+        TableManager tableManager = FindAnyObjectByType<TableManager>();
+        foreach(Table table in tableManager.tables)
+        {
+            if(recipe.orderTableNumber == table.tableNumber)
+            {
+                table.currentPassenger.Exit(false, 0);
+                table.ResetTable();
+            }
+        }
         yield return new WaitForSeconds(delay);
+        
+
         if (this.gameObject != null)
         {
             Destroy(this.gameObject);

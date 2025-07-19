@@ -18,6 +18,7 @@ public class Node : MonoBehaviour
     private NodeRecipe recipe;
     private RecipeStep currentStep;
     public Table requestedTable;
+    
 
     enum NodeState
     {
