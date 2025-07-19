@@ -68,7 +68,7 @@ public class NodeManager : MonoBehaviour
     }
     void NodeGo(string recipeName=null)
     {
-        if (nodeCount <= 3)
+        if (nodeCount <= 6)
         {
             int randomLine = Random.Range(0, 2);//어디에서 나올것인지에 대해
             int randomFood = Random.Range(0, 3);

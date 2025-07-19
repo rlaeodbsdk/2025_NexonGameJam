@@ -20,6 +20,8 @@ public class Bullet : MonoBehaviour
         if(collision.CompareTag("Table"))
         {
             Debug.Log("테이블과의 접촉");
+            
+
             Destroy(this.gameObject);
         }
     }
