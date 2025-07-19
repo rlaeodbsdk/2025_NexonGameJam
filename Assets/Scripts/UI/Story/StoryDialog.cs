@@ -289,14 +289,17 @@ public class StoryDialog : UI_Popup
                 float money = Managers.Game.playerTotalMoney;
                 if(money>=0)
                 {
+                    Managers.UI.ShowPopUpUI<UI_GoodEnding>();
                     Debug.Log("굿엔딩");
                 }
                 else if((money<0)||(money>=-1000))
                 {
+                    Managers.UI.ShowPopUpUI<UI_GoodEnding>();
                     Debug.Log("노말엔딩");
                 }
                 else if(money<-1000)
                  {
+                    Managers.UI.ShowPopUpUI<UI_BadEnding>();
                  Debug.Log("배드엔딩");
 
                 }

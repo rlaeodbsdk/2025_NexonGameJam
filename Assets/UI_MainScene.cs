@@ -7,8 +7,7 @@ public class UI_MainScene : UI_Popup
 {
     enum Buttons
     {
-        StartButton,
-        EndButton
+        StartButton
     }
 
     private void Start()
@@ -23,7 +22,6 @@ public class UI_MainScene : UI_Popup
         Bind<Button>(typeof(Buttons));
 
         GetButton((int)Buttons.StartButton).gameObject.AddUIEvent(StartClicked);
-        GetButton((int)Buttons.EndButton).gameObject.AddUIEvent(EndClicked);
 
     }
 
@@ -34,13 +32,4 @@ public class UI_MainScene : UI_Popup
         Managers.Sound.Play("BGM/stageBGM1", Define.Sound.BGM);
     }
 
-    void EndClicked(PointerEventData eventData)
-    {
-        Managers.Sound.Play("SFX/buttonClick1");
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit(); // 어플리케이션 종료
-#endif
-    }
 }

@@ -548,7 +548,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6866124495415763131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -637,14 +637,14 @@ RectTransform:
   m_GameObject: {fileID: 8313984543008793873}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 873195546169459362}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -414.4331}
+  m_AnchoredPosition: {x: -673, y: 1028}
   m_SizeDelta: {x: 950, y: 1840}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3787380099363920271
@@ -762,7 +762,7 @@ MonoBehaviour:
   id: 1
   isRelative: 0
   isFrom: 0
-  isIndependentUpdate: 0
+  isIndependentUpdate: 1
   autoKill: 0
   autoGenerate: 1
   isActive: 1
@@ -870,7 +870,7 @@ MonoBehaviour:
   id: 2
   isRelative: 0
   isFrom: 0
-  isIndependentUpdate: 0
+  isIndependentUpdate: 1
   autoKill: 0
   autoGenerate: 1
   isActive: 1
@@ -1071,9 +1071,302 @@ MonoBehaviour:
   panelOffset: {x: 0, y: 0}
   contents: {fileID: 3145522776773768616}
   scenes:
+  - speakingCharacter: 2
+    isFirstAppearance: 0
+    text: "\r\uC88B\uC740 \uC544\uCE68 !!!!!!!!!!!!!!!!"
+    overrideSprite: {fileID: 0}
+    panelPositionOffset: {x: -132, y: 144}
+    preDelay: 0
+    postDelay: 0
+    showLeftCharacter: 0
+    showRightCharacter: 1
+    isAnger: 1
+    isSurprized: 0
+    leftSDAnim: 0
+    rightSDAnim: 0
+    isTimeGoing: 0
+    isTomatoSoupGo: 0
+    isShopingGo: 0
+    isEndDialogue: 0
+    isGivingMoney: 0
+    isEnding: 0
+    givingMoneyAmount: 0
+    goingTimeAmount: 0
+    requiredKey: 0
   - speakingCharacter: 4
-    isFirstAppearance: 1
-    text: "\uC624\uB298\uB3C4 \uC88B\uC740 \uC544\uCE68\uC774\uC57C!!!\r"
+    isFirstAppearance: 0
+    text: "\uC5B4\uB77C ? \uD5E8\uC824\uC774 \uC624\uB298\uB530\uB77C \uAE30\uC6B4\uC774
+      \uB118\uCE58\uB124 ~\r"
+    overrideSprite: {fileID: 0}
+    panelPositionOffset: {x: 132, y: 144}
+    preDelay: 0
+    postDelay: 0
+    showLeftCharacter: 1
+    showRightCharacter: 0
+    isAnger: 0
+    isSurprized: 0
+    leftSDAnim: 0
+    rightSDAnim: 0
+    isTimeGoing: 0
+    isTomatoSoupGo: 0
+    isShopingGo: 0
+    isEndDialogue: 0
+    isGivingMoney: 0
+    isEnding: 0
+    givingMoneyAmount: 0
+    goingTimeAmount: 0
+    requiredKey: 0
+  - speakingCharacter: 3
+    isFirstAppearance: 0
+    text: "\uBC24\uC0C8 \uC9D1\uC5D0\uAC08 \uC218 \uC788\uB2E4\uACE0 \uC5BC\uB9C8\uB098
+      \uC911\uC5BC\uC911\uC5BC \uAC70\uB9AC\uB358\uC9C0 \uBAB0\uB77C\r"
+    overrideSprite: {fileID: 0}
+    panelPositionOffset: {x: 132, y: 144}
+    preDelay: 0
+    postDelay: 0
+    showLeftCharacter: 0
+    showRightCharacter: 1
+    isAnger: 0
+    isSurprized: 0
+    leftSDAnim: 0
+    rightSDAnim: 0
+    isTimeGoing: 0
+    isTomatoSoupGo: 0
+    isShopingGo: 0
+    isEndDialogue: 0
+    isGivingMoney: 0
+    isEnding: 0
+    givingMoneyAmount: 0
+    goingTimeAmount: 0
+    requiredKey: 0
+  - speakingCharacter: 3
+    isFirstAppearance: 0
+    text: "\uBB3C\uB860, \uADF8\uB807\uAC8C \uB41C\uB2E4\uBA74 \uC815\uB9D0 \uC88B\uACA0\uC9C0\uB9CC!"
+    overrideSprite: {fileID: 0}
+    panelPositionOffset: {x: -132, y: 144}
+    preDelay: 0
+    postDelay: 0
+    showLeftCharacter: 0
+    showRightCharacter: 1
+    isAnger: 0
+    isSurprized: 0
+    leftSDAnim: 0
+    rightSDAnim: 0
+    isTimeGoing: 0
+    isTomatoSoupGo: 0
+    isShopingGo: 0
+    isEndDialogue: 0
+    isGivingMoney: 0
+    isEnding: 0
+    givingMoneyAmount: 0
+    goingTimeAmount: 0
+    requiredKey: 0
+  - speakingCharacter: 4
+    isFirstAppearance: 0
+    text: "\uB108\uD76C\uB4E4\uACFC \uCE5C\uD574\uC838\uC11C \uB108\uBB34 \uB5A0\uB098\uBCF4\uB0B4\uAE30\uAC00
+      \uC544\uC26C\uC6CC..\r"
+    overrideSprite: {fileID: 0}
+    panelPositionOffset: {x: 132, y: 144}
+    preDelay: 0
+    postDelay: 0
+    showLeftCharacter: 1
+    showRightCharacter: 0
+    isAnger: 0
+    isSurprized: 0
+    leftSDAnim: 0
+    rightSDAnim: 0
+    isTimeGoing: 0
+    isTomatoSoupGo: 0
+    isShopingGo: 0
+    isEndDialogue: 0
+    isGivingMoney: 0
+    isEnding: 0
+    givingMoneyAmount: 0
+    goingTimeAmount: 0
+    requiredKey: 0
+  - speakingCharacter: 4
+    isFirstAppearance: 0
+    text: "\uB108\uB124\uB4E4\uC774 \uC774\uC57C\uAE30 \uD588\uB358 \uACFC..\uC790..?
+      \uC5D0 \uB300\uD55C \uC774\uC57C\uAE30 \uC815\uB9D0 \uC7AC\uBC0C\uC5C8\uB294\uB370
+      !"
+    overrideSprite: {fileID: 0}
+    panelPositionOffset: {x: -132, y: 144}
+    preDelay: 0
+    postDelay: 0
+    showLeftCharacter: 1
+    showRightCharacter: 0
+    isAnger: 0
+    isSurprized: 1
+    leftSDAnim: 0
+    rightSDAnim: 0
+    isTimeGoing: 0
+    isTomatoSoupGo: 0
+    isShopingGo: 0
+    isEndDialogue: 0
+    isGivingMoney: 0
+    isEnding: 0
+    givingMoneyAmount: 0
+    goingTimeAmount: 0
+    requiredKey: 0
+  - speakingCharacter: 2
+    isFirstAppearance: 0
+    text: "\uC6B0\uB9AC\uAC00 \uC9D1\uC5D0 \uAC00\uC11C \uC794\uB729 \uAC00\uC838\uC62C\uD14C\uB2C8\uAE4C
+      \uAE30\uB300\uD558\uB77C\uAD6C!!\r\r"
+    overrideSprite: {fileID: 0}
+    panelPositionOffset: {x: 132, y: 144}
+    preDelay: 0
+    postDelay: 0
+    showLeftCharacter: 0
+    showRightCharacter: 1
+    isAnger: 1
+    isSurprized: 0
+    leftSDAnim: 0
+    rightSDAnim: 0
+    isTimeGoing: 0
+    isTomatoSoupGo: 0
+    isShopingGo: 0
+    isEndDialogue: 0
+    isGivingMoney: 0
+    isEnding: 0
+    givingMoneyAmount: 0
+    goingTimeAmount: 0
+    requiredKey: 0
+  - speakingCharacter: 4
+    isFirstAppearance: 0
+    text: "\uC751, \uC815\uB9D0 \uAE30\uB300\uB3FC!"
+    overrideSprite: {fileID: 0}
+    panelPositionOffset: {x: -132, y: 144}
+    preDelay: 0
+    postDelay: 0
+    showLeftCharacter: 1
+    showRightCharacter: 0
+    isAnger: 0
+    isSurprized: 0
+    leftSDAnim: 0
+    rightSDAnim: 0
+    isTimeGoing: 0
+    isTomatoSoupGo: 0
+    isShopingGo: 0
+    isEndDialogue: 0
+    isGivingMoney: 0
+    isEnding: 0
+    givingMoneyAmount: 0
+    goingTimeAmount: 0
+    requiredKey: 0
+  - speakingCharacter: 4
+    isFirstAppearance: 0
+    text: "\uADF8\uB098\uC800\uB098 \uAE40\uC0BF\uAC13\uB2D8\uC740 \uC5B8\uC81C\uC624\uC2DC\uC9C0..?"
+    overrideSprite: {fileID: 0}
+    panelPositionOffset: {x: 132, y: 144}
+    preDelay: 0
+    postDelay: 0
+    showLeftCharacter: 1
+    showRightCharacter: 0
+    isAnger: 0
+    isSurprized: 0
+    leftSDAnim: 0
+    rightSDAnim: 0
+    isTimeGoing: 0
+    isTomatoSoupGo: 0
+    isShopingGo: 0
+    isEndDialogue: 0
+    isGivingMoney: 0
+    isEnding: 0
+    givingMoneyAmount: 0
+    goingTimeAmount: 0
+    requiredKey: 0
+  - speakingCharacter: 1
+    isFirstAppearance: 0
+    text: "[ \uB611 \uB611 \uB611 ]"
+    overrideSprite: {fileID: 0}
+    panelPositionOffset: {x: -132, y: 144}
+    preDelay: 0
+    postDelay: 0
+    showLeftCharacter: 1
+    showRightCharacter: 0
+    isAnger: 0
+    isSurprized: 0
+    leftSDAnim: 0
+    rightSDAnim: 0
+    isTimeGoing: 0
+    isTomatoSoupGo: 0
+    isShopingGo: 0
+    isEndDialogue: 0
+    isGivingMoney: 0
+    isEnding: 0
+    givingMoneyAmount: 0
+    goingTimeAmount: 0
+    requiredKey: 0
+  - speakingCharacter: 4
+    isFirstAppearance: 0
+    text: "\uAE40\uC0BF\uAC13\uB2D8\uC774 \uC624\uC168\uB098\uBD10!!      \uB124~!"
+    overrideSprite: {fileID: 0}
+    panelPositionOffset: {x: -132, y: 144}
+    preDelay: 0
+    postDelay: 0
+    showLeftCharacter: 0
+    showRightCharacter: 1
+    isAnger: 1
+    isSurprized: 0
+    leftSDAnim: 0
+    rightSDAnim: 0
+    isTimeGoing: 0
+    isTomatoSoupGo: 0
+    isShopingGo: 0
+    isEndDialogue: 0
+    isGivingMoney: 1
+    isEnding: 0
+    givingMoneyAmount: 500
+    goingTimeAmount: 0
+    requiredKey: 0
+  - speakingCharacter: 1
+    isFirstAppearance: 0
+    text: "\uB2A6\uC5B4\uC11C \uBBF8\uC548\uD558\uB124, \uB0B4\uAC00 \uBC29\uAE08
+      \uB9C9 \uC11C\uC591\uC73C\uB85C \uD5A5\uD558\uB294 \uBC30\uB97C \uAD6C\uD588\uB124!"
+    overrideSprite: {fileID: 0}
+    panelPositionOffset: {x: -132, y: 144}
+    preDelay: 0
+    postDelay: 0
+    showLeftCharacter: 1
+    showRightCharacter: 0
+    isAnger: 0
+    isSurprized: 0
+    leftSDAnim: 0
+    rightSDAnim: 0
+    isTimeGoing: 0
+    isTomatoSoupGo: 0
+    isShopingGo: 0
+    isEndDialogue: 0
+    isGivingMoney: 0
+    isEnding: 0
+    givingMoneyAmount: 0
+    goingTimeAmount: 0
+    requiredKey: 0
+  - speakingCharacter: 3
+    isFirstAppearance: 0
+    text: "\uC9D1\uC5D0 \uAC08 \uC218 \uC788\uB294\uAC70\uC57C?!"
+    overrideSprite: {fileID: 0}
+    panelPositionOffset: {x: 132, y: 144}
+    preDelay: 0
+    postDelay: 0
+    showLeftCharacter: 0
+    showRightCharacter: 1
+    isAnger: 0
+    isSurprized: 0
+    leftSDAnim: 0
+    rightSDAnim: 0
+    isTimeGoing: 0
+    isTomatoSoupGo: 0
+    isShopingGo: 0
+    isEndDialogue: 0
+    isGivingMoney: 0
+    isEnding: 0
+    givingMoneyAmount: 0
+    goingTimeAmount: 0
+    requiredKey: 0
+  - speakingCharacter: 2
+    isFirstAppearance: 0
+    text: "\uB9CC\uC138!!"
     overrideSprite: {fileID: 0}
     panelPositionOffset: {x: -132, y: 144}
     preDelay: 0
@@ -1089,61 +1382,20 @@ MonoBehaviour:
     isShopingGo: 0
     isEndDialogue: 0
     isGivingMoney: 0
+    isEnding: 0
     givingMoneyAmount: 0
     goingTimeAmount: 0
     requiredKey: 0
-  - speakingCharacter: 2
+  - speakingCharacter: 1
     isFirstAppearance: 0
-    text: "\uC544 . . \uB108 . . \uB108 .. \uBB34 \uB9E4\uC6CC. . .\r"
+    text: "\uADF8\uB7F0\uB370 \uC0AC\uC2E4\uC740 \uAC70\uB9AC\uAC00 \uAC70\uB9AC\uB2E4\uBCF4\uB2C8
+      \uAC12\uC774 \uC880 \uBE44\uC2F8\uB124. \uB0B4 \uB9CE\uC774 \uB3C4\uC640\uC8FC\uC5B4
+      \uAC12\uC2F8\uAC8C \uB9D0\uD588\uB124\uB9CC.."
     overrideSprite: {fileID: 0}
     panelPositionOffset: {x: 132, y: 144}
     preDelay: 0
     postDelay: 0
     showLeftCharacter: 0
-    showRightCharacter: 1
-    isAnger: 0
-    isSurprized: 1
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 4
-    isFirstAppearance: 0
-    text: "\uC74C \uC74C .. \uB9E4\uC6B4\uAC78 \uBA39\uB294 \uAFC8\uC774\uB77C\uB3C4
-      \uAFB8\uACE0\uC788\uB098?\r"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: 132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 1
-    showRightCharacter: 0
-    isAnger: 0
-    isSurprized: 1
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 3
-    isFirstAppearance: 0
-    text: "\uD55C\uAC00\uD558\uAC8C \uC7A0\uC790\uACE0 \uC788\uC744 \uB54C\uAC00
-      \uC544\uB2C8\uC57C.. \uC5EC\uAE30\uC880 \uBD10."
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: -132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 1
     showRightCharacter: 0
     isAnger: 0
     isSurprized: 0
@@ -1154,144 +1406,17 @@ MonoBehaviour:
     isShopingGo: 0
     isEndDialogue: 0
     isGivingMoney: 0
+    isEnding: 0
     givingMoneyAmount: 0
     goingTimeAmount: 0
     requiredKey: 0
-  - speakingCharacter: 4
+  - speakingCharacter: 1
     isFirstAppearance: 0
-    text: "\uAE30\uC0C1 !!!!!!!!!!!!!!!!!!!\r"
+    text: "\uAC70\uAE30\uAE4C\uC9C0 \uAC00\uAE30 \uC704\uD574\uC11C\uB294 3000\uB0E5
+      \uC815\uB3C4\uAC00 \uD544\uC694\uD558\uB124..\n[ \uAE08\uC561\uC774 \uC790\uB3D9\uC73C\uB85C
+      \uBAA8\uB450 \uC9C0\uBD88\uB429\uB2C8\uB2E4. ]"
     overrideSprite: {fileID: 0}
     panelPositionOffset: {x: 132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 1
-    showRightCharacter: 0
-    isAnger: 1
-    isSurprized: 1
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 2
-    isFirstAppearance: 0
-    text: "\uAE84\uC544\uC544\uC544\uC545!!!\r\n"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: -132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 0
-    showRightCharacter: 1
-    isAnger: 0
-    isSurprized: 1
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 4
-    isFirstAppearance: 0
-    text: "\uD558\uD56B. \uC624\uB298\uB3C4 \uC54C\uCC2C \uD558\uB8E8\uB97C \uC2DC\uC791\uD574\uBCF4\uC790\uAD6C!\r\r"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: 132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 1
-    showRightCharacter: 0
-    isAnger: 0
-    isSurprized: 1
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 3
-    isFirstAppearance: 0
-    text: "\uC774\uB7F4\uB54C \uBCF4\uBA74 \uD325\uC950\uB791 \uBE44\uC2B7\uD55C
-      \uBD80\uBD84\uC774 \uC788\uB124\r\n"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: -132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 0
-    showRightCharacter: 1
-    isAnger: 0
-    isSurprized: 0
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 3
-    isFirstAppearance: 0
-    text: "\uC5C9\uC5C9.. \uB0B4 \uC2EC\uC7A5\uC774 \uB5A8\uC5B4\uC9C0\uAE30\uC804\uC5D0
-      \uC5BC\uB978 \uC9D1\uC5D0 \uAC00\uC57C\uD574..\r\n"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: 132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 0
-    showRightCharacter: 1
-    isAnger: 0
-    isSurprized: 0
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 4
-    isFirstAppearance: 0
-    text: "\uC624\uB298\uC740 \uBD88\uCCAD\uAC1D\uC774 \uCC3E\uC544\uC62C\uC218\uB3C4
-      \uC788\uC5B4! \r\n"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: -132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 1
-    showRightCharacter: 0
-    isAnger: 0
-    isSurprized: 0
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 4
-    isFirstAppearance: 0
-    text: "\uAC00\uAC8C\uB97C \uC6B4\uC601\uD558\uB2E4\uAC00 \uBD88\uCCAD\uAC1D\uC774
-      \uCC3E\uC544\uC624\uBA74 \uB0B4\uCAD2\uC544\uC57C\uD574!!\r\n\r"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: -132, y: 144}
     preDelay: 0
     postDelay: 0
     showLeftCharacter: 1
@@ -1305,183 +1430,13 @@ MonoBehaviour:
     isShopingGo: 0
     isEndDialogue: 0
     isGivingMoney: 1
-    givingMoneyAmount: 500
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 4
-    isFirstAppearance: 0
-    text: "[ \uBD88\uCCAD\uAC1D\uC774 \uB098\uD0C0\uB098\uBA74 \uC5D4\uD130\uD0A4\uB97C
-      3\uBC88 \uB20C\uB7EC \uBD88\uCCAD\uAC1D\uC744 \uB0B4\uCAD2\uC544\uC8FC\uC138\uC694!
-      ]\r\n"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: -132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 1
-    showRightCharacter: 0
-    isAnger: 0
-    isSurprized: 0
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 7
-    isFirstAppearance: 0
-    text: "\uC624\uB298\uC740 \uC798\uC0DD\uAE34 \uCD1D\uAC01 \uC5C6\uB098 ~ ?\r\n"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: 132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 1
-    showRightCharacter: 0
-    isAnger: 0
-    isSurprized: 0
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 4
-    isFirstAppearance: 0
-    text: "!!!\uD560\uBA38\uB2C8 \uADF8\uB9CC \uC624\uC2DC\uB77C\uB2C8\uAE4C\uC694!!!!!!\r\n"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: -132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 1
-    showRightCharacter: 0
-    isAnger: 1
-    isSurprized: 0
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 7
-    isFirstAppearance: 0
-    text: "\uC544\uB2C8.. \uCD1D\uAC01..?\r\n"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: 132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 1
-    showRightCharacter: 0
-    isAnger: 0
-    isSurprized: 1
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 2
-    isFirstAppearance: 0
-    text: "\uD5C9..! \uC800.. \uC800\uC694?\r\n"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: 132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 0
-    showRightCharacter: 1
-    isAnger: 0
-    isSurprized: 1
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 7
-    isFirstAppearance: 0
-    text: "\uC544\uC8FC .. \uC798\uC0DD\uACBC\uAD6C\uB9CC.. \uC6B0\uB9AC \uC601\uAC10
-      \uC80A\uC744\uB54C \uAC00\uD168..\r\n"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: 132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 1
-    showRightCharacter: 0
-    isAnger: 0
-    isSurprized: 0
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 7
-    isFirstAppearance: 0
-    text: "\uB098\uB791 \uB370\uC774\uD2B8\uD558\uC9C0 \uC54A\uC73C\uB828?\r"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: 132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 1
-    showRightCharacter: 0
-    isAnger: 0
-    isSurprized: 0
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 2
-    isFirstAppearance: 0
-    text: "\uB124!?! \uC800 .. \uC800 \uC77C\uD574\uC57C\uD574\uC6A7!!!\r\n\r"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: 132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 0
-    showRightCharacter: 1
-    isAnger: 0
-    isSurprized: 1
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
+    isEnding: 0
+    givingMoneyAmount: 3000
     goingTimeAmount: 0
     requiredKey: 0
   - speakingCharacter: 3
     isFirstAppearance: 0
-    text: "\uD5E8\uC824\uC740 \uD56D\uC0C1 \uC800\uB7F0\uC77C\uC5D0 \uC2DC\uB2EC\uB9AC\uB124\r\n"
+    text: "\uC5EC\uAE30 \uC800\uD76C\uAC00 \uAC00\uC9C0\uACE0 \uC788\uB294 \uC804\uBD80\uC5D0\uC694!"
     overrideSprite: {fileID: 0}
     panelPositionOffset: {x: 132, y: 144}
     preDelay: 0
@@ -1497,51 +1452,7 @@ MonoBehaviour:
     isShopingGo: 0
     isEndDialogue: 0
     isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 3
-    isFirstAppearance: 0
-    text: "\uBB50 \uC774\uB7EC\uB098\uC800\uB7EC\uB098 \uC5F4\uC2EC\uD788 \uC77C\uD574\uC57C\uD558\uB294\uAC74
-      \uBCC0\uD558\uC9C0\uC54A\uB124\r\n"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: 132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 0
-    showRightCharacter: 1
-    isAnger: 0
-    isSurprized: 0
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
-    givingMoneyAmount: 0
-    goingTimeAmount: 0
-    requiredKey: 0
-  - speakingCharacter: 4
-    isFirstAppearance: 0
-    text: "\uADF8\uB7FC ! \uADF8\uB798\uB3C4 \uB0B4\uAC00 \uADFC\uCC98\uC5D0 \uBC1C
-      \uB113\uC740 \uC0AC\uB78C\uC5D0\uAC8C \uC815\uBCF4\uB97C \uBB3C\uC5B4\uBD24\uC73C\uB2C8
-      \uC870\uAE08\uB9CC \uAE30\uB2E4\uB824\uBD10!!\r\n"
-    overrideSprite: {fileID: 0}
-    panelPositionOffset: {x: 132, y: 144}
-    preDelay: 0
-    postDelay: 0
-    showLeftCharacter: 1
-    showRightCharacter: 0
-    isAnger: 0
-    isSurprized: 0
-    leftSDAnim: 0
-    rightSDAnim: 0
-    isTimeGoing: 0
-    isTomatoSoupGo: 0
-    isShopingGo: 0
-    isEndDialogue: 0
-    isGivingMoney: 0
+    isEnding: 1
     givingMoneyAmount: 0
     goingTimeAmount: 0
     requiredKey: 0
