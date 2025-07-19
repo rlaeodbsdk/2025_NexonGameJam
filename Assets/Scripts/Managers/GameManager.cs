@@ -14,7 +14,7 @@ public class GameManager
 
     public float completeOrderCount;
     public float OrderCount;
-    public float playerTotalMoney = 1000;
+    public float playerTotalMoney = 5000;
     public bool isTutorial;
     public float todaySelling=0;
 
