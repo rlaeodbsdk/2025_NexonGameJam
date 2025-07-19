@@ -66,6 +66,23 @@ public class Node : MonoBehaviour
         {
             if (Input.GetKeyDown(currentStep.key) && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)||Input.GetKeyDown(KeyCode.W))) //¸Â´ÂÅ° ´©¸£¸é 
             {
+                if(Input.GetKeyDown(KeyCode.A))
+                {
+                    if(recipe.dishName=="ChickenSoup"&&currentStepIndex==0) // ´ßÀº ½ä¾î¾ß Á¦¸À 
+                    {
+                        Managers.Sound.Play("SFX/chickenDie1"); 
+                    }
+                    Managers.Sound.Play("SFX/Kongjui_knife1");
+                }
+                else if(Input.GetKeyDown(KeyCode.D))
+                {
+                    Managers.Sound.Play("SFX/Kongjui_salt1");
+                }
+                else if(Input.GetKeyDown(KeyCode.W))
+                {
+                    Managers.Sound.Play("SFX/Kongjui&Gretel_pass1");
+                }
+
                 currentStepIndex++;
                 ThrowUpNode();
                 GetComponentInChildren<SpriteRenderer>().sprite = currentStep.sprite;
@@ -89,6 +106,19 @@ public class Node : MonoBehaviour
         {
             if (Input.GetKeyDown(currentStep.key) && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow)))
             {
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    Managers.Sound.Play("SFX/Gretel_fire1");
+                }
+                else if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    Managers.Sound.Play("SFX/Gretel_water1");
+                }
+                else if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    Managers.Sound.Play("SFX/Kongjui&Gretel_pass1");
+                }
+
                 currentStepIndex++;
                 ThrowUpNode();
                 GetComponentInChildren<SpriteRenderer>().sprite = currentStep.sprite;
@@ -166,8 +196,6 @@ public class Node : MonoBehaviour
         if(isReady==true)
         {
              recipe.price = recipe.price; // ÁøÂ¥·Î ¿Ï¼ºµÆÀ»‹š
-            Managers.Game.completeOrderCount++;
-            
         }
         else
         {

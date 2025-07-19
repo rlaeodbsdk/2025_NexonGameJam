@@ -77,7 +77,7 @@ public class UI_Receipt : UI_Popup
         string fullText = $"오늘의 매출 금액 : {Managers.Game.todaySelling}\n" +
                           $"주문 성공한 횟수 : {Managers.Game.completeOrderCount}\n" +
                           $"주문 실패한 횟수 : {Managers.Game.OrderCount- Managers.Game.completeOrderCount}\n" +
-                          $"주문 성공률 : {Mathf.RoundToInt(Managers.Game.completeOrderCount/Managers.Game.OrderCount*100)}%\n" +
+                          $"사용한 원재료 비용 : {Managers.Game.totalIngredientMoney}%\n" +
                           $"오늘의 순이익 : {Managers.Game.todaySelling}\n\n" +
                           $"총 자본 : {Managers.Game.playerTotalMoney}";
 
@@ -87,11 +87,7 @@ public class UI_Receipt : UI_Popup
 
     IEnumerator TypeText(TextMeshProUGUI textComponent, string fullText, bool isTitleText = false)
     {
-        if (isTitleText == false)
-        {
-            Managers.Sound.Play("SFX/typing");
-        }
-
+      
         textComponent.text = "";
 
         for (int i = 0; i < fullText.Length; i++)
@@ -113,6 +109,7 @@ public class UI_Receipt : UI_Popup
             }
             else
             {
+                Managers.Sound.Play("SFX/typing3");
                 yield return new WaitForSecondsRealtime(typeSpeed);
             }
         }

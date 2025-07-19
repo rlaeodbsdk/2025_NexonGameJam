@@ -72,6 +72,7 @@ public class Passenger : MonoBehaviour
             orderedImage.sprite = satisfactionSprite;
             Managers.Game.todaySelling += recipe.price;
             Managers.Game.playerTotalMoney += recipe.price;
+            Managers.Game.completeOrderCount++;    
             yield return new WaitForSeconds(2f);
         }else if(correctTable && correctness == 0)
         {
