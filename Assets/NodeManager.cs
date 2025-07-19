@@ -10,12 +10,16 @@ public class NodeManager : MonoBehaviour
 
     public int nodeCount = 0;
 
+    public NodeLauncher launcher;
+    public TableManager tableManager;
+
     private List<NodeRecipe> nodeRecipes = new List<NodeRecipe>();
     void Start()
     {
         Init();
         Managers.UI.ShowPopUpUI<UI_Test>(); // 테스트 Manager 호출
         StartCoroutine(PatternGoNode());
+        tableManager = FindFirstObjectByType<TableManager>();
     }
 
     public NodeRecipe GetRecipe(int id)
@@ -35,6 +39,8 @@ public class NodeManager : MonoBehaviour
                 return null;
         }
     }
+
+
 
     void Init()
     {
@@ -60,9 +66,9 @@ public class NodeManager : MonoBehaviour
             yield return new WaitForSeconds(3);
         }
     }
-    void NodeGo()
+    void NodeGo(string recipeName=null)
     {
-        if (nodeCount <= 0)
+        if (nodeCount <= 3)
         {
             int randomLine = Random.Range(0, 2);//어디에서 나올것인지에 대해
             int randomFood = Random.Range(0, 3);
@@ -72,6 +78,7 @@ public class NodeManager : MonoBehaviour
                 FirstNodeCs.GetWhereNodeLine(1);
                 FirstNodeCs.GetRecipe(nodeRecipes[randomFood]);
                 FirstNodeCs.setInstantiateData();
+
 
             }
             else // 오른쪽에서 나오기
@@ -83,6 +90,11 @@ public class NodeManager : MonoBehaviour
             }
             nodeCount++;
         }
+    }
+
+    public void readyOnBulltet(NodeRecipe recipe)
+    {
+        launcher.SpawnNote(recipe);
     }
 
     
