@@ -23,14 +23,19 @@ public class TableManager : MonoBehaviour
             tables.Add(table);
             table.SetTable(0);
         }
-           
+        if (tables.Count == 0)
+        {
+            AddTable();
+        }
     }
 
     // 호출: 테이블을 구매할 때
     public void AddTable()
     {
+        
         var newTable = Instantiate(tablePrefab, tableParent.transform);
         var tableComp = newTable.GetComponent<Table>();
+
 
         tables.Add(tableComp);
 
@@ -40,13 +45,14 @@ public class TableManager : MonoBehaviour
             tableAnim.DORestart();
         }
 
-        tableComp.SetTable(tableCount+1);
         tableCount++;
 
     }
     public Table GetRandomEmptyTable()
     {
-        List<Table> emptyTables = tables.FindAll(t => t.currentPassenger == null);
+        List<Table> emptyTables = tables.FindAll(
+        t => t.currentPassenger == null && t.currentVillain == null
+    );
         if (emptyTables.Count == 0) return null;
         return emptyTables[Random.Range(0, emptyTables.Count)];
     }

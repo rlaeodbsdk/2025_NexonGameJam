@@ -53,7 +53,7 @@ public class CustomShopManager : MonoBehaviour
 
     private void Awake()
     {
- 
+        
         InitShopDataManager();
 
         instance = this;

@@ -17,7 +17,8 @@ public class GameManager
     public float playerTotalMoney = 5000;
     public bool isTutorial;
     public float todaySelling=0;
-
+    public bool canControl = true;
+    public KeyCode lastKeyDown = KeyCode.None;
 
     public float totalIngredientMoney = 0;
 
