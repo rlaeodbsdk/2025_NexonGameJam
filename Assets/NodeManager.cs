@@ -22,6 +22,7 @@ public class NodeManager : MonoBehaviour
         Managers.UI.ShowPopUpUI<UI_Test>(); // 테스트 Manager 호출
         //StartCoroutine(PatternGoNode());
         tableManager = FindFirstObjectByType<TableManager>();
+        Managers.Sound.Play("BGM/stageBGM1", Define.Sound.BGM);
     }
 
     public NodeRecipe GetRecipe(int id)
@@ -70,7 +71,7 @@ public class NodeManager : MonoBehaviour
     }
     public void NodeGo(string recipeName=null)
     {
-        if (nodeCount <= 3)
+        if (nodeCount <= 6)
         {
             int randomLine = Random.Range(0, 2);//어디에서 나올것인지에 대해
             //int randomFood = Random.Range(0, 3);

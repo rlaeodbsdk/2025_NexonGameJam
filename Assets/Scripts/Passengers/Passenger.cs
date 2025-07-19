@@ -38,7 +38,9 @@ public class Passenger : MonoBehaviour
         orderedImage.sprite = selectedFood.foodImage;
         Debug.Log($"손님이 {selectedFood.foodName} 주문함!");
         if (currentTable != null)
+        {
             currentTable.AssignPassenger(this);
+        }
         yield break;
     }
 
