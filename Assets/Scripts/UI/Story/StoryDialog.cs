@@ -32,6 +32,7 @@ public class StoryDialog : UI_Popup
     private void OnEnable()
     {
         Time.timeScale = 0f;
+        Managers.Game.isTutorial = true; 
         StartCoroutine(TypingCoroutine());
     }
 
@@ -91,12 +92,12 @@ public class StoryDialog : UI_Popup
                         StandingImage[0].rectTransform.localScale = Vector3.one;
                         yield return new WaitForSecondsRealtime(2.2f);
                     }
-                        
+
                     else
                     {
                         StandingImage[0].rectTransform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
 
-                       
+
 
                     }
                     if (scene.isAnger)
@@ -164,6 +165,94 @@ public class StoryDialog : UI_Popup
                 yield return new WaitForSecondsRealtime(0.025f);
             }
 
+            if (scene.leftSDAnim || scene.rightSDAnim)
+            {
+                if (scene.requiredKey == KeyCode.None)
+                {
+                    while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
+                    {
+                        TestTexts[idx].text = full;
+                        yield return null;
+                    }
+                }
+                else
+                {
+                    while (!Input.GetKeyDown(scene.requiredKey))
+                    {
+                        TestTexts[idx].text = full;
+                        yield return null;
+                    }
+                }
+
+                // 입력받으면 TextPanel 끄기
+                if (TextPanel != null)
+                {
+                    TextPanel.SetActive(false);
+                    StandingImage[0].gameObject.SetActive(false);
+                    StandingImage[1].gameObject.SetActive(false);
+                }
+
+
+                // 여기서 애니메이션(이동 등) 진행 시간 만큼 대기 (예: 2초)
+                yield return new WaitForSecondsRealtime(2.0f); // 원하는 시간으로!
+
+                bool panelTurnedOn = false;
+                while (!panelTurnedOn)
+                {
+                    // 마우스 아무 버튼 클릭 시
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        if (TextPanel != null)
+                            TextPanel.SetActive(true);
+
+                        panelTurnedOn = true;
+                    }
+                    yield return null;
+                }
+
+                // 바로 다음 대사로!
+                continue;
+            }
+
+            if (scene.isTimeGoing)
+            {
+                if (scene.requiredKey == KeyCode.None)
+                {
+                    while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
+                    {
+                        TestTexts[idx].text = full;
+                        yield return null;
+                    }
+                }
+                else
+                {
+                    while (!Input.GetKeyDown(scene.requiredKey))
+                    {
+                        TestTexts[idx].text = full;
+                        yield return null;
+                    }
+                }
+                if (TextPanel != null)
+                {
+                    TextPanel.SetActive(false);
+                    StandingImage[0].gameObject.SetActive(false);
+                    StandingImage[1].gameObject.SetActive(false);
+                }
+
+                Time.timeScale = 1f;
+                float startTime = Time.unscaledTime;
+                float targetDuration = scene.goingTimeAmount;
+                float elapsed = 0f;
+                while (elapsed < targetDuration)
+                {
+                    elapsed = Time.unscaledTime - startTime;
+                    Debug.Log($"[isTimeGoing] 경과시간: {elapsed:F2}초 / 목표: {targetDuration}초");
+                    yield return null;
+                }
+                Time.timeScale = 0f;
+                TextPanel.SetActive(true);
+                continue;
+            }
 
 
             if (scene.requiredKey == KeyCode.None)
@@ -186,7 +275,7 @@ public class StoryDialog : UI_Popup
 
             yield return new WaitForSecondsRealtime(scene.postDelay);
         }
-        if(dimmedPanel != null)
+        if (dimmedPanel != null)
         {
             StandingImage[0].gameObject.SetActive(false);
             StandingImage[1].gameObject.SetActive(false);
@@ -194,16 +283,18 @@ public class StoryDialog : UI_Popup
             dimmedPanel.GetComponent<DOTweenAnimation>().DORestart();
             yield return new WaitForSecondsRealtime(1f);
         }
-        
+
         contents.SetActive(false);
-        Time.timeScale = 1f;
+        Managers.Game.isTutorial = false;
         if (TutorialDialog != null)
         {
             TutorialDialog.SetActive(true);
         }
-
-
+        else
+        {
+            Time.timeScale = 1f;
         }
 
+    }
 
 }

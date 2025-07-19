@@ -14,7 +14,9 @@ public class GameManager
     public float completeOrderCount;
     public float OrderCount;
     public float todaySelling;
-    public float playerTotalMoney = 0;
+    public float playerTotalMoney = 1000;
+
+    public bool isTutorial;
    
     public enum GameState
     {
@@ -49,12 +51,18 @@ public class GameManager
     {
         
         Managers.UI.ShowPopUpUI<UI_Receipt>();
+        
         Time.timeScale = 0;
+    }
+
+    public void openShop()
+    {
+        GameObject.FindFirstObjectByType<CustomShopManager>().openShop();
     }
 
     public void resetRound()
     {
-
+        
     }
 
     void Start()

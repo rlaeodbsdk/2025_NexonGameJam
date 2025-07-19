@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8be952ccf5bf0e14ea736abe9318143c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeSpeed: 0.7
+  nodeSpeed: 4.45
+  requestedTable: {fileID: 0}
 --- !u!61 &6520511126993469787
 BoxCollider2D:
   m_ObjectHideFlags: 0

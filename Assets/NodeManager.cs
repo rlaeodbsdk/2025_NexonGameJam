@@ -11,7 +11,7 @@ public class NodeManager : MonoBehaviour
 
     public int nodeCount = 0;
     public bool nodeBroken = false;
-
+    private int tutorialNodeLineIdx = 0;
     public NodeLauncher launcher;
     public TableManager tableManager;
     
@@ -24,7 +24,6 @@ public class NodeManager : MonoBehaviour
         //StartCoroutine(PatternGoNode());
         tableManager = FindFirstObjectByType<TableManager>();
         Managers.Sound.Play("BGM/stageBGM1", Define.Sound.BGM);
-        Managers.UI.ShowPopUpUI<UI_Receipt>();
     }
 
     public NodeRecipe GetRecipe(int id)
@@ -68,8 +67,17 @@ public class NodeManager : MonoBehaviour
     {
         if (nodeCount <= 6)
         {
-            int randomLine = Random.Range(0, 2);//어디에서 나올것인지에 대해
-            //int randomFood = Random.Range(0, 3);
+            int randomLine;
+            if (Managers.Game.isTutorial)
+            {
+                
+                randomLine = tutorialNodeLineIdx;
+                tutorialNodeLineIdx = (tutorialNodeLineIdx + 1) % 2;
+            }
+            else
+            {
+                randomLine = Random.Range(0, 2);
+            }
 
             NodeRecipe recipeToUse = null;
             if (!string.IsNullOrEmpty(recipeName))

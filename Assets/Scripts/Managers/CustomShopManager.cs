@@ -22,6 +22,7 @@ public class CustomShopManager : MonoBehaviour
     public RectTransform foodBtnRect;
 
     [Header("상점 스크롤뷰")]
+    public GameObject shopStage;
     public GameObject shopPanel;
     public GameObject leftShopCharacter;
     public GameObject rightShopCharacter;
@@ -46,6 +47,8 @@ public class CustomShopManager : MonoBehaviour
     private Dictionary<FoodSO, FoodSlot> foodSlotDict = new Dictionary<FoodSO, FoodSlot>();
     public static CustomShopManager instance;
     public List<FoodSO> foodList = new List<FoodSO>();
+    
+    
     private void Awake()
     {
         if(instance == null)
@@ -173,5 +176,10 @@ public class CustomShopManager : MonoBehaviour
         {
             Managers.Sound.Play("SFX/purchaseFailed1");
         }
+    }
+
+    public void openShop()
+    {
+        shopStage.SetActive(true);
     }
 }

@@ -15,6 +15,7 @@ public class Passenger : MonoBehaviour
     public Sprite angrySprite;
     public Sprite dissatisfactionSprite;
     public Sprite satisfactionSprite;
+    private static int tutorialOrderIdx = 0;
 
     private void OnEnable()
     {
@@ -33,7 +34,16 @@ public class Passenger : MonoBehaviour
         
         if (foodList == null || foodList.Count == 0) yield break;
         orderPanel.SetActive(true);
-        int idx = Random.Range(0, foodList.Count);
+        int idx;
+        if (Managers.Game.isTutorial)
+        {
+            idx = tutorialOrderIdx;
+            tutorialOrderIdx = (tutorialOrderIdx + 1) % foodList.Count; 
+        }
+        else
+        {
+            idx = Random.Range(0, foodList.Count);
+        }
         selectedFood = foodList[idx];
         orderedImage.sprite = selectedFood.foodImage;
         Debug.Log($"손님이 {selectedFood.foodName} 주문함!");

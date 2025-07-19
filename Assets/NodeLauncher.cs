@@ -32,7 +32,7 @@ public class NodeLauncher : MonoBehaviour
         {
             RotateCannon();
 
-            if (Input.GetKeyDown(KeyCode.Return)) // 임시 발사키
+            if (Input.GetKeyDown(KeyCode.Space)) // 임시 발사키
             {
                 TryFire();
             }
@@ -90,9 +90,22 @@ public class NodeLauncher : MonoBehaviour
 
         //  발사
         currentNote.transform.SetParent(null);
-        Rigidbody2D rb = currentNote.GetComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        rb.AddForce(cannonHead.up * launchForce);
+        if (Time.timeScale == 0f)
+        {
+            
+            Vector3 fireDir = cannonHead.up;
+            float fireDist = 5f;     
+            float fireTime = 0.5f;   
+
+            yield return StartCoroutine(ManualFireAnimation(currentNote, fireDir, fireDist, fireTime));
+        }
+        else
+        {
+            Rigidbody2D rb = currentNote.GetComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.AddForce(cannonHead.up * launchForce);
+        }
+            
         Managers.Sound.Play("SFX/cannonFire1");
 
         Bullet bullet = currentNote.GetComponent<Bullet>();
@@ -116,5 +129,19 @@ public class NodeLauncher : MonoBehaviour
         }
 
         isFiring = false;
+    }
+    IEnumerator ManualFireAnimation(GameObject note, Vector3 direction, float distance, float duration)
+    {
+        Vector3 startPos = note.transform.position;
+        Vector3 targetPos = startPos + direction.normalized * distance;
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            note.transform.position = Vector3.Lerp(startPos, targetPos, t);
+            yield return null;
+        }
+        note.transform.position = targetPos;
     }
 }
