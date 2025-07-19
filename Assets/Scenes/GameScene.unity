@@ -1825,7 +1825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
       propertyPath: scenes.Array.data[10].goingTimeAmount
-      value: 2.1
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
       propertyPath: scenes.Array.data[11].goingTimeAmount

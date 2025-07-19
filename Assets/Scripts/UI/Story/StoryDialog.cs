@@ -225,7 +225,7 @@ public class StoryDialog : UI_Popup
 
             if (scene.isShopingGo)
             {
-                StartCoroutine(goShopingOn());
+                StartCoroutine(goShopingOn(idx));
             }
 
             if (scene.isTimeGoing)
@@ -311,56 +311,39 @@ public class StoryDialog : UI_Popup
         }
 
     }
-    IEnumerator goShopingOn()
+    IEnumerator goShopingOn(int idx)
     {
-
         shop.SetActive(true);
-        shopManager.OnShopClosed += OnShopClosedHandler; // 구독
-        while (true)
-        {
-            // 텍스트가 full인지 확인 (여기선 TestTexts[0] 예시. 인덱스 조절!)
-            bool isTextFull = true;
-            foreach (var t in TestTexts)
-            {
-                if (t.gameObject.activeSelf && t.text != scenes[/*적절한 idx*/0].text)
-                {
-                    isTextFull = false;
-                    break;
-                }
-            }
+        shopManager.OnShopClosed += OnShopClosedHandler;
 
-            yield return new WaitForSecondsRealtime(2f);
-            if (TextPanel != null)
-                TextPanel.SetActive(false);
-
-            // exitBtn이 현재 선택되어 있는지 확인
-            bool isExitSelected = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject == shopManager.exitBtn.gameObject;
-
-            // 둘 다 만족하면 탈출!
-            if (isTextFull && isExitSelected)
-                break;
-
+        // 1. 텍스트 full 될 때까지 대기
+        while (TestTexts[idx].text != scenes[idx].text)
             yield return null;
 
-        }
+        // 2. 2초 대기 후 TextPanel 비활성화
+        yield return new WaitForSecondsRealtime(2f);
+        if (TextPanel != null)
+            TextPanel.SetActive(false);
 
+        // 3. exitBtn 선택될 때까지 대기
+        while (UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject != shopManager.exitBtn.gameObject)
+            yield return null;
+
+        // 4. shop 닫힌 후 TextPanel 켜고 "자동으로 다음 씬"
+        bool shopClosed = false;
         void OnShopClosedHandler()
         {
-            // 다시 필요한 동작 수행
-            Debug.Log("Shop closed! Resume logic.");
-
-            shopManager.OnShopClosed -= OnShopClosedHandler;  // 구독 해제 (중요)
-
-            StartCoroutine(ResumeAfterShop()); // 원하는 로직 이어가기
+            shopClosed = true;
+            shopManager.OnShopClosed -= OnShopClosedHandler;
         }
 
-        IEnumerator ResumeAfterShop()
-        {
-            yield return new WaitForSeconds(1f);
+        // 5. shop이 닫힐 때까지 대기
+        while (!shopClosed)
+            yield return null;
 
+        if (TextPanel != null)
             TextPanel.SetActive(true);
-        }
-
-
+        yield return new WaitForSecondsRealtime(0.5f); // 약간의 딜레이(선택)
+                                                       // 다음 대사로 자연스럽게 이동
     }
 }
