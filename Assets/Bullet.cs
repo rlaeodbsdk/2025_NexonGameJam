@@ -5,23 +5,26 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private NodeRecipe recipe;
-    
 
+    private bool isShooted = false;
     public float delay = 0.7f;
 
     public IEnumerator DestroyDelay()
     {
-        TableManager tableManager = FindAnyObjectByType<TableManager>();
-        foreach(Table table in tableManager.tables)
+        
+        yield return new WaitForSeconds(delay);
+        if (!isShooted)
         {
-            if(recipe.orderTableNumber == table.tableNumber)
+            TableManager tableManager = FindAnyObjectByType<TableManager>();
+            foreach (Table table in tableManager.tables)
             {
-                table.currentPassenger.Exit(false, 0,recipe);
-                table.ResetTable();
+                if (recipe.orderTableNumber == table.tableNumber)
+                {
+                    table.currentPassenger.Exit(false, 0, recipe);
+                    table.ResetTable();
+                }
             }
         }
-        yield return new WaitForSeconds(delay);
-
         if (this != null)
 
         {
@@ -33,7 +36,7 @@ public class Bullet : MonoBehaviour
         if(collision.CompareTag("Table"))
         {
            
-            var collidingTable = collision.gameObject.GetComponent<Table>();
+            var collidingTable = collision.gameObject.GetComponentInParent<Table>();
 
             if (collidingTable == null)
             {
@@ -57,7 +60,7 @@ public class Bullet : MonoBehaviour
                 {
                 collidingTable.currentPassenger.Exit(true, recipe.currentstepIndex,recipe);
                 collidingTable.ReceivedFood(recipe.steps[recipe.currentstepIndex].sprite, true);
-                   
+                isShooted = true;   
                 }
             
             Debug.Log("테이블과의 접촉");
@@ -66,6 +69,8 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    
 
     public void getNodeRecipe(NodeRecipe r)
     {

@@ -33,11 +33,11 @@ public class FoodSlot : MonoBehaviour
         
         if (foodData.foodUnlockPrice == 0)
         {
-            price.SetText("판매가: " + foodData.foodPrice + "냥");
+            price.SetText("판매가: " + foodData.foodPrice + "냥 / 재료값: " + foodData.foodIngredientPrice + "냥");
         }
         else
         {
-            price.SetText("판매가: " + foodData.foodPrice + "냥 / 해금: " + foodData.foodUnlockPrice + "냥");
+            price.SetText("판매가: " + foodData.foodPrice + "냥 / 해금: " + foodData.foodUnlockPrice + "냥 / 재료값: " + foodData.foodIngredientPrice + "냥");
         }
     }
 

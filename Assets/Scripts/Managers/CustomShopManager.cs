@@ -138,10 +138,42 @@ public class CustomShopManager : MonoBehaviour
 
             if (!playerInventory.ContainsKey(item))
                 playerInventory[item] = item.instantAmount;
-
             if (playerInventory[item] < item.maxAmount)
                 playerInventory[item] += 1;
+            int curLevel = playerInventory[item];
 
+            
+
+            if (item.itemName == "식재료 가격 감소")
+            {
+                Managers.Game.ApplyIngredientDiscount(playerInventory[item]);
+                if (curLevel == 2) item.itemPrice = 300;
+                else if (curLevel == 3) item.itemPrice = 500;
+
+            }
+
+            if (item.itemName == "진상 등장 확률 감소")
+            {
+                Managers.Game.ApplyVillainRate(playerInventory[item]);
+                if (curLevel == 1) item.itemPrice = 300;
+                else if (curLevel == 2) item.itemPrice = 500;
+
+            }
+
+            if (item.itemName == "하루 시간 증가")
+            {
+                Managers.Game.ApplyDaytimeAddition(playerInventory[item]);
+                if (curLevel == 1) item.itemPrice = 400;
+                else if (curLevel == 2) item.itemPrice = 600;
+
+            }
+
+            if (item.type == ItemSO.itemType.Table)
+            {
+                tableManager.AddTable();
+                if (curLevel == 1) item.itemPrice = 250;
+                else if (curLevel == 2) item.itemPrice = 400;
+            }
 
             if (itemSlotDict.ContainsKey(item))
             {
@@ -152,10 +184,9 @@ public class CustomShopManager : MonoBehaviour
                     itemSlotDict[item].SetInteractable(true);
             }
 
-            if (item.type == ItemSO.itemType.Table)
-            {
-                tableManager.AddTable();
-            }
+           
+
+            
 
             Managers.Game.playerTotalMoney -= item.itemPrice;
             Managers.Sound.Play("SFX/purchase1");

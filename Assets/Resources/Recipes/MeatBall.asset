@@ -12,22 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe47920fa67a6444b94e28893fe8b94, type: 3}
   m_Name: MeatBall
   m_EditorClassIdentifier: 
+
   startIngredient: {fileID: 21300000, guid: 61f7d149e6830c14e8595f663dbf2b65, type: 3}
   ingredientMoney: 40
+
   dishName: MeatBall
   steps:
   - character: 0
     action: 0
     key: 97
-    sprite: {fileID: 21300000, guid: 519974cdf14569f468c67a4c362b3d2d, type: 3}
+    sprite: {fileID: 21300000, guid: 72231a87393694b479edf1f7abbf6cbc, type: 3}
   - character: 0
     action: 3
     key: 276
-    sprite: {fileID: 21300000, guid: d1372f1d51d1a174f88126c9de046cd2, type: 3}
+    sprite: {fileID: 21300000, guid: 817af962a8c39ab4c88eda611dfef81c, type: 3}
   - character: 0
     action: 1
     key: 100
-    sprite: {fileID: 21300000, guid: 31e50c1e6000e654181e4744399b79cd, type: 3}
+    sprite: {fileID: 21300000, guid: 632c14d36db6d144485ac51768bd40bb, type: 3}
   price: 120
   eatingTime: 6
   currentstepIndex: 0
