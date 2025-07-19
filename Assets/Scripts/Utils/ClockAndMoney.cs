@@ -10,7 +10,7 @@ public class ClockAndMoney : MonoBehaviour
 
     public TextMeshProUGUI moneyText;
 
-    private float currentTime = 30f;
+    public float currentTime = 30f;
 
     private void Start()
     {

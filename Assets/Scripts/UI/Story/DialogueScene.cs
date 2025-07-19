@@ -32,6 +32,8 @@ public class DialogueScene
     public bool leftSDAnim;
     public bool rightSDAnim;
     public bool isTimeGoing;
+    public bool isTomatoSoupGo;
+    public bool isShopingGo;
     public float goingTimeAmount;
     public KeyCode requiredKey;
 }

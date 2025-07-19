@@ -47,7 +47,8 @@ public class CustomShopManager : MonoBehaviour
     private Dictionary<FoodSO, FoodSlot> foodSlotDict = new Dictionary<FoodSO, FoodSlot>();
     public static CustomShopManager instance;
     public List<FoodSO> foodList = new List<FoodSO>();
-    
+
+    public StoryManager stories;
     
     private void Awake()
     {
@@ -59,6 +60,8 @@ public class CustomShopManager : MonoBehaviour
 
     private void Start()
     {
+
+        stories = FindFirstObjectByType<StoryManager>();
         if(upgradeBtn != null && foodBtn !=null)
         {
             upgradeBtn.onClick.AddListener(ShowUpgradeMenu);
@@ -121,6 +124,10 @@ public class CustomShopManager : MonoBehaviour
         shopPanel.gameObject.GetComponent<DOTweenAnimation>().DOPlayBackwards();
         leftShopCharacter.gameObject.GetComponent<DOTweenAnimation>().DOPlayBackwards();
         rightShopCharacter.gameObject.GetComponent<DOTweenAnimation>().DOPlayBackwards();
+
+        
+        StartCoroutine(stories.getNextStory().TypingCoroutine());
+
     }
 
     public void BuyItem(ItemSO item)
@@ -180,6 +187,7 @@ public class CustomShopManager : MonoBehaviour
 
     public void openShop()
     {
+
         shopStage.SetActive(true);
     }
 }
