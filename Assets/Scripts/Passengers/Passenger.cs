@@ -55,25 +55,29 @@ public class Passenger : MonoBehaviour
     }
 
     // Επΐε
-    public void Exit(bool correctTable, int correctness)
+    public void Exit(bool correctTable, int correctness,NodeRecipe recipe)
     {
 
-        StartCoroutine(ExitRoutine(correctTable, correctness));
+        StartCoroutine(ExitRoutine(correctTable, correctness,recipe));
     }
     public void SetFoodList(List<FoodSO> foods)
     {
         foodList = foods;
     }
 
-    IEnumerator ExitRoutine(bool correctTable, int correctness)
+    IEnumerator ExitRoutine(bool correctTable, int correctness,NodeRecipe recipe)
     {
         if (correctTable && correctness == 1)
         {
             orderedImage.sprite = satisfactionSprite;
+            Managers.Game.todaySelling += recipe.price;
+            Managers.Game.playerTotalMoney += recipe.price;
             yield return new WaitForSeconds(2f);
         }else if(correctTable && correctness == 0)
         {
             orderedImage.sprite = dissatisfactionSprite;
+            Managers.Game.todaySelling += recipe.price;
+            Managers.Game.playerTotalMoney += recipe.price;
             yield return new WaitForSeconds(2f);
         }
         else

@@ -36,6 +36,7 @@ public class UI_Receipt : UI_Popup
 
     void Start()
     {
+        Time.timeScale = 0;
         upStartPos = upDooroo.rectTransform.anchoredPosition;
         downStartPos = downDooroo.rectTransform.anchoredPosition;
         middlePaper.rectTransform.localScale = new Vector3(1f, 0f, 1f);

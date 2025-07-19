@@ -18,6 +18,7 @@ public class RecipeStep
 public class NodeRecipe : ScriptableObject
 {
     public Sprite startIngredient;
+    public float ingredientMoney;
     public string dishName;
     public List<RecipeStep> steps;
     public float price;

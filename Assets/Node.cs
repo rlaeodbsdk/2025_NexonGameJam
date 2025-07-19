@@ -162,9 +162,12 @@ public class Node : MonoBehaviour
         GetComponent<ParabolaMover>().StartParabolaMove(transform.position, this.gameObject);
         yield return new WaitForSecondsRealtime(0.7f);
         float sellingPrice;
+        Managers.Game.OrderCount++;
         if(isReady==true)
         {
              recipe.price = recipe.price; // 진짜로 완성됐을떄
+            Managers.Game.completeOrderCount++;
+            
         }
         else
         {
@@ -181,13 +184,14 @@ public class Node : MonoBehaviour
             nodeManager.nodeBroken = true;
             if (requestedTable != null && requestedTable.currentPassenger != null)
             {
-                requestedTable.currentPassenger.Exit(false, 0);
+                requestedTable.currentPassenger.Exit(false, 0,recipe);
                 requestedTable.ResetTable();
             }
             DestroyNode(); }
-        Debug.Log(Managers.Data.TotalPrice);
-        
-        
+        Managers.Game.totalIngredientMoney += recipe.ingredientMoney;
+        Debug.Log(Managers.Game.totalIngredientMoney);
+
+
 
         Destroy(this.gameObject);
     }

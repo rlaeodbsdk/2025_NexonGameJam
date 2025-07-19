@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
         {
             if(recipe.orderTableNumber == table.tableNumber)
             {
-                table.currentPassenger.Exit(false, 0);
+                table.currentPassenger.Exit(false, 0,recipe);
                 table.ResetTable();
             }
         }
@@ -55,7 +55,7 @@ public class Bullet : MonoBehaviour
  
                 if(collidingTable.currentPassenger.selectedFood.foodNodeName == recipe.dishName)
                 {
-                collidingTable.currentPassenger.Exit(true, recipe.currentstepIndex);
+                collidingTable.currentPassenger.Exit(true, recipe.currentstepIndex,recipe);
                 collidingTable.ReceivedFood(recipe.steps[recipe.currentstepIndex].sprite, true);
                    
                 }
