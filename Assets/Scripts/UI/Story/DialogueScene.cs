@@ -31,5 +31,7 @@ public class DialogueScene
     public bool isSurprized;
     public bool leftSDAnim;
     public bool rightSDAnim;
+    public bool isTimeGoing;
+    public float goingTimeAmount;
     public KeyCode requiredKey;
 }

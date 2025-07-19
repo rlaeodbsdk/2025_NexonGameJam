@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Clock : MonoBehaviour
+public class ClockAndMoney : MonoBehaviour
 {
     public TextMeshProUGUI dayText;
     public TextMeshProUGUI timeText;
 
-    private float currentTime = 2f;
+    public TextMeshProUGUI moneyText;
+
+    private float currentTime = 30f;
 
     private void Start()
     {
@@ -34,5 +36,7 @@ public class Clock : MonoBehaviour
         int minutes = Mathf.FloorToInt(currentTime / 60f);
         int seconds = Mathf.FloorToInt(currentTime % 60f);
         timeText.SetText($"{minutes:00}:{seconds:00}");
+
+        moneyText.SetText(Managers.Game.playerTotalMoney.ToString());
     }
 }

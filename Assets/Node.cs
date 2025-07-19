@@ -8,7 +8,7 @@ public class Node : MonoBehaviour
     private int currentStepIndex = 0;
     private bool isInFirstZone;
     private bool isInSecondZone;
-    public float nodeSpeed = 1;
+    public float nodeSpeed = 1f;
     private bool upThrow = false;
     private bool isReady = false;
     private NodeManager nodeManager;
@@ -40,16 +40,20 @@ public class Node : MonoBehaviour
     private void Update()
     {
 
-
-        if (nodeLine == 1) // 왼쪽 노드라인
+        if (Time.timeScale != 0f)
         {
-            transform.position = transform.position + new Vector3(1f * nodeSpeed * Time.fixedDeltaTime, 0, 0); // 노드 생성시 자동움직임 오른쪽으로
+            if (nodeLine == 1) // 왼쪽 노드라인
+            {
+                transform.position = transform.position + new Vector3(1f * nodeSpeed * Time.deltaTime, 0, 0); // 노드 생성시 자동움직임 오른쪽으로
 
+            }
+            else if (nodeLine == 2) // 오른쪽 노드라인
+            {
+                transform.position = transform.position + new Vector3(-1f * nodeSpeed * Time.deltaTime, 0, 0); // 노드 생성시 자동움직임 왼쪽으로
+            }
         }
-        else if (nodeLine == 2) // 오른쪽 노드라인
-        {
-            transform.position = transform.position + new Vector3(-1f * nodeSpeed * Time.fixedDeltaTime, 0, 0); // 노드 생성시 자동움직임 왼쪽으로
-        }
+    
+       
 
 
 

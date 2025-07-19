@@ -144,6 +144,7 @@ public class UI_Receipt : UI_Popup
 
             // 애니메이션이 끝난 뒤 팝업 제거
             yield return new WaitForSecondsRealtime(1.0f);
+            Managers.Game.openShop();
             Destroy(this.gameObject);
         }
 
@@ -178,6 +179,7 @@ public class UI_Receipt : UI_Popup
 
         // 애니메이션이 끝난 뒤 팝업 제거하거나 비활성화하려면 아래 코드 추가
         yield return new WaitForSecondsRealtime(1.0f);
+        Managers.Game.openShop();
         Destroy(this.gameObject);
     }
 }
