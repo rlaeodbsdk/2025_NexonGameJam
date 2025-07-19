@@ -110,7 +110,7 @@ public class UI_Receipt : UI_Popup
             }
             else
             {
-                Managers.Sound.Play("SFX/typing3");
+                Managers.Sound.Play("SFX/typing4");
                 yield return new WaitForSecondsRealtime(typeSpeed);
             }
         }

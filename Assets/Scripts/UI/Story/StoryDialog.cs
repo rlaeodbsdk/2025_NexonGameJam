@@ -283,6 +283,23 @@ public class StoryDialog : UI_Popup
                 continue;
             }
             
+            if(scene.isEnding==true)
+            {
+                float money = Managers.Game.playerTotalMoney;
+                if(money>=0)
+                {
+                    Debug.Log("굿엔딩");
+                }
+                else if((money<0)||(money>=-1000))
+                {
+                    Debug.Log("노말엔딩");
+                }
+                else if(money<-1000)
+                 {
+                 Debug.Log("배드엔딩");
+
+                }
+            }
             if(scene.isEndDialogue==true)
             {
                 StartCoroutine(IsEndGo());
@@ -333,6 +350,7 @@ public class StoryDialog : UI_Popup
     {
         canGoNextStep = false;
         shop.SetActive(true);
+        Managers.Sound.Play("BGM/storeBGM1", Define.Sound.BGM);
         shopManager.OnShopClosed += OnShopClosedHandler; // 구독
         yield return new WaitForSecondsRealtime(2f);
         TextPanel.SetActive(false);

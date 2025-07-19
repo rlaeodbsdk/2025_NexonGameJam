@@ -34,6 +34,7 @@ public class ClockAndMoney : MonoBehaviour
             currentTime -= Time.deltaTime;
             if (currentTime < 0f)
             {
+                Managers.Sound.Play("SFX/timeOver");
                 currentTime = 0f;
                 dayText.SetText("Day" + Managers.Game.roundNumber);
                 Managers.Game.onRoundOver();

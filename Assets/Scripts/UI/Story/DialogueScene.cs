@@ -36,6 +36,7 @@ public class DialogueScene
     public bool isShopingGo;
     public bool isEndDialogue;
     public bool isGivingMoney;
+    public bool isEnding;
     public int givingMoneyAmount;
     
     public float goingTimeAmount;
