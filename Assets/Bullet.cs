@@ -21,9 +21,9 @@ public class Bullet : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(delay);
-        
 
-        if (this.gameObject != null)
+        if (this != null)
+
         {
             Destroy(this.gameObject);
         }
@@ -37,17 +37,17 @@ public class Bullet : MonoBehaviour
 
             if (collidingTable == null)
             {
-                Debug.Log("Table ÄÄÆ÷³ÍÆ® ¾øÀ½!");
+                Debug.Log("Table ì»´í¬ë„ŒíŠ¸ ì—†ìŒ!");
                 return;
             }
             if (collidingTable.currentPassenger == null)
             {
-                Debug.Log("currentPassenger ¾øÀ½!");
+                Debug.Log("currentPassenger ì—†ìŒ!");
                 return;
             }
             if (collidingTable.currentPassenger.selectedFood == null)
             {
-                Debug.Log("selectedFood ¾øÀ½!");
+                Debug.Log("selectedFood ì—†ìŒ!");
                 return;
             }
             Debug.Log(collidingTable.currentPassenger.selectedFood.foodNodeName);
@@ -60,7 +60,7 @@ public class Bullet : MonoBehaviour
                    
                 }
             
-            Debug.Log("Å×ÀÌºí°úÀÇ Á¢ÃË");
+            Debug.Log("í…Œì´ë¸”ê³¼ì˜ ì ‘ì´‰");
             
 
             Destroy(this.gameObject);

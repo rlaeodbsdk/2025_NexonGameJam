@@ -20,7 +20,7 @@ public class UI_Receipt : UI_Popup
     public float typeSpeed = 0.03f; // 글자 타이핑 속도
 
     [Header("Receipt Data")]
-    public string title = "오늘의 영수증";
+    public string title = "일일정산";
     public string totalSales = "120,000원";
     public string successCount = "23회";
     public string failCount = "2회";
@@ -54,7 +54,8 @@ public class UI_Receipt : UI_Popup
 
     void PlayReceiptAnimation()
     {
-        
+
+        Managers.Sound.Play("SFX/scrollExpand");
         upDooroo.rectTransform.DOAnchorPosY(upStartPos.y + moveDistance, animationDuration)
     .SetEase(Ease.OutQuad).SetUpdate(true);
         downDooroo.rectTransform.DOAnchorPosY(downStartPos.y - moveDistance, animationDuration)
@@ -70,20 +71,28 @@ public class UI_Receipt : UI_Popup
         // Title 타이핑
         yield return StartCoroutine(TypeText(TitleText, title,true));
 
+        
         // InnerTexts 타이핑
-        string fullText = $"오늘의 매출 금액 : {totalSales}\n" +
-                          $"주문 성공한 횟수 : {successCount}\n" +
-                          $"주문 실패한 횟수 : {failCount}\n" +
-                          $"주문 성공률 : {successRate}\n" +
-                          $"오늘의 순이익 : {netProfit}\n\n" +
-                          $"등급 : {rank}";
+        string fullText = $"오늘의 매출 금액 : {Managers.Game.todaySelling}\n" +
+                          $"주문 성공한 횟수 : {Managers.Game.completeOrderCount}\n" +
+                          $"주문 실패한 횟수 : {Managers.Game.OrderCount- Managers.Game.completeOrderCount}\n" +
+                          $"주문 성공률 : {Mathf.RoundToInt(Managers.Game.completeOrderCount/Managers.Game.OrderCount*100)}%\n" +
+                          $"오늘의 순이익 : {Managers.Game.todaySelling}\n\n" +
+                          $"총 자본 : {Managers.Game.playerTotalMoney}";
 
         yield return StartCoroutine(TypeText(InnerTexts, fullText));
+        
     }
 
-    IEnumerator TypeText(TextMeshProUGUI textComponent, string fullText,bool isTitleText=false)
+    IEnumerator TypeText(TextMeshProUGUI textComponent, string fullText, bool isTitleText = false)
     {
+        if (isTitleText == false)
+        {
+            Managers.Sound.Play("SFX/typing");
+        }
+
         textComponent.text = "";
+
         for (int i = 0; i < fullText.Length; i++)
         {
             if (skipTyping)
@@ -94,11 +103,20 @@ public class UI_Receipt : UI_Popup
             }
 
             textComponent.text += fullText[i];
-            Managers.Sound.Play("SFX/dailySettlement");
-            yield return new WaitForSecondsRealtime(typeSpeed);
+
+            if (isTitleText == true)
+            {
+                // "일일정산" 글자 하나마다 강렬한 사운드 재생
+                Managers.Sound.Play("SFX/dailySettlement");
+                yield return new WaitForSecondsRealtime(typeSpeed*24f); // 느리게 출력
+            }
+            else
+            {
+                yield return new WaitForSecondsRealtime(typeSpeed);
+            }
         }
-        
-        //여기 아래
+
+        // 아래는 "count == 1"일 때 UI 애니메이션 처리
         if (count == 1)
         {
             yield return new WaitForSecondsRealtime(1.5f); // 대기
@@ -106,14 +124,14 @@ public class UI_Receipt : UI_Popup
             InnerTexts.text = "";
 
             // 두루마리와 종이를 원래 위치로 복구 (접히는 애니메이션)
-            upDooroo.rectTransform.DOAnchorPosY(upStartPos.y, animationDuration*0.5f)
+            upDooroo.rectTransform.DOAnchorPosY(upStartPos.y, animationDuration * 0.5f)
                 .SetEase(Ease.InQuad).SetUpdate(true);
-            downDooroo.rectTransform.DOAnchorPosY(downStartPos.y, animationDuration*0.5f)
+            downDooroo.rectTransform.DOAnchorPosY(downStartPos.y, animationDuration * 0.5f)
                 .SetEase(Ease.InQuad).SetUpdate(true);
-            middlePaper.rectTransform.DOScaleY(0f, animationDuration*0.5f)
+            middlePaper.rectTransform.DOScaleY(0f, animationDuration * 0.5f)
                 .SetEase(Ease.InQuad).SetUpdate(true);
 
-            yield return new WaitForSecondsRealtime(animationDuration*0.5f + 0.2f); // 접히는 애니 끝난 후
+            yield return new WaitForSecondsRealtime(animationDuration * 0.5f + 0.2f); // 접히는 애니 끝난 후
 
             // 전체 UI를 아래로 내려서 사라지게 하기
             RectTransform canvasRect = GetComponent<RectTransform>();
@@ -123,13 +141,15 @@ public class UI_Receipt : UI_Popup
                     .SetEase(Ease.InCubic).SetUpdate(true);
             }
 
-            // 애니메이션이 끝난 뒤 팝업 제거하거나 비활성화하려면 아래 코드 추가
+            // 애니메이션이 끝난 뒤 팝업 제거
             yield return new WaitForSecondsRealtime(1.0f);
             Destroy(this.gameObject);
         }
-        count++;
 
+        count++;
     }
+
+
 
     IEnumerator End()
     {
@@ -137,6 +157,7 @@ public class UI_Receipt : UI_Popup
         TitleText.text = "";
         InnerTexts.text = "";
 
+        Managers.Sound.Play("SFX/scrollExpand");
         // 두루마리와 종이를 원래 위치로 복구 (접히는 애니메이션)
         upDooroo.rectTransform.DOAnchorPosY(upStartPos.y, animationDuration)
             .SetEase(Ease.InQuad).SetUpdate(true);
@@ -144,7 +165,6 @@ public class UI_Receipt : UI_Popup
             .SetEase(Ease.InQuad).SetUpdate(true);
         middlePaper.rectTransform.DOScaleY(0f, animationDuration)
             .SetEase(Ease.InQuad).SetUpdate(true);
-
         yield return new WaitForSecondsRealtime(animationDuration + 0.2f); // 접히는 애니 끝난 후
 
         // 전체 UI를 아래로 내려서 사라지게 하기

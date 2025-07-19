@@ -122,34 +122,56 @@ public class CustomShopManager : MonoBehaviour
 
     public void BuyItem(ItemSO item)
     {
-        if (!playerInventory.ContainsKey(item))
-            playerInventory[item] = item.instantAmount;
-
-        if(playerInventory[item] < item.maxAmount)
-            playerInventory[item] += 1;
-
-        
-        if (itemSlotDict.ContainsKey(item))
+        if (Managers.Game.playerTotalMoney >= item.itemPrice) // 만약 구매 가능하다면
         {
-            itemSlotDict[item].SetData(item, playerInventory[item]);
-            if (playerInventory[item] >= item.maxAmount)
-                itemSlotDict[item].SetInteractable(false);
-            else
-                itemSlotDict[item].SetInteractable(true);
+
+
+            if (!playerInventory.ContainsKey(item))
+                playerInventory[item] = item.instantAmount;
+
+            if (playerInventory[item] < item.maxAmount)
+                playerInventory[item] += 1;
+
+
+            if (itemSlotDict.ContainsKey(item))
+            {
+                itemSlotDict[item].SetData(item, playerInventory[item]);
+                if (playerInventory[item] >= item.maxAmount)
+                    itemSlotDict[item].SetInteractable(false);
+                else
+                    itemSlotDict[item].SetInteractable(true);
+            }
+
+            if (item.type == ItemSO.itemType.Table)
+            {
+                tableManager.AddTable();
+            }
+
+            Managers.Game.playerTotalMoney -= item.itemPrice;
+            Managers.Sound.Play("SFX/purchase1");
         }
-
-        if (item.type == ItemSO.itemType.Table)
+        else // 구매 실패
         {
-            tableManager.AddTable();
+            Managers.Sound.Play("SFX/purchaseFailed1");
         }
     }
 
     public void BuyFood(FoodSO food)
     {
-        if (foodSlotDict.ContainsKey(food))
-            foodSlotDict[food].SetInteractable(false);
+        if (Managers.Game.playerTotalMoney >= food.foodUnlockPrice)
+        {
+            if (foodSlotDict.ContainsKey(food))
+                foodSlotDict[food].SetInteractable(false);
 
-        if (!foodList.Contains(food))
-            foodList.Add(food);
+            if (!foodList.Contains(food))
+                foodList.Add(food);
+
+            Managers.Game.playerTotalMoney -= food.foodUnlockPrice;
+            Managers.Sound.Play("SFX/purchase1");
+        }
+        else // 구매실패
+        {
+            Managers.Sound.Play("SFX/purchaseFailed1");
+        }
     }
 }
