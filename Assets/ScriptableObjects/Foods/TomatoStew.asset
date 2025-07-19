@@ -19,5 +19,6 @@ MonoBehaviour:
   foodPrice: 80
   foodUnlockPrice: 0
   foodIngredientPrice: 30
+  foodNodeInfo: "\uB053\uC774\uAE30 \u2192 \uAC04\uD558\uAE30"
   foodInfo: "\uC798 \uC775\uC740 \uD1A0\uB9C8\uD1A0\uB97C \uBD80\uB4DC\uB7FD\uAC8C
     \uB053\uC5EC\uB0B8 \uB530\uB73B\uD55C \uC2A4\uD29C."

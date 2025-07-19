@@ -11,6 +11,7 @@ public class FoodSO : ScriptableObject
     public int foodPrice;
     public int foodUnlockPrice;
     public int foodIngredientPrice;
+    public string foodNodeInfo;
     [TextArea]
     public string foodInfo;
 }
