@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TomatoSoup
   m_EditorClassIdentifier: 
   startIngredient: {fileID: 21300000, guid: 50ea97115bf8235489c62b95875b72ef, type: 3}
+  ingredientMoney: 30
   dishName: TamatoSoup
   steps:
   - character: 1

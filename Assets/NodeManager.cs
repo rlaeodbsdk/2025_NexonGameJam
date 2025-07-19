@@ -66,6 +66,8 @@ public class NodeManager : MonoBehaviour
     {
         if (nodeCount <= 6)
         {
+            Managers.Game.OrderCount++;
+
             int randomLine;
             if (Managers.Game.isTutorial)
             {

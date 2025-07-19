@@ -16,6 +16,7 @@ public class Table : MonoBehaviour
     [Header("현재 주문된 음식 (없으면 null)")]
     public FoodSO orderedFood;
 
+
     public Image dishImage;
     
     // 손님 배치

@@ -30,8 +30,9 @@ public class PassengerSpawner : MonoBehaviour
 
     }
 
-    void TrySpawnPassenger()
+    public void TrySpawnPassenger()
     {
+        Debug.Log("Passenger Spawn");
         Table emptyTable = tableManager.GetRandomEmptyTable();
         if (emptyTable == null)
         {
