@@ -1826,6 +1826,7 @@ PrefabInstance:
     - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
       propertyPath: scenes.Array.data[10].goingTimeAmount
       value: 2.1
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
       propertyPath: scenes.Array.data[11].goingTimeAmount
@@ -4449,6 +4450,7 @@ Canvas:
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
+  m_SortingOrder: 2000
   m_TargetDisplay: 0
 --- !u!224 &1698033361
 RectTransform:
