@@ -10,12 +10,14 @@ public class Table : MonoBehaviour
 
     [Header("현재 주문된 음식 (없으면 null)")]
     public FoodSO orderedFood;
-
+    
     // 손님 배치
     public void AssignPassenger(Passenger passenger)
     {
         currentPassenger = passenger;
-  
+        
+
+
         passenger.transform.position = passengerPoint.position;
     }
 

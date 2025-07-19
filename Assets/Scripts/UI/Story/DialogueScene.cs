@@ -29,5 +29,7 @@ public class DialogueScene
     public bool showRightCharacter;
     public bool isAnger;
     public bool isSurprized;
-
+    public bool leftSDAnim;
+    public bool rightSDAnim;
+    public KeyCode requiredKey;
 }

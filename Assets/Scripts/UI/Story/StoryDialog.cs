@@ -13,12 +13,11 @@ public class StoryDialog : UI_Popup
     public CharacterData[] cd;
     public GameObject TextPanel;
     public DOTweenAnimation[] StandingAnimations;
+    public GameObject dimmedPanel;
     public GameObject TutorialDialog;
 
     public Vector2 panelOffset;
     public GameObject contents;
-
-    private char cursor_char = '|';
 
     private RectTransform panelRect;
     private Vector2 originalPanelPos;
@@ -84,6 +83,7 @@ public class StoryDialog : UI_Popup
                 {
                     StandingImage[0].sprite = scene.overrideSprite != null ? scene.overrideSprite : cd[charIdx].CharacterImage;
                     StandingImage[0].gameObject.SetActive(true);
+                    StandingImage[0].SetNativeSize();
 
                     if (scene.isFirstAppearance)
                     {
@@ -118,7 +118,7 @@ public class StoryDialog : UI_Popup
                 {
                     StandingImage[1].sprite = scene.overrideSprite != null ? scene.overrideSprite : cd[charIdx].CharacterImage;
                     StandingImage[1].gameObject.SetActive(true);
-                    
+                    StandingImage[1].SetNativeSize();
                 }
                 else
                 {
@@ -164,18 +164,44 @@ public class StoryDialog : UI_Popup
             }
 
 
-            while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
+
+            if (scene.requiredKey == KeyCode.None)
             {
-                TestTexts[idx].text = full;
-                yield return null;
+                while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
+                {
+                    TestTexts[idx].text = full;
+                    yield return null;
+                }
+            }
+            else
+            {
+                while (!Input.GetKeyDown(scene.requiredKey))
+                {
+                    TestTexts[idx].text = full;
+                    yield return null;
+                }
             }
 
 
             yield return new WaitForSeconds(scene.postDelay);
         }
+        if(dimmedPanel != null)
+        {
+            StandingImage[0].gameObject.SetActive(false);
+            StandingImage[1].gameObject.SetActive(false);
+            TextPanel.SetActive(false);
+            dimmedPanel.GetComponent<DOTweenAnimation>().DORestart();
+            yield return new WaitForSeconds(1f);
+        }
+        
         contents.SetActive(false);
-        TutorialDialog.SetActive(true);
-    }
+        if (TutorialDialog != null)
+        {
+            TutorialDialog.SetActive(true);
+        }
+
+
+        }
 
 
 }
