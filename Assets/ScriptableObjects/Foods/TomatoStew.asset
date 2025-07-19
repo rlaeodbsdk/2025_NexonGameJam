@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   foodName: "\uD1A0\uB9C8\uD1A0 \uC2A4\uD29C"
+  foodNodeName: TamatoSoup
   foodImage: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   foodPrice: 80
+  foodUnlockPrice: 0
   foodInfo: "\uC798 \uC775\uC740 \uD1A0\uB9C8\uD1A0\uB97C \uBD80\uB4DC\uB7FD\uAC8C
     \uB053\uC5EC\uB0B8 \uB530\uB73B\uD55C \uC2A4\uD29C."

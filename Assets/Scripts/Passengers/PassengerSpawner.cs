@@ -41,7 +41,7 @@ public class PassengerSpawner : MonoBehaviour
     );
 
         passenger.SetFoodList(CustomShopManager.instance.foodList);
+
         passenger.Visit(emptyTable);  // currentTable ¼¼ÆÃ µî
-        emptyTable.AssignPassenger(passenger);
     }
 }
