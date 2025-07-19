@@ -96,6 +96,7 @@ public class StoryDialog : UI_Popup
                         StandingImage[0].rectTransform.localScale = Vector3.one;
 
                         yield return new WaitForSecondsRealtime(2.2f);
+                        TextPanel.SetActive(true);
                     }
                     else
                     {
