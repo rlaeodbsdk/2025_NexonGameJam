@@ -48,40 +48,56 @@ public class CustomShopManager : MonoBehaviour
     public static CustomShopManager instance;
     public List<FoodSO> foodList = new List<FoodSO>();
 
-    public StoryManager stories;
-    
+
     private void Awake()
     {
-        if(instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
+        InitShopDataManager();
+
+        instance = this;
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject); // 이미 다른 인스턴스가 있으면 자신 파괴
+            return;
+        }
     }
 
     private void Start()
     {
+        Time.timeScale = 0;
 
-        stories = FindFirstObjectByType<StoryManager>();
-        if(upgradeBtn != null && foodBtn !=null)
+        if (upgradeBtn != null && foodBtn != null && exitBtn != null)
         {
             upgradeBtn.onClick.AddListener(ShowUpgradeMenu);
             foodBtn.onClick.AddListener(ShowFoodMenu);
             exitBtn.onClick.AddListener(CloseShop);
         }
+
+        // 아이템 슬롯 초기화
         for (int i = 0; i < itemData.Length; i++)
         {
-            var slot = Instantiate(itemSlot, upgradeScrollContents.transform);
-            slot.SetData(itemData[i], itemData[i].instantAmount);
-            itemSlotDict[itemData[i]] = slot;
+            int level = ShopDataManager.instance.GetItemLevel(itemData[i].itemName);
 
+            var slot = Instantiate(itemSlot, upgradeScrollContents.transform);
+            slot.SetData(itemData[i], level);
+            itemSlotDict[itemData[i]] = slot;
+            playerInventory[itemData[i]] = level;
         }
+
+        // 음식 슬롯 초기화
         for (int i = 0; i < foodData.Length; i++)
         {
             var slot = Instantiate(foodSlot, foodScrollContents.transform);
             slot.SetData(foodData[i]);
             foodSlotDict[foodData[i]] = slot;
+
+            if (ShopDataManager.instance.IsFoodUnlocked(foodData[i].name))
+            {
+                foodList.Add(foodData[i]);
+                slot.SetInteractable(false);
+            }
         }
 
+        // 해금된 음식 다시 정리
         foodList.Clear();
         foreach (var food in foodData)
         {
@@ -89,15 +105,14 @@ public class CustomShopManager : MonoBehaviour
             {
                 foodList.Add(food);
 
-                // 슬롯 비활성화도 같이 진행!
                 if (foodSlotDict.ContainsKey(food))
                 {
                     foodSlotDict[food].SetInteractable(false);
                 }
             }
         }
-       
     }
+
 
     public void ShowUpgradeMenu()
     {
@@ -125,24 +140,20 @@ public class CustomShopManager : MonoBehaviour
         leftShopCharacter.gameObject.GetComponent<DOTweenAnimation>().DOPlayBackwards();
         rightShopCharacter.gameObject.GetComponent<DOTweenAnimation>().DOPlayBackwards();
 
-        
-        StartCoroutine(stories.getNextStory().TypingCoroutine());
+        Time.timeScale = 1;
 
     }
-
     public void BuyItem(ItemSO item)
     {
         if (Managers.Game.playerTotalMoney >= item.itemPrice) // 만약 구매 가능하다면
         {
-
-
             if (!playerInventory.ContainsKey(item))
                 playerInventory[item] = item.instantAmount;
             if (playerInventory[item] < item.maxAmount)
                 playerInventory[item] += 1;
             int curLevel = playerInventory[item];
 
-            
+            ShopDataManager.instance.SaveItemLevel(item.itemName, curLevel);
 
             if (item.itemName == "식재료 가격 감소")
             {
@@ -184,10 +195,7 @@ public class CustomShopManager : MonoBehaviour
                     itemSlotDict[item].SetInteractable(true);
             }
 
-           
-
-            
-
+   
             Managers.Game.playerTotalMoney -= item.itemPrice;
             Managers.Sound.Play("SFX/purchase1");
         }
@@ -201,6 +209,8 @@ public class CustomShopManager : MonoBehaviour
     {
         if (Managers.Game.playerTotalMoney >= food.foodUnlockPrice)
         {
+            ShopDataManager.instance.UnlockFood(food.name); // 저장!
+
             if (foodSlotDict.ContainsKey(food))
                 foodSlotDict[food].SetInteractable(false);
 
@@ -213,6 +223,15 @@ public class CustomShopManager : MonoBehaviour
         else // 구매실패
         {
             Managers.Sound.Play("SFX/purchaseFailed1");
+        }
+    }
+
+    void InitShopDataManager()
+    {
+        if (ShopDataManager.instance == null)
+        {
+            GameObject obj = new GameObject("ShopDataManager");
+            obj.AddComponent<ShopDataManager>();
         }
     }
 

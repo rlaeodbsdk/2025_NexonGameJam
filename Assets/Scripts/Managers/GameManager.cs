@@ -55,26 +55,23 @@ public class GameManager
         OrderCount = 0;
         totalIngredientMoney = 0;
 
-        //타이머 재조정
-        switch (stageNumber)
+    }
+
+    public void GoNextStage()
+    {
+        roundNumber++;
+        switch (roundNumber)
         {
-            case 1: // 1일차 . 사실안씀
-                {
-                    cMoney.currentTime = 40f;
-                    break;
-                }
-            case 2: // 2일차.
-                {
-                    cMoney.currentTime = 60f;
-                    break;
-                }
-            case 3:
-                {
-                    cMoney.currentTime = 130f;
-                    break;
-                }
+            case 2: Managers.Scene.LoadScene(Define.Scene.Stage2);
+                break;
+            case 3: Managers.Scene.LoadScene(Define.Scene.Stage3);
+                break;
+            case 4: Managers.Scene.LoadScene(Define.Scene.Stage4);
+                break;
         }
-}
+
+
+    }
 
     public void Upgrade()
     {
