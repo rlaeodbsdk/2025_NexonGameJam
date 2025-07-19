@@ -13,6 +13,7 @@ public class FoodSlot : MonoBehaviour
     public TextMeshProUGUI description;
     public TextMeshProUGUI price;
     public bool isActive;
+    public TextMeshProUGUI foodNodeInfo;
 
     private FoodSO foodData;
 
@@ -30,7 +31,7 @@ public class FoodSlot : MonoBehaviour
         image.sprite = foodData.foodImage;
         foodName.SetText(foodData.foodName);
         description.SetText(foodData.foodInfo);
-        
+        foodNodeInfo.SetText(foodData.foodNodeInfo);
         if (foodData.foodUnlockPrice == 0)
         {
             price.SetText("판매가: " + foodData.foodPrice + "냥");

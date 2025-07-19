@@ -65,6 +65,8 @@ public class Node : MonoBehaviour
         }
         if (isInFirstZone) //첫번째 존
         {
+            var kongjwui = FindAnyObjectByType<KongJwui>();
+            var kongjwuiAnim = kongjwui.GetComponent<Animator>();
             if (Input.GetKeyDown(currentStep.key) && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)||Input.GetKeyDown(KeyCode.W))) //맞는키 누르면 
             {
                 if(Input.GetKeyDown(KeyCode.A))
@@ -74,14 +76,21 @@ public class Node : MonoBehaviour
                         Managers.Sound.Play("SFX/chickenDie1"); 
                     }
                     Managers.Sound.Play("SFX/Kongjui_knife1");
+                    kongjwuiAnim.SetBool("isKnife", true);
+                    StartCoroutine(ResetAnimBool(kongjwuiAnim, "isKnife", 1.0f));
                 }
                 else if(Input.GetKeyDown(KeyCode.D))
                 {
                     Managers.Sound.Play("SFX/Kongjui_salt1");
+                    kongjwuiAnim.SetBool("isSalt", true);
+                    StartCoroutine(ResetAnimBool(kongjwuiAnim, "isSalt", 1.0f));
                 }
                 else if(Input.GetKeyDown(KeyCode.W))
                 {
+
                     Managers.Sound.Play("SFX/Kongjui&Gretel_pass1");
+                    kongjwuiAnim.SetBool("isToss", true);
+                    StartCoroutine(ResetAnimBool(kongjwuiAnim, "isToss", 1.0f));
                 }
 
                 currentStepIndex++;
@@ -100,8 +109,14 @@ public class Node : MonoBehaviour
             else if(Input.GetKeyDown(KeyCode.W))
             {
                 ThrowNode();
+                kongjwuiAnim.SetBool("isToss", true);
+                StartCoroutine(ResetAnimBool(kongjwuiAnim, "isToss", 1.0f));
             }
-            //잘못된키 누르면 아무 반응도 없다 -> 통과
+            else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+            {
+                kongjwuiAnim.SetBool("isFail", true);
+                StartCoroutine(ResetAnimBool(kongjwuiAnim, "isFail", 1.0f));
+            }
         }
         else if (isInSecondZone) //두번쨰 존에선 S를 눌러야 사라짐
         {
@@ -151,7 +166,11 @@ public class Node : MonoBehaviour
                 ThrowNode();
 
             }
-
+            else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                gretelAnim.SetBool("isFail", true);
+                StartCoroutine(ResetAnimBool(gretelAnim, "isFail", 1.0f));
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
