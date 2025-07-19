@@ -17,7 +17,10 @@ public class Table : MonoBehaviour
     public void AssignPassenger(Passenger passenger)
     {
         currentPassenger = passenger;
-        
+       
+
+        var nodeManager = FindFirstObjectByType<NodeManager>();
+        nodeManager.NodeGo(passenger.selectedFood.foodNodeName);
 
 
         passenger.transform.position = passengerPoint.position;
