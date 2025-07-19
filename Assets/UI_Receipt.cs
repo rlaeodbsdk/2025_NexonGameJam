@@ -78,7 +78,7 @@ public class UI_Receipt : UI_Popup
         string fullText = $"오늘의 매출 금액 : {Managers.Game.todaySelling}\n" +
                           $"주문 성공한 횟수 : {Managers.Game.completeOrderCount}\n" +
                           $"주문 실패한 횟수 : {Managers.Game.OrderCount- Managers.Game.completeOrderCount}\n" +
-                          $"사용한 원재료 비용 : {Managers.Game.totalIngredientMoney*Managers.Game.GetDiscountedIngredientPrice()}"+$"(할인률 {Managers.Game.ingredientDiscount*100}%)"+"\n" +
+                          $"사용한 원재료 비용 : {-Managers.Game.totalIngredientMoney*Managers.Game.GetDiscountedIngredientPrice()}"+$"(할인률 {Managers.Game.ingredientDiscount*100}%)"+"\n" +
                           $"오늘의 순이익 : {Managers.Game.todaySelling-Managers.Game.totalIngredientMoney}\n\n" +
                           $"총 자본 : {Managers.Game.playerTotalMoney}";
 
