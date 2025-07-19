@@ -94,11 +94,9 @@ public class NodeLauncher : MonoBehaviour
         Managers.Sound.Play("SFX/cannonFire1");
 
         Bullet bullet = currentNote.GetComponent<Bullet>();
-<<<<<<< Updated upstream
+
         bullet.getNodeRecipe(currentRecipe);
-=======
-        
->>>>>>> Stashed changes
+
         StartCoroutine(bullet.DestroyDelay());
 
         //  현재 노트 클리어
