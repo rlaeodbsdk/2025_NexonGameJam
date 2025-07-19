@@ -42,6 +42,7 @@ public class Node : MonoBehaviour
 
         if (Time.timeScale != 0f)
         {
+           
             if (nodeLine == 1) // 왼쪽 노드라인
             {
                 transform.position = transform.position + new Vector3(1f * nodeSpeed * Time.deltaTime, 0, 0); // 노드 생성시 자동움직임 오른쪽으로
@@ -52,8 +53,8 @@ public class Node : MonoBehaviour
                 transform.position = transform.position + new Vector3(-1f * nodeSpeed * Time.deltaTime, 0, 0); // 노드 생성시 자동움직임 왼쪽으로
             }
         }
-    
-       
+
+        if (!Managers.Game.canControl) return;
 
 
 

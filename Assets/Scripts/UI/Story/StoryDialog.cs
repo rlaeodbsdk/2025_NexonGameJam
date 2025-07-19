@@ -230,6 +230,11 @@ public class StoryDialog : UI_Popup
 
             if (scene.isTimeGoing)
             {
+                Managers.Game.canControl = false;
+                while (TestTexts[idx].text != full)
+                    yield return null;
+
+                Managers.Game.canControl = true;
                 if (scene.requiredKey == KeyCode.None)
                 {
                     while ((!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)))
