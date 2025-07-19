@@ -104,21 +104,31 @@ public class Node : MonoBehaviour
         }
         else if (isInSecondZone) //두번쨰 존에선 S를 눌러야 사라짐
         {
+            var gretel = FindAnyObjectByType<Gretel>();
+            var gretelAnim = gretel.GetComponent<Animator>();
             if (Input.GetKeyDown(currentStep.key) && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow)))
             {
+                
+                
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
                     Managers.Sound.Play("SFX/Gretel_fire1");
+                    gretelAnim.SetBool("isFrying", true);
+                    StartCoroutine(ResetAnimBool(gretelAnim, "isFrying", 1.0f));
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
                     Managers.Sound.Play("SFX/Gretel_water1");
+                    gretelAnim.SetBool("isBoiling", true);
+                    StartCoroutine(ResetAnimBool(gretelAnim, "isBoiling", 1.0f));
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     Managers.Sound.Play("SFX/Kongjui&Gretel_pass1");
+                    gretelAnim.SetBool("isTossing", true);
+                    StartCoroutine(ResetAnimBool(gretelAnim, "isTossing", 1.0f));
                 }
-
+                
                 currentStepIndex++;
                 ThrowUpNode();
                 GetComponentInChildren<SpriteRenderer>().sprite = currentStep.sprite;
@@ -133,8 +143,14 @@ public class Node : MonoBehaviour
             }
             else if(Input.GetKeyDown(KeyCode.UpArrow))
             {
+
+                Managers.Sound.Play("SFX/Kongjui&Gretel_pass1");
+                gretelAnim.SetBool("isTossing", true);
+                StartCoroutine(ResetAnimBool(gretelAnim, "isTossing", 1.0f));
                 ThrowNode();
+
             }
+
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -182,7 +198,11 @@ public class Node : MonoBehaviour
     {
         recipe = r;
     }
-
+    IEnumerator ResetAnimBool(Animator anim, string param, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        anim.SetBool(param, false);
+    }
     IEnumerator CompleteGoDestroy() //완성됐으니 없애는 과정
     {
         upThrow = true;
