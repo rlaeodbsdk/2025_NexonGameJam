@@ -89,6 +89,7 @@ public class NodeLauncher : MonoBehaviour
         rb.AddForce(cannonHead.up * launchForce);
 
         Bullet bullet = currentNote.GetComponent<Bullet>();
+        bullet.getNodeRecipe(currentRecipe);
         StartCoroutine(bullet.DestroyDelay());
 
         //  현재 노트 클리어

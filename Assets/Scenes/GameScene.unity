@@ -1536,7 +1536,7 @@ MonoBehaviour:
   notePrefab: {fileID: 1261868982779062715, guid: 54c1652e3e118ad4095b03428c60523a, type: 3}
   noteSpawnPoint: {fileID: 1051991189}
   rotationAngle: 80
-  rotationSpeed: 2
+  rotationSpeed: 40
   launchForce: 800
 --- !u!212 &289790074
 SpriteRenderer:
@@ -1751,6 +1751,10 @@ PrefabInstance:
     - target: {fileID: 4917529552754859566, guid: 35641d2bee486d748b57d22d4e02e740, type: 3}
       propertyPath: m_Name
       value: Table
+      objectReference: {fileID: 0}
+    - target: {fileID: 6437020900503185026, guid: 35641d2bee486d748b57d22d4e02e740, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4002,9 +4006,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnTimes:
   - 3
-  - 6
-  - 9
-  - 12
+  - 10
+  - 17
+  - 24
   passengerPrefab: {fileID: 6966015654144533325, guid: c8ba39ebf873eb14b9b17a42d927ea88, type: 3}
   tableManager: {fileID: 989463413}
 --- !u!4 &1190802380
