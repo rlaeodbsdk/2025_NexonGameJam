@@ -54,6 +54,7 @@ public class NodeLauncher : MonoBehaviour
 
     public void SpawnNote(NodeRecipe recipe) // 장전!
     {
+       
         if (currentNote == null)
         {
             //  장전된 노트가 없으면 바로 장전
@@ -61,12 +62,14 @@ public class NodeLauncher : MonoBehaviour
             currentNote = Instantiate(notePrefab, noteSpawnPoint.position, noteSpawnPoint.rotation);
             currentNote.transform.SetParent(noteSpawnPoint);
             currentNote.GetComponentInChildren<SpriteRenderer>().sprite = recipe.steps[recipe.currentstepIndex].sprite;
+            Managers.Sound.Play("SFX/cannonLoad1");
         }
         else
         {
             //  이미 장전돼 있으면 대기열에 넣음
             noteQueue.Enqueue(recipe);
         }
+       
     }
 
     void TryFire()
@@ -76,6 +79,7 @@ public class NodeLauncher : MonoBehaviour
 
         StartCoroutine(FireCoroutine());
         nodeManager.nodeCount--;
+       
     }
 
     IEnumerator FireCoroutine()
@@ -87,9 +91,12 @@ public class NodeLauncher : MonoBehaviour
         Rigidbody2D rb = currentNote.GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.AddForce(cannonHead.up * launchForce);
+        Managers.Sound.Play("SFX/cannonFire1");
 
         Bullet bullet = currentNote.GetComponent<Bullet>();
+
         bullet.getNodeRecipe(currentRecipe);
+
         StartCoroutine(bullet.DestroyDelay());
 
         //  현재 노트 클리어
@@ -103,6 +110,7 @@ public class NodeLauncher : MonoBehaviour
         {
             NodeRecipe next = noteQueue.Dequeue();
             SpawnNote(next);
+            Managers.Sound.Play("SFX/cannonLoad1");
         }
 
         isFiring = false;

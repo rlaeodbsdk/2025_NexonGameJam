@@ -21,7 +21,7 @@ public class Table : MonoBehaviour
     // 손님 배치
     public void AssignPassenger(Passenger passenger)
     {
-        currentPassenger = passenger;
+        currentPassenger = passenger; // 특정손님이 있는 Table
        
 
         var nodeManager = FindFirstObjectByType<NodeManager>();

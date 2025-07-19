@@ -47,6 +47,8 @@ public class Bullet : MonoBehaviour
                 }
             
             Debug.Log("테이블과의 접촉");
+            
+
             Destroy(this.gameObject);
         }
     }

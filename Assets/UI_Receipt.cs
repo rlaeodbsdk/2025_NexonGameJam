@@ -54,6 +54,7 @@ public class UI_Receipt : UI_Popup
 
     void PlayReceiptAnimation()
     {
+        
         upDooroo.rectTransform.DOAnchorPosY(upStartPos.y + moveDistance, animationDuration)
     .SetEase(Ease.OutQuad).SetUpdate(true);
         downDooroo.rectTransform.DOAnchorPosY(downStartPos.y - moveDistance, animationDuration)
@@ -67,7 +68,7 @@ public class UI_Receipt : UI_Popup
         yield return new WaitForSecondsRealtime(animationDuration + 0.2f); // 애니 끝나고 시작
 
         // Title 타이핑
-        yield return StartCoroutine(TypeText(TitleText, title));
+        yield return StartCoroutine(TypeText(TitleText, title,true));
 
         // InnerTexts 타이핑
         string fullText = $"오늘의 매출 금액 : {totalSales}\n" +
@@ -80,7 +81,7 @@ public class UI_Receipt : UI_Popup
         yield return StartCoroutine(TypeText(InnerTexts, fullText));
     }
 
-    IEnumerator TypeText(TextMeshProUGUI textComponent, string fullText)
+    IEnumerator TypeText(TextMeshProUGUI textComponent, string fullText,bool isTitleText=false)
     {
         textComponent.text = "";
         for (int i = 0; i < fullText.Length; i++)
@@ -93,6 +94,7 @@ public class UI_Receipt : UI_Popup
             }
 
             textComponent.text += fullText[i];
+            Managers.Sound.Play("SFX/dailySettlement");
             yield return new WaitForSecondsRealtime(typeSpeed);
         }
         
