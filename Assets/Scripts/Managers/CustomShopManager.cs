@@ -5,6 +5,7 @@ using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class CustomShopManager : MonoBehaviour
 {
@@ -48,9 +49,11 @@ public class CustomShopManager : MonoBehaviour
     public static CustomShopManager instance;
     public List<FoodSO> foodList = new List<FoodSO>();
 
+    public event Action OnShopClosed;
 
     private void Awake()
     {
+ 
         InitShopDataManager();
 
         instance = this;
@@ -150,6 +153,7 @@ public class CustomShopManager : MonoBehaviour
         leftShopCharacter.gameObject.GetComponent<DOTweenAnimation>().DOPlayBackwards();
         rightShopCharacter.gameObject.GetComponent<DOTweenAnimation>().DOPlayBackwards();
 
+        OnShopClosed?.Invoke();
         Time.timeScale = 1;
 
     }

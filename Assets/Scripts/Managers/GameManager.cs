@@ -122,9 +122,9 @@ public class GameManager
         }
     }
 
-    public int GetDiscountedIngredientPrice(int originalPrice)
+    public int GetDiscountedIngredientPrice()
     {
-        return Mathf.RoundToInt(originalPrice * (1f - ingredientDiscount));
+        return Mathf.RoundToInt(totalIngredientMoney * (1f - ingredientDiscount));
     }
 
     public void ApplyVillainRate(int level)
