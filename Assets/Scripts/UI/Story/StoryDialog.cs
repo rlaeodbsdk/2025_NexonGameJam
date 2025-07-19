@@ -2,7 +2,6 @@ using DG.Tweening;
 using KoreanTyper;                                                  // Add KoreanTyper namespace | 네임 스페이스 추가
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.UI;
 
