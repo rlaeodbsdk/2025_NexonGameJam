@@ -38,6 +38,7 @@ public class DialogueScene
     public bool isGivingMoney;
     public bool isEnding;
     public int givingMoneyAmount;
+    public bool XFlip;
     
     public float goingTimeAmount;
     public KeyCode requiredKey;
