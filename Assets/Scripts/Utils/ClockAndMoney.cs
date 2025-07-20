@@ -16,11 +16,11 @@ public class ClockAndMoney : MonoBehaviour
     {
         switch(Managers.Game.roundNumber)
         {
-            case 2: currentTime = 60f;
+            case 2: currentTime = Managers.Game.GetAddedDaytime(60f);
                 break;
-            case 3: currentTime = 90f;
+            case 3: currentTime = Managers.Game.GetAddedDaytime(90f);
                 break;
-            case 4: currentTime = 120f;
+            case 4: currentTime = Managers.Game.GetAddedDaytime(120f);
                 break;
         }
         dayText.SetText("Day" + Managers.Game.roundNumber);

@@ -22,9 +22,20 @@ public class StoryDialog : UI_Popup
     private Vector2 originalPanelPos;
     public List<DialogueScene> scenes;
 
+    public bool canGoNextStep = true;
+    public CustomShopManager shopManager;
     public GameObject shop;
+
+    public GameObject[] leftSDAnimSet;        
+    public GameObject leftSDCharacter;
+    public GameObject KongCanvas;
+
+    public GameObject[] rightSDAnimSet;
+    public GameObject rightSDCharacter;
+    public GameObject GretCanvas;
     private void Awake()
     {
+        shopManager = FindObjectOfType<CustomShopManager>();
         panelRect = TextPanel.GetComponent<RectTransform>();
         originalPanelPos = panelRect.anchoredPosition;
         contents.SetActive(true);
@@ -91,23 +102,23 @@ public class StoryDialog : UI_Popup
                     if (scene.isFirstAppearance)
                     {
                         StandingImage[0].rectTransform.localScale = Vector3.one;
-                        yield return new WaitForSecondsRealtime(2.2f);
-                    }
 
+                        yield return new WaitForSecondsRealtime(2.2f);
+                        TextPanel.SetActive(true);
+                    }
                     else
                     {
-                        StandingImage[0].rectTransform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-
-
 
                     }
                     if (scene.isAnger)
                     {
+                        Debug.Log("왼쪽사람화내기!");
                         LeftCharacter.instance.frowningAnim.DORestartById("1");
                     }
                     if (scene.isSurprized)
                     {
-                        LeftCharacter.instance.surprisedAnim.DORestartById("2");
+                        Debug.Log("왼쪽사람놀라기!");
+                        LeftCharacter.instance.frowningAnim.DORestartById("2");
                     }
                 }
 
@@ -132,25 +143,31 @@ public class StoryDialog : UI_Popup
                 if (panelRect != null)
                     panelRect.anchoredPosition = originalPanelPos + scene.panelPositionOffset;
 
-                if (scene.isFirstAppearance)
+                if (scene.showRightCharacter)
                 {
-
-                    if (TextPanel != null)
-                        TextPanel.SetActive(false);
-
-
-                    if (TextPanel != null)
-                        TextPanel.SetActive(true);
-                }
-                else
-                {
-                    if (scene.isAnger)
+                    if (scene.isFirstAppearance)
                     {
-                        RightCharacter.instance.frowningAnim.DORestartById("1");
+
+                        if (TextPanel != null)
+                            TextPanel.SetActive(false);
+
+
+                        if (TextPanel != null)
+                            TextPanel.SetActive(true);
+
                     }
-                    if (scene.isSurprized)
+                    else
                     {
-                        RightCharacter.instance.surprisedAnim.DORestartById("2");
+                        if (scene.isAnger)
+                        {
+                            Debug.Log("오른쪽사람화내기!");
+                            RightCharacter.instance.frowningAnim.DORestartById("1");
+                        }
+                        if (scene.isSurprized)
+                        {
+                            Debug.Log("오른쪽사람놀라기!");
+                            RightCharacter.instance.surprisedAnim.DORestartById("2");
+                        }
                     }
                 }
             }
@@ -170,11 +187,12 @@ public class StoryDialog : UI_Popup
             {
                 if (scene.requiredKey == KeyCode.None)
                 {
-                    while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
+                    while ((!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)))
                     {
                         TestTexts[idx].text = full;
                         yield return null;
                     }
+
                 }
                 else
                 {
@@ -193,16 +211,68 @@ public class StoryDialog : UI_Popup
                     StandingImage[1].gameObject.SetActive(false);
                 }
 
+                if (scene.leftSDAnim)
+                {
+                    var leftAnim = leftSDCharacter.GetComponent<DOTweenAnimation>();
+                    var leftSR = leftSDCharacter.GetComponent<SpriteRenderer>();
+                    leftSR.sortingOrder = 3;
+                    if (leftAnim != null)
+                        leftAnim.DORestart();
 
-                // 여기서 애니메이션(이동 등) 진행 시간 만큼 대기 (예: 2초)
-                yield return new WaitForSecondsRealtime(2.0f); // 원하는 시간으로!
 
+                    foreach (var obj in leftSDAnimSet)
+                        if (obj != null) obj.SetActive(true);
+
+                   
+                }
+                if (scene.rightSDAnim)
+                {
+                    var rightAnim = rightSDCharacter.GetComponent<DOTweenAnimation>();
+                    var rightSR = rightSDCharacter.GetComponent<SpriteRenderer>();
+                    rightSR.sortingOrder = 3;
+                    if (rightAnim != null)
+                        rightAnim.DORestart();
+
+
+                    foreach (var obj in rightSDAnimSet)
+                        if (obj != null) obj.SetActive(true);
+
+
+                }
+
+                yield return new WaitForSecondsRealtime(1.5f);
+                if (scene.leftSDAnim) KongCanvas.SetActive(true);
+                if (scene.rightSDAnim) GretCanvas.SetActive(true);
                 bool panelTurnedOn = false;
                 while (!panelTurnedOn)
                 {
                     // 마우스 아무 버튼 클릭 시
                     if (Input.GetMouseButtonDown(0))
                     {
+                        
+
+                        if (KongCanvas != null) KongCanvas.SetActive(false);
+                        if (GretCanvas != null) GretCanvas.SetActive(false);
+                        if (scene.leftSDAnim)
+                        {
+                            foreach (var obj in leftSDAnimSet)
+                                if (obj != null) obj.SetActive(false);
+                            var leftAnim = leftSDCharacter.GetComponent<DOTweenAnimation>();
+                            var leftSR = leftSDCharacter.GetComponent<SpriteRenderer>();
+                            leftAnim.DOPlayBackwards();
+                            leftSR.sortingOrder = -3;
+                        }
+                        if(scene.rightSDAnim)
+                        {
+                            foreach (var obj in rightSDAnimSet)
+                                if (obj != null) obj.SetActive(false);
+                            var rightAnim = rightSDCharacter.GetComponent<DOTweenAnimation>();
+                            var rightSR = rightSDCharacter.GetComponent<SpriteRenderer>();
+                            rightAnim.DOPlayBackwards();
+                            rightSR.sortingOrder = -3;
+                        }
+                            
+                        
                         if (TextPanel != null)
                             TextPanel.SetActive(true);
 
@@ -221,18 +291,29 @@ public class StoryDialog : UI_Popup
 
             if(scene.isShopingGo)
             {
-                shop.SetActive(true);
+                StartCoroutine(goShopingOn());
+            }
+
+            if(scene.isGivingMoney)
+            {
+                Managers.Game.playerTotalMoney -= scene.givingMoneyAmount;
             }
 
             if (scene.isTimeGoing)
             {
+                Managers.Game.canControl = false;
+                while (TestTexts[idx].text != full)
+                    yield return null;
+
+                Managers.Game.canControl = true;
                 if (scene.requiredKey == KeyCode.None)
                 {
-                    while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
+                    while ((!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return)))
                     {
                         TestTexts[idx].text = full;
                         yield return null;
                     }
+
                 }
                 else
                 {
@@ -263,7 +344,10 @@ public class StoryDialog : UI_Popup
                 continue;
             }
             
-
+            if(scene.isEndDialogue==true)
+            {
+                StartCoroutine(IsEndGo());
+            }
             if (scene.requiredKey == KeyCode.None)
             {
                 while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Return))
@@ -306,5 +390,37 @@ public class StoryDialog : UI_Popup
         }
 
     }
+    IEnumerator goShopingOn()
+    {
+        canGoNextStep = false;
+        shop.SetActive(true);
+        shopManager.OnShopClosed += OnShopClosedHandler; // 구독
+        yield return new WaitForSecondsRealtime(2f);
+        TextPanel.SetActive(false);
+
+    }
+
+    void OnShopClosedHandler()
+    {
+        // 다시 필요한 동작 수행
+        Debug.Log("Shop closed! Resume logic.");
+
+        shopManager.OnShopClosed -= OnShopClosedHandler;  // 구독 해제 (중요)
+
+        StartCoroutine(ResumeAfterShop()); // 원하는 로직 이어가기
+    }
+
+    IEnumerator ResumeAfterShop()
+    {
+        yield return new WaitForSeconds(1f);
+        canGoNextStep = true;
+        TextPanel.SetActive(true);
+    }
+    IEnumerator IsEndGo()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        Managers.UI.ShowPopUpUI<UI_Receipt>();
+    }
+
 
 }

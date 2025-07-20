@@ -17,7 +17,8 @@ public class GameManager
     public float playerTotalMoney = 5000;
     public bool isTutorial;
     public float todaySelling=0;
-
+    public bool canControl = true;
+    public KeyCode lastKeyDown = KeyCode.None;
 
     public float totalIngredientMoney = 0;
 
@@ -122,9 +123,9 @@ public class GameManager
         }
     }
 
-    public int GetDiscountedIngredientPrice(int originalPrice)
+    public int GetDiscountedIngredientPrice()
     {
-        return Mathf.RoundToInt(originalPrice * (1f - ingredientDiscount));
+        return Mathf.RoundToInt(totalIngredientMoney * (1f - ingredientDiscount));
     }
 
     public void ApplyVillainRate(int level)

@@ -70,13 +70,16 @@ public class Passenger : MonoBehaviour
         if (correctTable && correctness == 1)
         {
             orderedImage.sprite = satisfactionSprite;
+            orderedImage.gameObject.transform.localScale = new Vector3 (3.3f, 2.5f, 1f);
             Managers.Game.todaySelling += recipe.price;
             Managers.Game.playerTotalMoney += recipe.price;
-            Managers.Game.completeOrderCount++;    
+            Managers.Game.completeOrderCount++;
+
             yield return new WaitForSeconds(2f);
         }else if(correctTable && correctness == 0)
         {
             orderedImage.sprite = dissatisfactionSprite;
+            orderedImage.gameObject.transform.localScale = new Vector3(3.3f, 2.5f, 1f);
             Managers.Game.todaySelling += recipe.price;
             Managers.Game.playerTotalMoney += recipe.price;
             yield return new WaitForSeconds(2f);
@@ -84,10 +87,12 @@ public class Passenger : MonoBehaviour
         else
         {
             orderedImage.sprite = angrySprite;
+            orderedImage.gameObject.transform.localScale = new Vector3(3.3f, 2.5f, 1f);
             yield return new WaitForSeconds(2f);
         }
+        orderedImage.gameObject.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
 
-            selectedFood = null;
+        selectedFood = null;
         Destroy(gameObject);
     }
 }

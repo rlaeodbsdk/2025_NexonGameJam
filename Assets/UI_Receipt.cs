@@ -72,13 +72,14 @@ public class UI_Receipt : UI_Popup
         // Title 타이핑
         yield return StartCoroutine(TypeText(TitleText, title,true));
 
-        
+
+        Managers.Game.playerTotalMoney -= Managers.Game.GetDiscountedIngredientPrice();
         // InnerTexts 타이핑
         string fullText = $"오늘의 매출 금액 : {Managers.Game.todaySelling}\n" +
                           $"주문 성공한 횟수 : {Managers.Game.completeOrderCount}\n" +
                           $"주문 실패한 횟수 : {Managers.Game.OrderCount- Managers.Game.completeOrderCount}\n" +
-                          $"사용한 원재료 비용 : {Managers.Game.totalIngredientMoney}%\n" +
-                          $"오늘의 순이익 : {Managers.Game.todaySelling}\n\n" +
+                          $"사용한 원재료 비용 : {Managers.Game.totalIngredientMoney*Managers.Game.GetDiscountedIngredientPrice()}"+$"(할인률 {Managers.Game.ingredientDiscount*100}%)"+"\n" +
+                          $"오늘의 순이익 : {Managers.Game.todaySelling-Managers.Game.totalIngredientMoney}\n\n" +
                           $"총 자본 : {Managers.Game.playerTotalMoney}";
 
         yield return StartCoroutine(TypeText(InnerTexts, fullText));

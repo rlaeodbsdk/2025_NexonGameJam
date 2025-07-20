@@ -34,6 +34,11 @@ public class DialogueScene
     public bool isTimeGoing;
     public bool isTomatoSoupGo;
     public bool isShopingGo;
+    public bool isEndDialogue;
+    public bool isGivingMoney;
+    public int givingMoneyAmount;
+    
     public float goingTimeAmount;
     public KeyCode requiredKey;
+    
 }
