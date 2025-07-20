@@ -3211,6 +3211,23 @@ PrefabInstance:
       propertyPath: shopManager
       value: 
       objectReference: {fileID: 751688731}
+    - target: {fileID: 5273557353683227009, guid: f6930b5199ebfaf4caed3a571e55b2e8, type: 3}
+      propertyPath: scenes.Array.data[4].text
+      value: "\uC774 \uB3C8\uC774\uBA74 \uBD80\uBAA8\uB2D8\uC744 \uC218\uC18C\uBB38\uD558\uB294\uAC83\uB3C4
+        \uCDA9\uBD84\uD574!!! \uC9D1\uC5D0\uB3C4 \uAC08 \uC218 \uC788\uACA0\uC5B4!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273557353683227009, guid: f6930b5199ebfaf4caed3a571e55b2e8, type: 3}
+      propertyPath: scenes.Array.data[3].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273557353683227009, guid: f6930b5199ebfaf4caed3a571e55b2e8, type: 3}
+      propertyPath: scenes.Array.data[11].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273557353683227009, guid: f6930b5199ebfaf4caed3a571e55b2e8, type: 3}
+      propertyPath: scenes.Array.data[14].XFlip
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7374971431601263012, guid: f6930b5199ebfaf4caed3a571e55b2e8, type: 3}
       propertyPath: m_Pivot.x
       value: 0

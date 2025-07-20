@@ -4441,6 +4441,26 @@ PrefabInstance:
       propertyPath: shopManager
       value: 
       objectReference: {fileID: 751688731}
+    - target: {fileID: 2399005951111665720, guid: b57e539cfd889044d8512dfabd2c0a22, type: 3}
+      propertyPath: scenes.Array.data[1].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2399005951111665720, guid: b57e539cfd889044d8512dfabd2c0a22, type: 3}
+      propertyPath: scenes.Array.data[4].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2399005951111665720, guid: b57e539cfd889044d8512dfabd2c0a22, type: 3}
+      propertyPath: scenes.Array.data[6].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2399005951111665720, guid: b57e539cfd889044d8512dfabd2c0a22, type: 3}
+      propertyPath: scenes.Array.data[8].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2399005951111665720, guid: b57e539cfd889044d8512dfabd2c0a22, type: 3}
+      propertyPath: scenes.Array.data[9].XFlip
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2630843551951615991, guid: b57e539cfd889044d8512dfabd2c0a22, type: 3}
       propertyPath: m_Name
       value: 4_StoryCanvas

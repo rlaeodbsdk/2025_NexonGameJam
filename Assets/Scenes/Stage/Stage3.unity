@@ -1394,6 +1394,22 @@ PrefabInstance:
         ]\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 5273557353683227009, guid: 4f821afafa78d2c4caa3f04bf2deb043, type: 3}
+      propertyPath: scenes.Array.data[14].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273557353683227009, guid: 4f821afafa78d2c4caa3f04bf2deb043, type: 3}
+      propertyPath: scenes.Array.data[16].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273557353683227009, guid: 4f821afafa78d2c4caa3f04bf2deb043, type: 3}
+      propertyPath: scenes.Array.data[17].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273557353683227009, guid: 4f821afafa78d2c4caa3f04bf2deb043, type: 3}
+      propertyPath: scenes.Array.data[19].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273557353683227009, guid: 4f821afafa78d2c4caa3f04bf2deb043, type: 3}
       propertyPath: scenes.Array.data[21].isShopingGo
       value: 1
       objectReference: {fileID: 0}
