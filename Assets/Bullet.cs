@@ -8,27 +8,27 @@ public class Bullet : MonoBehaviour
 
     private bool isShooted = false;
     public float delay = 0.7f;
+    private bool isDestroying = false;
 
     public IEnumerator DestroyDelay()
     {
-        
         yield return new WaitForSeconds(delay);
-        if (!isShooted)
+        if (!isShooted && !isDestroying)
         {
+            isDestroying = true;  
             TableManager tableManager = FindAnyObjectByType<TableManager>();
             foreach (Table table in tableManager.tables)
             {
                 if (recipe.orderTableNumber == table.tableNumber)
                 {
-                    table.currentPassenger.Exit(false, 0, recipe);
-                    table.ResetTable();
+                    if (table.currentPassenger != null)
+                    {
+                        table.currentPassenger.Exit(false, 0, recipe);
+                        table.ResetTable();
+                    }
                 }
             }
-        }
-        if (this != null)
-
-        {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
