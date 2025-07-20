@@ -25,6 +25,14 @@ public class StoryDialog : UI_Popup
     public bool canGoNextStep = true;
     public CustomShopManager shopManager;
     public GameObject shop;
+
+    public GameObject[] leftSDAnimSet;        
+    public GameObject leftSDCharacter;
+    public GameObject KongCanvas;
+
+    public GameObject[] rightSDAnimSet;
+    public GameObject rightSDCharacter;
+    public GameObject GretCanvas;
     private void Awake()
     {
         shopManager = FindObjectOfType<CustomShopManager>();
@@ -203,16 +211,68 @@ public class StoryDialog : UI_Popup
                     StandingImage[1].gameObject.SetActive(false);
                 }
 
+                if (scene.leftSDAnim)
+                {
+                    var leftAnim = leftSDCharacter.GetComponent<DOTweenAnimation>();
+                    var leftSR = leftSDCharacter.GetComponent<SpriteRenderer>();
+                    leftSR.sortingOrder = 3;
+                    if (leftAnim != null)
+                        leftAnim.DORestart();
 
-                // 여기서 애니메이션(이동 등) 진행 시간 만큼 대기 (예: 2초)
-                yield return new WaitForSecondsRealtime(2.0f); // 원하는 시간으로!
 
+                    foreach (var obj in leftSDAnimSet)
+                        if (obj != null) obj.SetActive(true);
+
+                   
+                }
+                if (scene.rightSDAnim)
+                {
+                    var rightAnim = rightSDCharacter.GetComponent<DOTweenAnimation>();
+                    var rightSR = rightSDCharacter.GetComponent<SpriteRenderer>();
+                    rightSR.sortingOrder = 3;
+                    if (rightAnim != null)
+                        rightAnim.DORestart();
+
+
+                    foreach (var obj in rightSDAnimSet)
+                        if (obj != null) obj.SetActive(true);
+
+
+                }
+
+                yield return new WaitForSecondsRealtime(1.5f);
+                if (scene.leftSDAnim) KongCanvas.SetActive(true);
+                if (scene.rightSDAnim) GretCanvas.SetActive(true);
                 bool panelTurnedOn = false;
                 while (!panelTurnedOn)
                 {
                     // 마우스 아무 버튼 클릭 시
                     if (Input.GetMouseButtonDown(0))
                     {
+                        
+
+                        if (KongCanvas != null) KongCanvas.SetActive(false);
+                        if (GretCanvas != null) GretCanvas.SetActive(false);
+                        if (scene.leftSDAnim)
+                        {
+                            foreach (var obj in leftSDAnimSet)
+                                if (obj != null) obj.SetActive(false);
+                            var leftAnim = leftSDCharacter.GetComponent<DOTweenAnimation>();
+                            var leftSR = leftSDCharacter.GetComponent<SpriteRenderer>();
+                            leftAnim.DOPlayBackwards();
+                            leftSR.sortingOrder = -3;
+                        }
+                        if(scene.rightSDAnim)
+                        {
+                            foreach (var obj in rightSDAnimSet)
+                                if (obj != null) obj.SetActive(false);
+                            var rightAnim = rightSDCharacter.GetComponent<DOTweenAnimation>();
+                            var rightSR = rightSDCharacter.GetComponent<SpriteRenderer>();
+                            rightAnim.DOPlayBackwards();
+                            rightSR.sortingOrder = -3;
+                        }
+                            
+                        
                         if (TextPanel != null)
                             TextPanel.SetActive(true);
 
