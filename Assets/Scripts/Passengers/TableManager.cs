@@ -11,6 +11,7 @@ public class TableManager : MonoBehaviour
     private DOTweenAnimation tableAnim;
     public List<Table> tables = new List<Table>();
     private int tableCount = 0;
+    private int Count = 0;
 
     private HorizontalLayoutGroup layoutGroup;
 
@@ -21,7 +22,7 @@ public class TableManager : MonoBehaviour
         foreach (var table in FindObjectsByType<Table>(FindObjectsSortMode.None))
         {
             tables.Add(table);
-            table.SetTable(0);
+            table.SetTable(Count++);
         }
         if (tables.Count == 0)
         {
@@ -38,7 +39,7 @@ public class TableManager : MonoBehaviour
 
 
         tables.Add(tableComp);
-
+        tableComp.SetTable(Count++);
         var tableAnim = newTable.GetComponent<DOTweenAnimation>();
         if (tableAnim != null)
         {
