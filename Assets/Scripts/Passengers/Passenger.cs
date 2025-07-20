@@ -19,6 +19,7 @@ public class Passenger : MonoBehaviour
 
     private void OnEnable()
     {
+        Managers.Sound.Play("SFX/guestAppearance");
         TableManager = FindFirstObjectByType<TableManager>();
         foodList = CustomShopManager.instance.foodList;
         StartCoroutine(Order());
@@ -69,6 +70,7 @@ public class Passenger : MonoBehaviour
     {
         if (correctTable && correctness == 1)
         {
+            Managers.Sound.Play("SFX/guestSatisfied");
             orderedImage.sprite = satisfactionSprite;
             orderedImage.gameObject.transform.localScale = new Vector3 (3.3f, 2.5f, 1f);
             Managers.Game.todaySelling += recipe.price;
@@ -78,6 +80,7 @@ public class Passenger : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }else if(correctTable && correctness == 0)
         {
+            Managers.Sound.Play("SFX/guestDissatisfied");
             orderedImage.sprite = dissatisfactionSprite;
             orderedImage.gameObject.transform.localScale = new Vector3(3.3f, 2.5f, 1f);
             Managers.Game.todaySelling += recipe.price;
@@ -86,6 +89,7 @@ public class Passenger : MonoBehaviour
         }
         else
         {
+            Managers.Sound.Play("SFX/guestAngry");
             orderedImage.sprite = angrySprite;
             orderedImage.gameObject.transform.localScale = new Vector3(3.3f, 2.5f, 1f);
             yield return new WaitForSeconds(2f);

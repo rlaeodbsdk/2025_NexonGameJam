@@ -95,9 +95,19 @@ public class StoryDialog : UI_Popup
                 // 왼쪽 캐릭터 처리
                 if (scene.showLeftCharacter)
                 {
+
                     StandingImage[0].sprite = scene.overrideSprite != null ? scene.overrideSprite : cd[charIdx].CharacterImage;
                     StandingImage[0].gameObject.SetActive(true);
                     StandingImage[0].SetNativeSize();
+
+                    if (scene.XFlip)
+                    {
+                        LeftCharacter.instance.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 180, 0);
+                    }
+                    else
+                    {
+                        LeftCharacter.instance.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 0);
+                    }
 
                     if (scene.isFirstAppearance)
                     {
@@ -130,9 +140,19 @@ public class StoryDialog : UI_Popup
                 // 오른쪽 캐릭터 처리
                 if (scene.showRightCharacter)
                 {
+                   
                     StandingImage[1].sprite = scene.overrideSprite != null ? scene.overrideSprite : cd[charIdx].CharacterImage;
                     StandingImage[1].gameObject.SetActive(true);
                     StandingImage[1].SetNativeSize();
+                    if (scene.XFlip)
+                    {
+                        RightCharacter.instance.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 180, 0);
+                    }
+                    else
+                    {
+                        RightCharacter.instance.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 0);
+                    }
+
                 }
                 else
                 {
@@ -343,7 +363,28 @@ public class StoryDialog : UI_Popup
                 TextPanel.SetActive(true);
                 continue;
             }
-            
+
+        
+            if (scene.isEnding==true)
+            {
+                float money = Managers.Game.playerTotalMoney;
+                if(money>=0)
+                {
+                    Managers.UI.ShowPopUpUI<UI_GoodEnding>();
+                    Debug.Log("굿엔딩");
+                }
+                else if((money<0)||(money>=-1000))
+                {
+                    Managers.UI.ShowPopUpUI<UI_GoodEnding>();
+                    Debug.Log("노말엔딩");
+                }
+                else if(money<-1000)
+                 {
+                    Managers.UI.ShowPopUpUI<UI_BadEnding>();
+                 Debug.Log("배드엔딩");
+
+                }
+            }
             if(scene.isEndDialogue==true)
             {
                 StartCoroutine(IsEndGo());
@@ -394,6 +435,7 @@ public class StoryDialog : UI_Popup
     {
         canGoNextStep = false;
         shop.SetActive(true);
+        Managers.Sound.Play("BGM/storeBGM1", Define.Sound.BGM);
         shopManager.OnShopClosed += OnShopClosedHandler; // 구독
         yield return new WaitForSecondsRealtime(2f);
         TextPanel.SetActive(false);

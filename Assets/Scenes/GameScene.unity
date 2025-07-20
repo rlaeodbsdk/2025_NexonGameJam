@@ -2076,6 +2076,10 @@ PrefabInstance:
       value: "\uD1A0\uB9C8\uD1A0\uB97C \uB053\uC5EC\uBCFC\uAC8C. [\u2192 \uD0A4]!"
       objectReference: {fileID: 0}
     - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[0].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
       propertyPath: scenes.Array.data[10].text
       value: "\uC774\uC58F!! [\u2191 \uD0A4]!"
       objectReference: {fileID: 0}
@@ -2119,6 +2123,38 @@ PrefabInstance:
         \uC2DC\uC791\uB429\uB2C8\uB2E4!]"
       objectReference: {fileID: 0}
     - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[1].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[2].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[3].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[4].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[6].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[7].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[8].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[9].XFlip
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
       propertyPath: leftSDAnimSet.Array.data[0]
       value: 
       objectReference: {fileID: 1810522189}
@@ -2147,6 +2183,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2101994183}
     - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[11].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[12].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[13].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[14].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[15].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
       propertyPath: rightSDAnimSet.Array.data[0]
       value: 
       objectReference: {fileID: 1362246677}
@@ -2174,6 +2230,14 @@ PrefabInstance:
       propertyPath: rightSDAnimSet.Array.data[6]
       value: 
       objectReference: {fileID: 1810522189}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[1].isEnding
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
+      propertyPath: scenes.Array.data[7].isEnding
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7581831135830954149, guid: 38395d2471af436468bf80f5ffd25021, type: 3}
       propertyPath: scenes.Array.data[0].isShopingGo
       value: 0
@@ -2977,7 +3041,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -8486,6 +8550,11 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5273557353683227009, guid: 08760b1f29c60fa418be98fb35b46858, type: 3}
+      propertyPath: scenes.Array.data[0].text
+      value: "\uC77C\uC5B4\uB098 !!!!!!!!\n[ Enter\uB85C \uB300\uD654\uB97C \uC9C4\uD589\uD569\uB2C8\uB2E4
+        ]"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273557353683227009, guid: 08760b1f29c60fa418be98fb35b46858, type: 3}
       propertyPath: leftSDAnimSet.Array.data[0]
       value: 
       objectReference: {fileID: 1810522189}
@@ -8513,6 +8582,22 @@ PrefabInstance:
       propertyPath: leftSDAnimSet.Array.data[6]
       value: 
       objectReference: {fileID: 2101994183}
+    - target: {fileID: 5273557353683227009, guid: 08760b1f29c60fa418be98fb35b46858, type: 3}
+      propertyPath: scenes.Array.data[15].XFlip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273557353683227009, guid: 08760b1f29c60fa418be98fb35b46858, type: 3}
+      propertyPath: scenes.Array.data[15].isEnding
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273557353683227009, guid: 08760b1f29c60fa418be98fb35b46858, type: 3}
+      propertyPath: scenes.Array.data[15].showLeftCharacter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273557353683227009, guid: 08760b1f29c60fa418be98fb35b46858, type: 3}
+      propertyPath: scenes.Array.data[15].showRightCharacter
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5850030202721715782, guid: 08760b1f29c60fa418be98fb35b46858, type: 3}
       propertyPath: isIndependentUpdate
       value: 1

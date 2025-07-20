@@ -231,7 +231,6 @@ public class Node : MonoBehaviour
         transform.position = transform.position + new Vector3(0, 2, 0);
         GetComponent<ParabolaMover>().StartParabolaMove(transform.position, this.gameObject);
         yield return new WaitForSecondsRealtime(0.7f);
-        float sellingPrice;
         Managers.Game.OrderCount++;
         if(isReady==true)
         {
