@@ -17,7 +17,7 @@ public class UI_MainScene : UI_Popup
 
     public override void Init()
     {
-        Managers.Sound.Play("BGM/titleBGM1");
+        //Managers.Sound.Play("BGM/titleBGM1");
         base.Init();
         Bind<Button>(typeof(Buttons));
 
@@ -28,7 +28,9 @@ public class UI_MainScene : UI_Popup
     void StartClicked(PointerEventData eventData)
     {
         Managers.Sound.Play("SFX/buttonClick1");
+        Managers.Sound.StopBGM();
         Managers.Scene.LoadScene(Define.Scene.GameScene);
+        
         Managers.Sound.Play("BGM/stageBGM1", Define.Sound.BGM);
     }
 

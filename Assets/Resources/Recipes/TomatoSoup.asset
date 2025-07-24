@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TomatoSoup
   m_EditorClassIdentifier: 
   startIngredient: {fileID: 21300000, guid: 50ea97115bf8235489c62b95875b72ef, type: 3}
-  ingredientMoney: 30
+  ingredientMoney: 10
   dishName: TamatoSoup
   steps:
   - character: 1
@@ -24,7 +24,7 @@ MonoBehaviour:
     action: 1
     key: 100
     sprite: {fileID: 21300000, guid: 455f81e4f62c4a040b5151cd18986682, type: 3}
-  price: 80
+  price: 110
   eatingTime: 6
   currentstepIndex: 0
   orderTableNumber: 0

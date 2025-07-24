@@ -172,8 +172,8 @@ public class CustomShopManager : MonoBehaviour
             if (item.itemName == "식재료 가격 감소")
             {
                 Managers.Game.ApplyIngredientDiscount(playerInventory[item]);
-                if (curLevel == 2) item.itemPrice = 300;
-                else if (curLevel == 3) item.itemPrice = 500;
+                if (curLevel == 1) item.itemPrice = 300;
+                else if (curLevel == 2) item.itemPrice = 500;
                 ShopDataManager.instance.SaveItemLevel(item.itemName, playerInventory[item]);
             }
 

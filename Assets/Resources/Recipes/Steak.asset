@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Steak
   m_EditorClassIdentifier: 
   startIngredient: {fileID: 21300000, guid: 5ca982bb434d1494888702d27dc390ca, type: 3}
-  ingredientMoney: 30
+  ingredientMoney: 10
   dishName: Steak
   steps:
   - character: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
     action: 3
     key: 276
     sprite: {fileID: 21300000, guid: 4a56232e3731b1344a3cd885582aa282, type: 3}
-  price: 80
+  price: 110
   eatingTime: 6
   currentstepIndex: 1
   orderTableNumber: 0

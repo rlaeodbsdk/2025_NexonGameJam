@@ -17,7 +17,6 @@ public class MainTitle : BaseScene
     private void Start()
     {
         Init();
-        Managers.Sound.Play("BGM/titleBGM1",Define.Sound.BGM);
         Managers.UI.ShowPopUpUI<UI_MainScene>();
     }
 

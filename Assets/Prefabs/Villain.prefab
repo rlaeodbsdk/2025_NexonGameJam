@@ -310,7 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sleepingPanel: {fileID: 2607069854010008356}
   sleepingImage: {fileID: 1176541979898714457}
-  sleepingSprite: {fileID: 21300000, guid: 6514b6e3651fa8543b2974ad0397f2c0, type: 3}
+  sleepingSprite: {fileID: 21300000, guid: ce9ec9ce0d863d2459aa3f07ab39798a, type: 3}
 --- !u!114 &-5424064556336627448
 MonoBehaviour:
   m_ObjectHideFlags: 0

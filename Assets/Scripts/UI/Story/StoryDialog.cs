@@ -420,6 +420,7 @@ public class StoryDialog : UI_Popup
 
         contents.SetActive(false);
         Managers.Game.isTutorial = false;
+        Time.timeScale = 1f;
 
         if (TutorialDialog != null)
         {
@@ -457,6 +458,7 @@ public class StoryDialog : UI_Popup
         yield return new WaitForSeconds(1f);
         canGoNextStep = true;
         TextPanel.SetActive(true);
+        Time.timeScale = 0f;
     }
     IEnumerator IsEndGo()
     {

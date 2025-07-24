@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MeatBall
   m_EditorClassIdentifier: 
   startIngredient: {fileID: 21300000, guid: d337e00ed12228348897650921ddffac, type: 3}
-  ingredientMoney: 50
+  ingredientMoney: 20
   dishName: MeatBall
   steps:
   - character: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
     action: 0
     key: 100
     sprite: {fileID: 21300000, guid: 632c14d36db6d144485ac51768bd40bb, type: 3}
-  price: 80
+  price: 110
   eatingTime: 6
   currentstepIndex: 1
   orderTableNumber: 1

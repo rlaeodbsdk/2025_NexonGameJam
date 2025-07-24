@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CornSoup
   m_EditorClassIdentifier: 
   startIngredient: {fileID: 21300000, guid: 42417b5b9433fbd4a87984f3208dcccd, type: 3}
-  ingredientMoney: 50
+  ingredientMoney: 20
   dishName: CornSoup
   steps:
   - character: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
     action: 4
     key: 275
     sprite: {fileID: 21300000, guid: b0a85a25b446545409ff528e069d548e, type: 3}
-  price: 120
+  price: 150
   eatingTime: 6
   currentstepIndex: 0
   orderTableNumber: 0

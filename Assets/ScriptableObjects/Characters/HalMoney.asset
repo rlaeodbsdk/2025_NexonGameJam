@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88fd321ea2cf3a740ba8ac8e764925e3, type: 3}
   m_Name: HalMoney
   m_EditorClassIdentifier: 
-  CharacterImage: {fileID: 21300000, guid: 431c83bcfa2de2144be0140d99ad2a0a, type: 3}
+  CharacterImage: {fileID: 21300000, guid: db56a84793dbe9c4a85c7f9cbca29b14, type: 3}
   CharacterName: 
   CharacterModel: {fileID: 0}
   CryCharacter: {fileID: 0}

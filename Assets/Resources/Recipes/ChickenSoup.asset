@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChickenSoup
   m_EditorClassIdentifier: 
   startIngredient: {fileID: 21300000, guid: 81ebf66686c013f4faff359eff088379, type: 3}
-  ingredientMoney: 60
+  ingredientMoney: 20
   dishName: ChickenSoup
   steps:
   - character: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
     action: 4
     key: 275
     sprite: {fileID: 21300000, guid: 1da0bdc491620b349be0117e93853cf7, type: 3}
-  price: 150
+  price: 180
   eatingTime: 6
   currentstepIndex: 0
   orderTableNumber: 0

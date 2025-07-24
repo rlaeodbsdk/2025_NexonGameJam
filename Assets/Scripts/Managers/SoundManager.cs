@@ -37,6 +37,12 @@ public class SoundManager
         if (audioMixer == null) { Debug.Log("audioMixer is Null"); }
 
     }
+    public void StopBGM()
+    {
+        AudioSource bgmSource = _audioSources[(int)Define.Sound.BGM];
+        if (bgmSource.isPlaying)
+            bgmSource.Stop();
+    }
     public void Play(AudioClip audioClip, Define.Sound type = Define.Sound.SFX, float pitch = 1.0f)
     {
         if (audioClip == null)

@@ -14,7 +14,7 @@ public class GameManager
 
     public float completeOrderCount;
     public float OrderCount;
-    public float playerTotalMoney = 5000;
+    public float playerTotalMoney = 1000;
     public bool isTutorial;
     public float todaySelling=0;
     public bool canControl = true;
@@ -133,16 +133,16 @@ public class GameManager
         switch (level)
         {
             case 1:
-                villainRate = 0.08f;
+                villainRate = 0.24f;
                 break;
             case 2:
-                villainRate = 0.06f;
+                villainRate = 0.18f;
                 break;
             case 3:
-                villainRate = 0.04f;
+                villainRate = 0.12f;
                 break;
             default:
-                villainRate = 0.10f;
+                villainRate = 0.30f;
                 break;
         }
     }

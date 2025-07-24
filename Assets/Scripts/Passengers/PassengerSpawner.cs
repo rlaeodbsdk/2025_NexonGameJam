@@ -55,6 +55,11 @@ public class PassengerSpawner : MonoBehaviour
             Debug.Log("빈 테이블 없음!");
             return;
         }
+        if (CustomShopManager.instance.foodList == null || CustomShopManager.instance.foodList.Count == 0)
+        {
+            Debug.Log("소환 가능한 음식이 없으니 손님 소환 불가!");
+            return;
+        }
         if (Random.value < villainSpawnRate) // 10% 확률
         {
             var villain = Instantiate(villainPrefab, emptyTable.villainPoint.position, Quaternion.identity, emptyTable.villainPoint);

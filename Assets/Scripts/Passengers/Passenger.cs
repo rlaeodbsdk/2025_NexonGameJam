@@ -38,14 +38,14 @@ public class Passenger : MonoBehaviour
         int idx;
         if (Managers.Game.isTutorial)
         {
-            idx = tutorialOrderIdx;
-            tutorialOrderIdx = (tutorialOrderIdx + 1) % foodList.Count; 
+            idx = 0;
         }
         else
         {
             idx = Random.Range(0, foodList.Count);
         }
         selectedFood = foodList[idx];
+        foodList.RemoveAt(idx); // SelectedFood를 방문객이 온 동안 리스트에서 제외함, 다른 방문객은 선택불가
         orderedImage.sprite = selectedFood.foodImage;
         Debug.Log($"손님이 {selectedFood.foodName} 주문함!");
         if (currentTable != null)
@@ -95,7 +95,7 @@ public class Passenger : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
         orderedImage.gameObject.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
-
+        foodList.Add(selectedFood); //selectedFood를 다시 리스트에 넣어서 다른 객이 선택가능하게 함
         selectedFood = null;
         Destroy(gameObject);
     }
